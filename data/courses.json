@@ -1,0 +1,67 @@
+[
+  {
+    "title": "Анхан шатны Алгебр",
+    "level": "Анхан",
+    "category": "Алгебр",
+    "image": "images/algebry.jpg",
+    "rating": 4.9,
+    "students": 1248,
+    "price": 49.99,
+    "instructor": "С. Мөнх-Эрдэнэ",
+    "lessons": 31,
+    "hours": 60,
+    "enrolled": 34
+  },
+  {
+    "title": "Геометрийн үндэс",
+    "level": "Дунд",
+    "category": "Геометр",
+    "image": "images/geometry.jpg",
+    "rating": 4.7,
+    "students": 980,
+    "price": 39.99,
+    "instructor": "Б. Оюунчимэг",
+    "lessons": 19,
+    "hours": 37,
+    "enrolled": 6
+  },
+  {
+    "title": "C++ програмчлалын эхлэл",
+    "level": "Анхан",
+    "category": "Програмчлал",
+    "image": "images/c++.jpg",
+    "rating": 4.8,
+    "students": 2300,
+    "price": 59.99,
+    "instructor": "Д. Тэмүүлэн",
+    "lessons": 27,
+    "hours": 59,
+    "enrolled": 18
+  },
+  {
+    "title": "UI/UX дизайн",
+    "level": "Дунд",
+    "category": "UI/UX",
+    "image": "images/ux.jpg",
+    "rating": 4.6,
+    "students": 870,
+    "price": 44.99,
+    "instructor": "Н. Энхжин",
+    "lessons": 17,
+    "hours": 34,
+    "enrolled": 89
+  },
+  {
+    "title": "Өгөгдлийн шинжилгээ",
+    "level": "Ахисан",
+    "category": "Data Science",
+    "image": "images/data_analysis.jpg",
+    "rating": 4.9,
+    "students": 1560,
+    "price": 69.99,
+    "instructor": "Г. Баттулга",
+    "lessons": 20,
+    "hours": 55,
+    "enrolled": 76
+  }
+]
