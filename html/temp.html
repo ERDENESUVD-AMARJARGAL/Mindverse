@@ -3,144 +3,77 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Online Course Player</title>
+  <title>Course Player</title>
   <link rel="stylesheet" href="../css/temp.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-<!-- ── HEADER ── -->
 <header class="header">
   <div class="header-left">
-    <a href="classes.html" class="back-btn">
-      <i class="bi bi-arrow-left"></i>
-      Буцах
+    <a href="../html/classes.html" class="back-btn">
+      <i class="bi bi-arrow-left"></i> Буцах
     </a>
     <span class="course-title" id="headerTitle">...</span>
   </div>
-
   <div class="progress-wrap">
-    <div class="progress-track">
-      <div class="progress-fill" id="progressFill"></div>
-    </div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
     <span class="progress-label" id="progressLabel">0% дууссан</span>
   </div>
 </header>
 
-<!-- ── MAIN ── -->
 <div class="main">
-
-  <!-- VIDEO AREA -->
   <div class="video-area">
-    <div class="video-wrap">
-      <video controls id="courseVideo">
-        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-        Таны хөтөч видео дэмжихгүй байна.
-      </video>
+
+    <div id="videoView">
+      <div class="video-wrap">
+        <video controls id="courseVideo"><source src="" type="video/mp4"></video>
+      </div>
+      <div class="lesson-meta">
+        <span class="lesson-tag" id="lessonTag">Видео хичээл</span>
+        <h1 class="lesson-title" id="lessonTitle">...</h1>
+        <p class="lesson-desc" id="lessonDesc">...</p>
+      </div>
     </div>
 
-    <div class="lesson-meta">
-      <span class="lesson-tag">Хичээл 1 · Видео</span>
-      <h1 class="lesson-title" id="lessonTitle">...</h1>
-      <p class="lesson-desc" id="lessonDesc">...</p>
+    <div id="exerciseView" style="display:none;">
+      <div class="lesson-meta">
+        <span class="lesson-tag" id="exTag">Дасгал ажил</span>
+        <h1 class="lesson-title" id="exTitle">...</h1>
+        <p class="lesson-desc" id="exDesc">...</p>
+      </div>
+      <div class="questions-wrap" id="questionsWrap"></div>
+      <div class="exercise-footer">
+        <button class="check-btn" id="checkBtn" onclick="checkAnswers()" disabled>Шалгах</button>
+        <div class="score-wrap" id="scoreWrap" style="display:none;"></div>
+      </div>
     </div>
 
-    <!-- Course info strip -->
-    <div id="courseInfoStrip" style="display:flex;gap:20px;flex-wrap:wrap;margin-top:18px;padding:16px 18px;background:var(--white);border:1px solid var(--border);border-radius:12px;font-size:13px;color:var(--text-muted);">
+    <div id="courseInfoStrip">
       <span><i class="bi bi-person-circle"></i> <span id="infoInstructor"></span></span>
       <span><i class="bi bi-journal-plus"></i> <span id="infoLessons"></span> хичээл</span>
       <span><i class="bi bi-alarm"></i> <span id="infoHours"></span> цаг</span>
       <span><i class="bi bi-people-fill"></i> <span id="infoEnrolled"></span> сурагч</span>
       <span><i class="bi bi-star-fill" style="color:#ffc107"></i> <span id="infoRating"></span></span>
-      <span id="infoPrice" style="font-weight:600;"></span>
+      <span id="infoPrice"></span>
     </div>
   </div>
 
-  <!-- SIDEBAR -->
   <aside class="sidebar">
-    <div class="sidebar-header">
-      <h5>Хичээлийн жагсаалт</h5>
-    </div>
-
+    <div class="sidebar-header"><h5>Хичээлийн жагсаалт</h5></div>
     <div class="sidebar-scroll">
-
-      <!-- Unit 1 -->
-      <div class="unit-header" onclick="toggleUnit(this)">
-        <div class="unit-info">
-          <small>Хичээл 1</small>
-          <div class="unit-name" id="unit1Name">...</div>
-        </div>
-        <i class="bi bi-chevron-down unit-arrow"></i>
-      </div>
-      <div class="lessons open">
-        <div class="lesson-item active" onclick="selectLesson(this, 1)">
-          <i class="bi bi-play-circle-fill"></i>
-          Видео хичээл
-        </div>
-        <div class="lesson-item" onclick="selectLesson(this, 1)">
-          <i class="bi bi-pencil-square"></i>
-          Дасгал ажил
-        </div>
-      </div>
-
-      <!-- Unit 2 -->
-      <div class="unit-header" onclick="toggleUnit(this)">
-        <div class="unit-info">
-          <small>Хичээл 2</small>
-          <div class="unit-name">Хувьсагч ба илэрхийлэл</div>
-        </div>
-        <i class="bi bi-chevron-down unit-arrow"></i>
-      </div>
-      <div class="lessons">
-        <div class="lesson-item" onclick="selectLesson(this, 2)">
-          <i class="bi bi-play-circle"></i>
-          Видео хичээл
-        </div>
-        <div class="lesson-item" onclick="selectLesson(this, 2)">
-          <i class="bi bi-pencil-square"></i>
-          Дасгал ажил
-        </div>
-      </div>
-
-      <!-- Unit 3 -->
-      <div class="unit-header" onclick="toggleUnit(this)">
-        <div class="unit-info">
-          <small>Хичээл 3</small>
-          <div class="unit-name">Тэгшитгэл шийдвэрлэх</div>
-        </div>
-        <i class="bi bi-chevron-down unit-arrow"></i>
-      </div>
-      <div class="lessons">
-        <div class="lesson-item" onclick="selectLesson(this, 3)">
-          <i class="bi bi-play-circle"></i>
-          Видео хичээл
-        </div>
-        <div class="lesson-item" onclick="selectLesson(this, 3)">
-          <i class="bi bi-pencil-square"></i>
-          Дасгал ажил
-        </div>
-        <div class="lesson-item" onclick="selectLesson(this, 3)">
-          <i class="bi bi-file-earmark-check"></i>
-          Тест
-        </div>
-      </div>
-
-      <!-- NOTES -->
+      <div id="sidebarUnits"><div class="loading-state"><i class="bi bi-arrow-repeat"></i> Ачааллаж байна...</div></div>
       <div class="notes-section">
         <div class="notes-toggle" onclick="toggleNotes()">
           <div class="notes-toggle-left">
-            <button class="add-note-btn" onclick="createNote(); event.stopPropagation();" title="Шинэ тэмдэглэл">
-              <i class="bi bi-plus"></i>
-            </button>
+            <button class="add-note-btn" onclick="createNote(); event.stopPropagation();"><i class="bi bi-plus"></i></button>
             <span>Тэмдэглэл</span>
           </div>
           <i class="bi bi-chevron-down notes-chevron" id="notesChevron"></i>
         </div>
-
         <div class="notes-list" id="notesList"></div>
       </div>
-
     </div>
   </aside>
 </div>
