@@ -1,116 +1,229 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="mn">
 <head>
   <meta charset="UTF-8">
-  <title>Sidebar Layout</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EduLearn – Материалууд</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Fraunces:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    .materials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 28px;
+    }
+    .mat-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform 0.22s, box-shadow 0.22s;
+    }
+    .mat-item:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(91,33,182,.12); }
+    .mat-item img { width: 100%; height: 155px; object-fit: cover; display: block; }
+    .mat-body { padding: 16px 18px 18px; }
+    .mat-tag {
+      display: inline-block;
+      font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+      color: var(--violet-mid); background: var(--violet-light);
+      padding: 3px 10px; border-radius: 99px; margin-bottom: 8px;
+    }
+    .mat-body h3 { font-size: 15px; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+    .mat-body p  { font-size: 12.5px; color: var(--muted); line-height: 1.55; margin-bottom: 14px; }
+    .mat-meta { display: flex; gap: 14px; font-size: 12px; color: var(--muted); margin-bottom: 14px; }
+    .mat-meta i { color: var(--violet-mid); }
+    .mat-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--violet-mid); color: #fff;
+      padding: 9px 18px; border-radius: 8px;
+      font-size: 13px; font-weight: 600; text-decoration: none;
+      border: none; cursor: pointer;
+      transition: background 0.15s, transform 0.15s;
+    }
+    .mat-btn:hover { background: var(--violet); transform: translateY(-1px); }
+    .search-bar {
+      display: flex; align-items: center;
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 10px; padding: 0 14px;
+      max-width: 400px; gap: 10px;
+    }
+    .search-bar i { color: var(--muted); font-size: 14px; }
+    .search-bar input {
+      flex: 1; border: none; outline: none; padding: 10px 0;
+      font-family: 'Sora', sans-serif; font-size: 13.5px;
+      background: transparent; color: var(--text);
+    }
+    .filter-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+    .tab-btn {
+      border: none; padding: 7px 16px; border-radius: 20px;
+      background: #f0f0f0; color: #555; cursor: pointer;
+      font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 600;
+      transition: background .15s, color .15s;
+    }
+    .tab-btn.active { background: var(--violet-mid); color: #fff; }
+    .tab-btn:hover:not(.active) { background: #ddd; }
+    #mat-count { font-size: 13px; color: var(--muted); margin-top: 6px; }
+  </style>
 </head>
 <body>
 
-<div class="container">
+<div id="sidebar-container"></div>
 
-  <div class="sidebar">
-    <div class="sidebar-logo">
-      <img src="images/logo.png" alt="Logo" />
+<div class="page">
+  <div class="section-head">
+    <div>
+      <h2>Үнэгүй <span>материалууд</span></h2>
+      <p style="margin-top:4px">Суралцахад шаардлагатай бүх материал нэг дороо</p>
     </div>
-
-    <h2>MAIN MENU</h2>
-    <ul>
-      <li><a href="main.html"><i class="fas fa-home"></i> Home</a></li>
-      <li><a href="classes.html"><i class="fas fa-chalkboard-teacher"></i> Classes</a></li>
-      <li><a href="materials.html"><i class="fas fa-folder-open"></i> Materials</a></li>
-      <li><a href="exams.html"><i class="fas fa-file-alt"></i> Exams</a></li>
-    </ul>
-    
-    <h2>ACCOUNT</h2>
-    <ul>
-      <li><a href="#"><i class="fas fa-user"></i> Profile</a></li>
-      <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
-    </ul>
-
-    <hr>
-
-    <ul>
-      <li class="logout"><a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-    </ul>
   </div>
 
-<div class="container">
-
-  <div class="sidebar">
-    <div class="sidebar-logo">
-      <img src="images/logo.png" alt="Logo" />
-    </div>
-
-    <h2>MAIN MENU</h2>
-    <ul>
-      <li><a href="main.html"><i class="fas fa-home"></i> Home</a></li>
-      <li><a href="classes.html"><i class="fas fa-chalkboard-teacher"></i> Classes</a></li>
-      <li><a href="materials.html"><i class="fas fa-folder-open"></i> Materials</a></li>
-      <li><a href="exams.html"><i class="fas fa-file-alt"></i> Exams</a></li>
-    </ul>
-    
-    <h2>ACCOUNT</h2>
-    <ul>
-      <li><a href="#"><i class="fas fa-user"></i> Profile</a></li>
-      <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
-    </ul>
-
-    <hr>
-
-    <ul>
-      <li class="logout"><a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-    </ul>
+  <div class="search-bar">
+    <i class="fas fa-search"></i>
+    <input type="text" id="matSearch" placeholder="Материал хайх...">
   </div>
 
-<div class="main">
+  <div class="filter-tabs" id="filterTabs">
+    <button class="tab-btn active" data-cat="all">Бүгд</button>
+    <button class="tab-btn" data-cat="Алгебр">Алгебр</button>
+    <button class="tab-btn" data-cat="Геометр">Геометр</button>
+    <button class="tab-btn" data-cat="Тригонометр">Тригонометр</button>
+    <button class="tab-btn" data-cat="Комбинаторик">Комбинаторик</button>
+    <button class="tab-btn" data-cat="Тооны онол">Тооны онол</button>
+    <button class="tab-btn" data-cat="Арифметик">Арифметик</button>
+  </div>
 
-<h1>Study Materials</h1>
+  <p id="mat-count"></p>
 
-<div class="materials-grid">
-
-<div class="material">
-<h3>Algebra Basics</h3>
-<p>Learn equations and functions.</p>
-<button>View</button>
+  <div class="materials-grid" id="materialsGrid"></div>
 </div>
 
-<div class="material">
-<h3>Geometry Fundamentals</h3>
-<p>Angles, triangles and shapes.</p>
-<button>View</button>
-</div>
+<script src="js/load.js"></script>
+<script>
+const materials = [
+  {
+    title: "Алгебрийн үндэс",
+    category: "Алгебр",
+    desc: "Тэгшитгэл, тэнцэтгэл бус, олон гишүүнт зэрэг үндсэн ойлголтуудыг хамарсан PDF материал.",
+    pages: 48, size: "2.3 MB",
+    image: "images/algebry.jpg",
+    file: "#"
+  },
+  {
+    title: "Геометрийн теорем",
+    category: "Геометр",
+    desc: "Евклидийн геометрийн теорем, нотолгоо, дасгал бодлогуудын цогц эмхэтгэл.",
+    pages: 62, size: "3.1 MB",
+    image: "images/geometry.jpg",
+    file: "#"
+  },
+  {
+    title: "Тригонометрийн хүснэгт",
+    category: "Тригонометр",
+    desc: "Синус, косинус, тангенс нэгж тойргийн дэлгэрэнгүй хүснэгт болон томъёоны цуглуулга.",
+    pages: 24, size: "1.1 MB",
+    image: "images/trignometry.jpg",
+    file: "#"
+  },
+  {
+    title: "Комбинаторикийн лекц",
+    category: "Комбинаторик",
+    desc: "Зөвшөөрөл, хослол, биномийн теорем зэрэг сэдвийг тайлбарлана.",
+    pages: 36, size: "1.8 MB",
+    image: "images/data_analysis.jpg",
+    file: "#"
+  },
+  {
+    title: "Тооны онолын нотолгоо",
+    category: "Тооны онол",
+    desc: "Анхны тоо, хуваагдах чанар, Эйлерийн функц болон конгруенц сэдэвт материал.",
+    pages: 52, size: "2.7 MB",
+    image: "images/geometry.png",
+    file: "#"
+  },
+  {
+    title: "Арифметикийн дасгал",
+    category: "Арифметик",
+    desc: "Үндсэн арифметик үйлдлүүдийн шийдлийн аргуудыг дасгал бодлогоор бататгана.",
+    pages: 20, size: "0.9 MB",
+    image: "images/algebry.jpg",
+    file: "#"
+  },
+  {
+    title: "Алгебрийн бодлогын шийдлүүд",
+    category: "Алгебр",
+    desc: "ЭЕШ болон олимпиадын алгебрийн бодлогуудын дэлгэрэнгүй шийдлийн эмхэтгэл.",
+    pages: 80, size: "4.2 MB",
+    image: "images/algebry.jpg",
+    file: "#"
+  },
+  {
+    title: "Геометрийн бодлого",
+    category: "Геометр",
+    desc: "Гурвалжин, дөрвөлжин, тойрог сэдэвт 100+ дасгал бодлого шийдэлтэй.",
+    pages: 70, size: "3.6 MB",
+    image: "images/geometry.png",
+    file: "#"
+  },
+  {
+    title: "Тригонометрийн тэгшитгэл",
+    category: "Тригонометр",
+    desc: "Тригонометрийн тэгшитгэл болон тэнцэтгэл бусыг жишээ шийдлийн хамт авч үзнэ.",
+    pages: 40, size: "2.0 MB",
+    image: "images/trignometry.jpg",
+    file: "#"
+  }
+];
 
-<div class="material">
-<h3>Trigonometry Guide</h3>
-<p>Sine, cosine, tangent.</p>
-<button>View</button>
-</div>
+let activeCategory = 'all';
 
-<div class="material">
-<h3>Combinatorics Notes</h3>
-<p>Permutations and combinations.</p>
-<button>View</button>
-</div>
+function renderMaterials(list) {
+  const grid = document.getElementById('materialsGrid');
+  grid.innerHTML = '';
+  list.forEach(m => {
+    const card = document.createElement('div');
+    card.className = 'mat-item';
+    card.innerHTML = `
+      <img src="${m.image}" alt="${m.title}">
+      <div class="mat-body">
+        <span class="mat-tag">${m.category}</span>
+        <h3>${m.title}</h3>
+        <p>${m.desc}</p>
+        <div class="mat-meta">
+          <span><i class="fas fa-file-alt"></i> ${m.pages} хуудас</span>
+          <span><i class="fas fa-download"></i> ${m.size}</span>
+        </div>
+        <a href="${m.file}" class="mat-btn"><i class="fas fa-download"></i> Татах</a>
+      </div>`;
+    grid.appendChild(card);
+  });
+  document.getElementById('mat-count').textContent = `Нийт ${list.length} материал`;
+}
 
-<div class="material">
-<h3>Number Theory</h3>
-<p>Prime numbers and divisibility.</p>
-<button>View</button>
-</div>
+function applyFilters() {
+  const q = document.getElementById('matSearch').value.toLowerCase();
+  const filtered = materials.filter(m => {
+    const catOk  = activeCategory === 'all' || m.category === activeCategory;
+    const textOk = !q || m.title.toLowerCase().includes(q) || m.category.toLowerCase().includes(q);
+    return catOk && textOk;
+  });
+  renderMaterials(filtered);
+}
 
-<div class="material">
-<h3>Arithmetic Review</h3>
-<p>Basic math operations.</p>
-<button>View</button>
-</div>
+document.getElementById('filterTabs').addEventListener('click', e => {
+  const btn = e.target.closest('.tab-btn');
+  if (!btn) return;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeCategory = btn.dataset.cat;
+  applyFilters();
+});
 
-</div>
+document.getElementById('matSearch').addEventListener('input', applyFilters);
 
-</div>
-
-</div>
-
+renderMaterials(materials);
+</script>
 </body>
 </html>

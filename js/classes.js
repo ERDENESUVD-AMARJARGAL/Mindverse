@@ -1,14 +1,5 @@
-// Sidebar toggle
-const toggleBtn  = document.getElementById('toggleBtn');
-const sidebar    = document.getElementById('sidebar');
-const toggleIcon = document.getElementById('toggleIcon');
 
-toggleBtn.addEventListener('click', () => {
-  const collapsed = sidebar.classList.toggle('collapsed');
-  document.body.classList.toggle('sb-collapsed');
-  toggleIcon.classList.remove('fa-chevron-left', 'fa-chevron-right');
-  toggleIcon.classList.add(collapsed ? 'fa-chevron-right' : 'fa-chevron-left');
-});
+
 
 // Load JSON and render cards
 fetch('data/courses.json')
@@ -45,25 +36,22 @@ function renderCourses(courses) {
         <i class="bi bi-people-fill"> ${course.enrolled} сурагч</i>
       </div>
     `;
-      card.addEventListener('click', () => {
-      window.location.href = `temp.html?id=${course.id}`;
-    });
-    
     container.appendChild(card);
 
     // Card click → temp.html
     card.addEventListener('click', () => {
       const query = new URLSearchParams({
-        title: course.title,
-        level: course.level,
-        category: course.category,
-        price: course.price,
+        id:         course.id,
+        title:      course.title,
+        level:      course.level,
+        category:   course.category,
+        price:      course.price,
         instructor: course.instructor,
-        rating: course.rating,
-        lessons: course.lessons,
-        hours: course.hours,
-        enrolled: course.enrolled,
-        image: course.image
+        rating:     course.rating,
+        lessons:    course.lessons,
+        hours:      course.hours,
+        enrolled:   course.enrolled,
+        image:      course.image
       });
       window.location.href = `temp.html?${query.toString()}`;
     });

@@ -1,62 +1,253 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="mn">
 <head>
-<meta charset="UTF-8">
-<title>Profile</title>
-<link rel="stylesheet" href="styles.css">
-</head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EduLearn – Профайл</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Fraunces:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    .profile-wrap {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 24px;
+      margin-top: 28px;
+    }
+    /* ── LEFT CARD ── */
+    .profile-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+    }
+    .avatar-wrap { position: relative; margin-bottom: 16px; }
+    .avatar-wrap img {
+      width: 96px; height: 96px; border-radius: 50%; object-fit: cover;
+      border: 3px solid var(--violet-light);
+    }
+    .avatar-edit {
+      position: absolute; bottom: 0; right: 0;
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--violet-mid); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; cursor: pointer;
+      border: 2px solid var(--white);
+    }
+    .profile-name { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+    .profile-role {
+      display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .07em;
+      text-transform: uppercase; color: var(--violet-mid); background: var(--violet-light);
+      padding: 3px 12px; border-radius: 99px; margin-bottom: 12px;
+    }
+    .profile-email { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+    .profile-divider { width: 100%; height: 1px; background: var(--border); margin: 16px 0; }
+    .stat-row { display: flex; justify-content: space-around; width: 100%; }
+    .stat { text-align: center; }
+    .stat-num { font-size: 22px; font-weight: 700; color: var(--violet-mid); }
+    .stat-lbl { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .edit-btn {
+      margin-top: 20px; width: 100%;
+      padding: 10px; border-radius: 8px;
+      border: 2px solid var(--violet-mid); background: transparent;
+      color: var(--violet-mid); font-family: 'Sora', sans-serif;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      transition: background .15s, color .15s;
+    }
+    .edit-btn:hover { background: var(--violet-mid); color: #fff; }
 
+    /* ── RIGHT PANELS ── */
+    .panels { display: flex; flex-direction: column; gap: 20px; }
+    .panel {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+    }
+    .panel-title {
+      font-family: 'Fraunces', serif;
+      font-size: 17px; font-weight: 700; margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .panel-title i { color: var(--violet-mid); font-size: 16px; }
+
+    /* Progress bars */
+    .prog-item { margin-bottom: 14px; }
+    .prog-header { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 5px; }
+    .prog-header span:last-child { font-weight: 700; color: var(--violet-mid); }
+    .prog-track {
+      height: 8px; background: var(--border); border-radius: 99px; overflow: hidden;
+    }
+    .prog-fill {
+      height: 100%; border-radius: 99px;
+      background: linear-gradient(90deg, var(--violet-mid), #a78bfa);
+      transition: width .5s ease;
+    }
+
+    /* Recent exams */
+    .exam-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 0; border-bottom: 1px solid var(--border);
+    }
+    .exam-row:last-child { border-bottom: none; }
+    .exam-row-title { font-size: 13.5px; font-weight: 500; }
+    .exam-row-meta  { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .score-pill {
+      font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 99px;
+    }
+    .score-high   { background: #dcfce7; color: #16a34a; }
+    .score-mid    { background: #fef9c3; color: #ca8a04; }
+    .score-low    { background: #fee2e2; color: #dc2626; }
+
+    /* Badges */
+    .badges-row { display: flex; flex-wrap: wrap; gap: 12px; }
+    .badge-item {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      background: var(--violet-pale); border-radius: 12px;
+      padding: 14px 18px; font-size: 12px; font-weight: 600; color: var(--muted);
+    }
+    .badge-item i { font-size: 22px; color: var(--violet-mid); }
+    .badge-item.locked { opacity: .4; filter: grayscale(1); }
+  </style>
+</head>
 <body>
 
-<div class="container">
+<div id="sidebar-container"></div>
 
-  <div class="sidebar">
-    <div class="sidebar-logo">
-      <img src="images/logo.png" alt="Logo" />
+<div class="page">
+  <div class="section-head">
+    <div>
+      <h2>Миний <span style="color:var(--violet-mid)">профайл</span></h2>
+      <p style="margin-top:4px">Хувийн мэдээлэл болон дэвшлийн тойм</p>
     </div>
-
-    <h2>MAIN MENU</h2>
-    <ul>
-      <li><a href="main.html"><i class="fas fa-home"></i> Home</a></li>
-      <li><a href="classes.html"><i class="fas fa-chalkboard-teacher"></i> Classes</a></li>
-      <li><a href="materials.html"><i class="fas fa-folder-open"></i> Materials</a></li>
-      <li><a href="exams.html"><i class="fas fa-file-alt"></i> Exams</a></li>
-    </ul>
-    
-    <h2>ACCOUNT</h2>
-    <ul>
-      <li><a href="#"><i class="fas fa-user"></i> Profile</a></li>
-      <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
-    </ul>
-
-    <hr>
-
-    <ul>
-      <li class="logout"><a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-    </ul>
   </div>
 
-<div class="main">
+  <div class="profile-wrap">
 
-<h1>User Profile</h1>
+    <!-- LEFT -->
+    <div class="profile-card">
+      <div class="avatar-wrap">
+        <img src="images/boy.png" alt="Avatar" id="avatarImg">
+        <div class="avatar-edit" title="Зураг солих"><i class="fas fa-camera"></i></div>
+      </div>
+      <div class="profile-name" id="profileName">Нэргүй</div>
+      <span class="profile-role" id="profileRole">Сурагч</span>
+      <div class="profile-email" id="profileEmail">—</div>
+      <div class="profile-divider"></div>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-num">9</div><div class="stat-lbl">Хичээл</div></div>
+        <div class="stat"><div class="stat-num" id="statExams">0</div><div class="stat-lbl">Шалгалт</div></div>
+        <div class="stat"><div class="stat-num" id="statAvg">—</div><div class="stat-lbl">Дундаж</div></div>
+      </div>
+      <button class="edit-btn" onclick="window.location.href='settings.html'">
+        <i class="fas fa-pen" style="margin-right:6px"></i>Мэдээлэл засах
+      </button>
+    </div>
 
-<div class="profile-box">
+    <!-- RIGHT -->
+    <div class="panels">
 
-<img src="images/user.png">
+      <!-- Course progress -->
+      <div class="panel">
+        <div class="panel-title"><i class="fas fa-chart-line"></i> Хичээлийн дэвшил</div>
+        <div id="progressList"></div>
+      </div>
 
-<h2>Username</h2>
+      <!-- Exam scores -->
+      <div class="panel">
+        <div class="panel-title"><i class="fas fa-file-alt"></i> Шалгалтын үр дүн</div>
+        <div id="examResults"></div>
+      </div>
 
-<p>Email: user@email.com</p>
+      <!-- Badges -->
+      <div class="panel">
+        <div class="panel-title"><i class="fas fa-medal"></i> Медалиуд</div>
+        <div class="badges-row">
+          <div class="badge-item" title="Анхны хичээл дуусгасан">
+            <i class="fas fa-star"></i>Анхны алхам
+          </div>
+          <div class="badge-item" title="5 шалгалт өгсөн" id="badge5exams">
+            <i class="fas fa-graduation-cap"></i>Шалгагч
+          </div>
+          <div class="badge-item locked" title="10 хичээл дуусгах">
+            <i class="fas fa-fire"></i>Хичээлч
+          </div>
+          <div class="badge-item locked" title="90%+ дундаж оноо авах">
+            <i class="fas fa-trophy"></i>Шилдэг
+          </div>
+        </div>
+      </div>
 
-<p>Joined: 2026</p>
-
-<button>Edit Profile</button>
-
+    </div>
+  </div>
 </div>
 
-</div>
+<script src="js/load.js"></script>
+<script>
+// ── Fill user info from sessionStorage ──
+(function () {
+  const name  = sessionStorage.getItem('user_name')  || 'Сурагч';
+  const email = sessionStorage.getItem('user_email') || '—';
+  const role  = sessionStorage.getItem('user_role');
+  document.getElementById('profileName').textContent  = name;
+  document.getElementById('profileEmail').textContent = email;
+  document.getElementById('profileRole').textContent  =
+    role === 'teacher' ? 'Багш' : 'Сурагч';
+})();
 
-</div>
+// ── Course progress from localStorage ──
+const courses = [
+  "Анхан шатны Алгебр", "Геометрийн үндэс", "C++ програмчлалын эхлэл",
+  "UI/UX дизайн", "Өгөгдлийн шинжилгээ", "Тригонометрийн үндэс",
+  "Комбинаторикийн эхлэл", "Арифметик — Анхан шат", "Тооны онолын оршил"
+];
 
+const progList = document.getElementById('progressList');
+courses.forEach(title => {
+  const pct = parseInt(localStorage.getItem('progress_' + title) || '0');
+  progList.innerHTML += `
+    <div class="prog-item">
+      <div class="prog-header"><span>${title}</span><span>${pct}%</span></div>
+      <div class="prog-track"><div class="prog-fill" style="width:${pct}%"></div></div>
+    </div>`;
+});
+
+// ── Exam results from localStorage ──
+const examNames = [
+  "Алгебрийн шалгалт","Геометрийн шалгалт","Тригонометрийн шалгалт",
+  "Арифметикийн шалгалт","Комбинаторикийн шалгалт","Тооны онолын шалгалт"
+];
+
+const examResults = document.getElementById('examResults');
+let taken = 0, total = 0;
+
+examNames.forEach((name, i) => {
+  const score = localStorage.getItem('exam_score_' + i);
+  if (score === null) return;
+  taken++;
+  total += parseInt(score);
+  const cls  = score >= 80 ? 'score-high' : score >= 60 ? 'score-mid' : 'score-low';
+  examResults.innerHTML += `
+    <div class="exam-row">
+      <div>
+        <div class="exam-row-title">${name}</div>
+        <div class="exam-row-meta">Дуусгасан</div>
+      </div>
+      <span class="score-pill ${cls}">${score}%</span>
+    </div>`;
+});
+
+if (taken === 0) {
+  examResults.innerHTML = '<p style="font-size:13px;color:var(--muted)">Одоохондоо шалгалт өгөөгүй байна.</p>';
+}
+
+document.getElementById('statExams').textContent = taken;
+document.getElementById('statAvg').textContent   = taken > 0 ? Math.round(total / taken) + '%' : '—';
+
+// badge unlock
+if (taken >= 5) document.getElementById('badge5exams').classList.remove('locked');
+</script>
 </body>
 </html>

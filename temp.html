@@ -4,11 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Online Course Player</title>
-  <link rel="stylesheet" href="temp.css">
+  <link rel="stylesheet" href="css/temp.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet" />
-
-
 </head>
 <body>
 
@@ -19,14 +17,14 @@
       <i class="bi bi-arrow-left"></i>
       Буцах
     </a>
-    <span class="course-title">Анхан шатны Алгебр</span>
+    <span class="course-title" id="headerTitle">...</span>
   </div>
 
   <div class="progress-wrap">
     <div class="progress-track">
-      <div class="progress-fill"></div>
+      <div class="progress-fill" id="progressFill"></div>
     </div>
-    <span class="progress-label">6% дууссан</span>
+    <span class="progress-label" id="progressLabel">0% дууссан</span>
   </div>
 </header>
 
@@ -36,15 +34,26 @@
   <!-- VIDEO AREA -->
   <div class="video-area">
     <div class="video-wrap">
-      <video controls>
-        <source src="https://www.pexels.com/download/video/5146631/" type="video/mp4">
+      <video controls id="courseVideo">
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        Таны хөтөч видео дэмжихгүй байна.
       </video>
     </div>
 
     <div class="lesson-meta">
       <span class="lesson-tag">Хичээл 1 · Видео</span>
-      <h1 class="lesson-title">Алгебр гэж юу вэ?</h1>
-      <p class="lesson-desc">Алгебрийн үндсэн ойлголт, тэмдэглэгээ болон анхдагч математик харилцааг танилцуулна.</p>
+      <h1 class="lesson-title" id="lessonTitle">...</h1>
+      <p class="lesson-desc" id="lessonDesc">...</p>
+    </div>
+
+    <!-- Course info strip -->
+    <div id="courseInfoStrip" style="display:flex;gap:20px;flex-wrap:wrap;margin-top:18px;padding:16px 18px;background:var(--white);border:1px solid var(--border);border-radius:12px;font-size:13px;color:var(--text-muted);">
+      <span><i class="bi bi-person-circle"></i> <span id="infoInstructor"></span></span>
+      <span><i class="bi bi-journal-plus"></i> <span id="infoLessons"></span> хичээл</span>
+      <span><i class="bi bi-alarm"></i> <span id="infoHours"></span> цаг</span>
+      <span><i class="bi bi-people-fill"></i> <span id="infoEnrolled"></span> сурагч</span>
+      <span><i class="bi bi-star-fill" style="color:#ffc107"></i> <span id="infoRating"></span></span>
+      <span id="infoPrice" style="font-weight:600;"></span>
     </div>
   </div>
 
@@ -60,16 +69,16 @@
       <div class="unit-header" onclick="toggleUnit(this)">
         <div class="unit-info">
           <small>Хичээл 1</small>
-          <div class="unit-name">Алгебр гэж юу вэ?</div>
+          <div class="unit-name" id="unit1Name">...</div>
         </div>
         <i class="bi bi-chevron-down unit-arrow"></i>
       </div>
       <div class="lessons open">
-        <div class="lesson-item active">
+        <div class="lesson-item active" onclick="selectLesson(this, 1)">
           <i class="bi bi-play-circle-fill"></i>
           Видео хичээл
         </div>
-        <div class="lesson-item">
+        <div class="lesson-item" onclick="selectLesson(this, 1)">
           <i class="bi bi-pencil-square"></i>
           Дасгал ажил
         </div>
@@ -84,11 +93,11 @@
         <i class="bi bi-chevron-down unit-arrow"></i>
       </div>
       <div class="lessons">
-        <div class="lesson-item">
+        <div class="lesson-item" onclick="selectLesson(this, 2)">
           <i class="bi bi-play-circle"></i>
           Видео хичээл
         </div>
-        <div class="lesson-item">
+        <div class="lesson-item" onclick="selectLesson(this, 2)">
           <i class="bi bi-pencil-square"></i>
           Дасгал ажил
         </div>
@@ -103,15 +112,15 @@
         <i class="bi bi-chevron-down unit-arrow"></i>
       </div>
       <div class="lessons">
-        <div class="lesson-item">
+        <div class="lesson-item" onclick="selectLesson(this, 3)">
           <i class="bi bi-play-circle"></i>
           Видео хичээл
         </div>
-        <div class="lesson-item">
+        <div class="lesson-item" onclick="selectLesson(this, 3)">
           <i class="bi bi-pencil-square"></i>
           Дасгал ажил
         </div>
-        <div class="lesson-item">
+        <div class="lesson-item" onclick="selectLesson(this, 3)">
           <i class="bi bi-file-earmark-check"></i>
           Тест
         </div>
@@ -137,21 +146,72 @@
 </div>
 
 <script>
+  /* ── LOAD COURSE DATA FROM URL PARAMS ── */
+  (function () {
+    const p = new URLSearchParams(window.location.search);
+
+    const title      = p.get('title')      || 'Хичээл';
+    const instructor = p.get('instructor') || '';
+    const lessons    = p.get('lessons')    || '';
+    const hours      = p.get('hours')      || '';
+    const enrolled   = p.get('enrolled')   || '';
+    const rating     = p.get('rating')     || '';
+    const price      = p.get('price')      || '';
+
+    document.getElementById('headerTitle').textContent  = title;
+    document.title = title + ' – EduLearn';
+    document.getElementById('lessonTitle').textContent  = title + ' — Оршил';
+    document.getElementById('lessonDesc').textContent   =
+      title + '-ийн үндсэн ойлголт, тэмдэглэгээ болон анхдагч харилцааг танилцуулна.';
+    document.getElementById('unit1Name').textContent    = title + ' гэж юу вэ?';
+
+    document.getElementById('infoInstructor').textContent = instructor;
+    document.getElementById('infoLessons').textContent    = lessons;
+    document.getElementById('infoHours').textContent      = hours;
+    document.getElementById('infoEnrolled').textContent   = enrolled;
+    document.getElementById('infoRating').textContent     = rating;
+    const priceEl = document.getElementById('infoPrice');
+    priceEl.textContent = parseFloat(price) === 0 ? 'Үнэгүй' : (price ? '$' + price : '');
+    priceEl.style.color = parseFloat(price) === 0 ? '#22c55e' : 'inherit';
+
+    // Track progress in localStorage keyed by course title
+    const key      = 'progress_' + title;
+    const progress = parseInt(localStorage.getItem(key) || '0');
+    updateProgress(progress);
+  })();
+
+  /* ── PROGRESS ── */
+  let completedLessons = 0;
+  const totalLessons   = 7; // unit 1×2 + unit 2×2 + unit 3×3
+
+  function updateProgress(pct) {
+    document.getElementById('progressFill').style.width  = pct + '%';
+    document.getElementById('progressLabel').textContent = pct + '% дууссан';
+  }
+
+  function selectLesson(el, unit) {
+    document.querySelectorAll('.lesson-item').forEach(i => i.classList.remove('active'));
+    el.classList.add('active');
+    completedLessons = Math.min(completedLessons + 1, totalLessons);
+    const pct = Math.round((completedLessons / totalLessons) * 100);
+    const key = 'progress_' + (document.getElementById('headerTitle').textContent);
+    localStorage.setItem(key, pct);
+    updateProgress(pct);
+  }
+
   /* ── UNIT TOGGLE ── */
   function toggleUnit(header) {
     const lessons = header.nextElementSibling;
-    const isOpen = lessons.classList.contains('open');
+    const isOpen  = lessons.classList.contains('open');
     lessons.classList.toggle('open', !isOpen);
     header.classList.toggle('active', !isOpen);
   }
 
   /* ── NOTES ── */
-  let notes = JSON.parse(localStorage.getItem('cp_notes') || '[]');
+  let notes     = JSON.parse(localStorage.getItem('cp_notes') || '[]');
   let notesOpen = false;
 
-  function saveNotes() {
-    localStorage.setItem('cp_notes', JSON.stringify(notes));
-  }
+  function saveNotes() { localStorage.setItem('cp_notes', JSON.stringify(notes)); }
 
   function toggleNotes() {
     notesOpen = !notesOpen;
@@ -163,12 +223,10 @@
   function renderNotes() {
     const list = document.getElementById('notesList');
     list.innerHTML = '';
-
     if (notes.length === 0) {
       list.innerHTML = '<div class="notes-empty">Тэмдэглэл байхгүй байна</div>';
       return;
     }
-
     notes.forEach((note, i) => {
       const div = document.createElement('div');
       div.className = 'note-item';
@@ -176,8 +234,7 @@
         <span class="note-title">${escHtml(note.title)}</span>
         <button class="note-delete" onclick="deleteNote(event,${i})" title="Устгах">
           <i class="bi bi-trash3"></i>
-        </button>
-      `;
+        </button>`;
       div.addEventListener('click', () => openNote(i));
       list.appendChild(div);
     });
@@ -191,8 +248,7 @@
     const n = { title: 'Шинэ тэмдэглэл', content: '', created: Date.now() };
     notes.unshift(n);
     saveNotes();
-    if (!notesOpen) toggleNotes();
-    else renderNotes();
+    if (!notesOpen) toggleNotes(); else renderNotes();
     openNote(0);
   }
 
@@ -203,93 +259,55 @@
     renderNotes();
   }
 
-  /* ── POPUP ── */
+  /* ── NOTE POPUP ── */
   function openNote(i) {
     const note = notes[i];
-    const existing = document.querySelectorAll('.note-popup');
-    // avoid duplicate
-    for (const p of existing) {
+    for (const p of document.querySelectorAll('.note-popup')) {
       if (parseInt(p.dataset.index) === i) { p.style.zIndex = 10000; return; }
     }
-
-    const popup = document.createElement('div');
-    popup.className = 'note-popup';
+    const popup  = document.createElement('div');
+    popup.className   = 'note-popup';
     popup.dataset.index = i;
-
     const d = new Date(note.created || Date.now());
     const dateStr = d.toLocaleDateString('mn-MN', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
-
     popup.innerHTML = `
       <div class="note-popup-header" onmousedown="dragStart(event, this.closest('.note-popup'))">
         <input value="${escHtml(note.title)}" placeholder="Гарчиг...">
         <div class="popup-actions">
-          <button class="popup-btn" onclick="togglePopupSize(this)" title="Томруулах">
-            <i class="bi bi-arrows-fullscreen"></i>
-          </button>
-          <button class="popup-btn" onclick="this.closest('.note-popup').remove()" title="Хаах">
-            <i class="bi bi-x-lg"></i>
-          </button>
+          <button class="popup-btn" onclick="togglePopupSize(this)" title="Томруулах"><i class="bi bi-arrows-fullscreen"></i></button>
+          <button class="popup-btn" onclick="this.closest('.note-popup').remove()" title="Хаах"><i class="bi bi-x-lg"></i></button>
         </div>
       </div>
       <div class="note-popup-body">
         <textarea placeholder="Тэмдэглэл бичих...">${escHtml(note.content)}</textarea>
       </div>
-      <div class="note-popup-footer">${dateStr}</div>
-    `;
-
+      <div class="note-popup-footer">${dateStr}</div>`;
     document.body.appendChild(popup);
-
-    popup.querySelector('input').addEventListener('input', e => {
-      notes[i].title = e.target.value;
-      saveNotes();
-      renderNotes();
-    });
-
-    popup.querySelector('textarea').addEventListener('input', e => {
-      notes[i].content = e.target.value;
-      saveNotes();
-    });
+    popup.querySelector('input').addEventListener('input', e => { notes[i].title = e.target.value; saveNotes(); renderNotes(); });
+    popup.querySelector('textarea').addEventListener('input', e => { notes[i].content = e.target.value; saveNotes(); });
   }
 
-  function togglePopupSize(btn) {
-    btn.closest('.note-popup').classList.toggle('large');
-  }
+  function togglePopupSize(btn) { btn.closest('.note-popup').classList.toggle('large'); }
 
   /* ── DRAG ── */
   function dragStart(e, el) {
     e.preventDefault();
     let startX = e.clientX - el.offsetLeft;
     let startY = e.clientY - el.offsetTop;
-
     function onMove(e) {
-      el.style.left = (e.clientX - startX) + 'px';
-      el.style.top  = (e.clientY - startY) + 'px';
-      el.style.bottom = 'auto';
-      el.style.right  = 'auto';
+      el.style.left     = (e.clientX - startX) + 'px';
+      el.style.top      = (e.clientY - startY) + 'px';
+      el.style.bottom   = 'auto';
+      el.style.right    = 'auto';
       el.style.position = 'fixed';
     }
-
     function onUp() {
       document.removeEventListener('mousemove', onMove);
-      document.removeEventListener('mouseup', onUp);
+      document.removeEventListener('mouseup',   onUp);
     }
-
     document.addEventListener('mousemove', onMove);
-    document.addEventListener('mouseup', onUp);
+    document.addEventListener('mouseup',   onUp);
   }
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-      co

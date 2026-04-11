@@ -4,49 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>EduLearn</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/sidebar.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Fraunces:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
 </head>
 <body>
 
 <!-- ════════ SIDEBAR ════════ -->
-<aside class="sidebar" id="sidebar">
-  <div class="sb-top">
-    <div class="sb-logo link-text">EduLearn</div>
-    <button class="sb-toggle" id="toggleBtn" title="Sidebar нуух/харуулах">
-      <i class="fas fa-chevron-left" id="toggleIcon"></i>
-    </button>
-  </div>
-
-  <div class="sb-label link-text">Үндсэн цэс</div>
-  <nav>
-    <ul>
-      <li class="active"><a href="main.html"><i class="fas fa-home"></i><span class="link-text">Нүүр</span></a></li>
-      <li><a href="classes.html"><i class="fas fa-chalkboard-teacher"></i><span class="link-text">Хичээлүүд</span></a></li>
-      <li><a href="materials.html"><i class="fas fa-folder-open"></i><span class="link-text">Материалууд</span></a></li>
-      <li><a href="exams.html"><i class="fas fa-file-alt"></i><span class="link-text">Шалгалтууд</span></a></li>
-    </ul>
-  </nav>
-
-  <div class="sb-label link-text">Хаяг</div>
-  <nav>
-    <ul>
-      <li><a href="#"><i class="fas fa-user"></i><span class="link-text">Профайл</span></a></li>
-      <li><a href="settings.html"><i class="fas fa-cog"></i><span class="link-text">Тохиргоо</span></a></li>
-    </ul>
-  </nav>
-
-  <hr class="sb-divider" />
-  <nav>
-    <ul>
-      <li class="sb-logout"><a href="#"><i class="fas fa-sign-out-alt"></i><span class="link-text">Гарах</span></a></li>
-    </ul>
-  </nav>
-</aside>
-
+<div id="sidebar-container"></div>
 <!-- ════════ PAGE ════════ -->
-<div class="page">
+<div class="page"> 
 
   <!-- HERO -->
   <section class="hero">
@@ -131,19 +99,19 @@
         <div class="mat-card-label">Геометр</div>
       </a>
       <a href="materials.html" class="mat-card">
-        <img src="images/trigonometry.jpg" alt="Тригонометр">
+        <img src="images/trignometry.jpg" alt="Тригонометр">
         <div class="mat-card-label">Тригонометр</div>
       </a>
       <a href="materials.html" class="mat-card">
-        <img src="images/combinatorics.jpg" alt="Комбинаторик">
+        <img src="images/data_analysis.jpg" alt="Комбинаторик">
         <div class="mat-card-label">Комбинаторик</div>
       </a>
       <a href="materials.html" class="mat-card">
-        <img src="images/number_theory.jpg" alt="Тооны онол">
+        <img src="images/c++.jpg" alt="Тооны онол">
         <div class="mat-card-label">Тооны онол</div>
       </a>
       <a href="materials.html" class="mat-card">
-        <img src="images/arithmetic.jpg" alt="Арифметик">
+        <img src="images/ux.jpg" alt="Арифметик">
         <div class="mat-card-label">Арифметик</div>
       </a>
     </div>
@@ -160,28 +128,28 @@
     </div>
     <div class="cards-row">
       <a href="exams.html" class="exam-card">
-        <img src="images/algebry_exam.jpg" alt="Алгебр">
+        <img src="images/algebry.jpg" alt="Алгебр">
         <div class="exam-card-body">
           <h3>Алгебрийн шалгалт</h3>
           <p>Алгебрийн мэдлэгээ шалгаарай.</p>
         </div>
       </a>
       <a href="exams.html" class="exam-card">
-        <img src="images/geometry_exam.jpg" alt="Геометр">
+        <img src="images/geometry.png" alt="Геометр">
         <div class="exam-card-body">
           <h3>Геометрийн шалгалт</h3>
           <p>Геометрийн ур чадвараа туршаарай.</p>
         </div>
       </a>
       <a href="exams.html" class="exam-card">
-        <img src="images/trigonometry_exam.jpg" alt="Тригонометр">
+        <img src="images/trignometry.jpg" alt="Тригонометр">
         <div class="exam-card-body">
           <h3>Тригонометрийн шалгалт</h3>
           <p>Тригонометрийн мэдлэгээ шалгаарай.</p>
         </div>
       </a>
       <a href="exams.html" class="exam-card">
-        <img src="images/combinatorics_exam.jpg" alt="Комбинаторик">
+        <img src="images/data_analysis.jpg" alt="Комбинаторик">
         <div class="exam-card-body">
           <h3>Комбинаторикийн шалгалт</h3>
           <p>Комбинаторикийн ур чадвараа туршаарай.</p>
@@ -281,6 +249,7 @@
     </div>
   </div>
 
+
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-grid">
@@ -312,20 +281,13 @@
     </div>
   </footer>
 
+
+
 </div><!-- /page -->
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  /* Sidebar toggle */
-  const toggleBtn  = document.getElementById('toggleBtn');
-  const sidebar    = document.getElementById('sidebar');
-  const toggleIcon = document.getElementById('toggleIcon');
+  <script src="./js/load.js"></script>
 
-  toggleBtn.addEventListener('click', () => {
-    const col = sidebar.classList.toggle('collapsed');
-    document.body.classList.toggle('sb-collapsed', col);
-    toggleIcon.className = col ? 'fas fa-chevron-right' : 'fas fa-chevron-left';
-  });
-
+<script>
   /* FAQ accordion */
   document.querySelectorAll('.faq-item').forEach(item => {
     item.querySelector('.faq-question').addEventListener('click', () => {
