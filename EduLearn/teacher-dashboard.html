@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Багшийн хянах самбар — EduLearn</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="index.html" class="navbar-brand">
+    <div class="logo-icon">🎓</div>
+    EduLearn
+  </a>
+  <ul class="navbar-nav">
+    <li><a href="teacher-dashboard.html" class="active">🏠 Нүүр</a></li>
+    <li><a href="classroom.html">📚 Классууд</a></li>
+    <li><a href="exam.html">📝 Шалгалт</a></li>
+    <li><a href="marketplace.html">💼 Marketplace</a></li>
+    <li><a href="chat.html">💬 Чат</a></li>
+  </ul>
+  <div class="navbar-right">
+    <button class="notif-btn">🔔<span class="notif-badge">5</span></button>
+    <div class="user-avatar" onclick="window.location.href='index.html'" title="Гарах">Д</div>
+  </div>
+</nav>
+
+<div class="app-layout">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a href="teacher-dashboard.html" class="sidebar-link active">
+      <span class="icon">🏠</span> Нүүр хуудас
+    </a>
+    <a href="classroom.html" class="sidebar-link">
+      <span class="icon">📚</span> Классууд
+      <span class="badge">4</span>
+    </a>
+    <a href="exam.html" class="sidebar-link">
+      <span class="icon">📝</span> Шалгалт
+    </a>
+    <a href="marketplace.html" class="sidebar-link">
+      <span class="icon">💼</span> Marketplace
+      <span class="badge accent">3</span>
+    </a>
+    <a href="chat.html" class="sidebar-link">
+      <span class="icon">💬</span> Чат
+      <span class="badge">2</span>
+    </a>
+    <div class="sidebar-section-title">Удирдлага</div>
+    <a href="#" class="sidebar-link" onclick="showSection('analytics')">
+      <span class="icon">📊</span> Аналитик
+    </a>
+    <a href="#" class="sidebar-link" onclick="showSection('students')">
+      <span class="icon">👨‍🎓</span> Сурагчид
+    </a>
+    <a href="#" class="sidebar-link" onclick="showSection('materials')">
+      <span class="icon">📁</span> Материалууд
+    </a>
+    <a href="wallet.html" class="sidebar-link">
+      <span class="icon">💰</span> Орлого
+    </a>
+
+    <!-- Teacher profile -->
+    <div style="margin-top:auto;padding:14px;background:var(--primary-pale);border-radius:var(--radius-md);">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+        <div style="width:38px;height:38px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:16px;">Д</div>
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--gray-800);">Д.Дорж Багш</div>
+          <div class="badge badge-primary" style="font-size:10px;padding:1px 7px;margin-top:2px;">👨‍🏫 Математик</div>
+        </div>
+      </div>
+      <div style="font-size:12px;color:var(--gray-600);">Энэ сарын орлого:</div>
+      <div style="font-size:20px;font-weight:800;color:var(--primary);">₮48,500</div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <div id="section-main">
+      <!-- Header -->
+      <div class="page-header" style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <div>
+          <h1>Сайн байна уу, Дорж Багш! 👨‍🏫</h1>
+          <p>Таны 4 класст нийт 107 сурагч байна</p>
+        </div>
+        <div style="display:flex;gap:10px;">
+          <button class="btn btn-outline" onclick="showSection('materials')">📁 Материал нэмэх</button>
+          <button class="btn btn-primary" onclick="document.getElementById('createClassModal').classList.add('open')">+ Класс үүсгэх</button>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid-4" style="margin-bottom:28px;">
+        <div class="stat-card">
+          <div class="stat-icon blue">👨‍🎓</div>
+          <div class="stat-value">107</div>
+          <div class="stat-label">Нийт сурагч</div>
+          <div class="stat-change up">↑ +12 энэ сар</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green">✅</div>
+          <div class="stat-value">87%</div>
+          <div class="stat-label">Даалгавар гүйцэтгэл</div>
+          <div class="stat-change up">↑ +3% өмнөхөөс</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon yellow">💼</div>
+          <div class="stat-value">18</div>
+          <div class="stat-label">Шийдсэн бодлого</div>
+          <div class="stat-change up">+₮48,500 орлого</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon purple">⭐</div>
+          <div class="stat-value">4.9</div>
+          <div class="stat-label">Дундаж үнэлгээ</div>
+          <div class="stat-change up">↑ Маш сайн</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:24px;">
+        <!-- Left -->
+        <div>
+          <!-- My Classes -->
+          <div class="card" style="margin-bottom:20px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+              <h3 style="font-size:16px;">📚 Миний классууд</h3>
+              <button class="btn btn-primary btn-sm" onclick="document.getElementById('createClassModal').classList.add('open')">+ Шинэ класс</button>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div class="card card-hover" style="padding:16px;cursor:pointer;" onclick="window.location.href='classroom.html'">
+                <div style="display:flex;align-items:center;gap:14px;">
+                  <div style="width:50px;height:50px;background:var(--primary);border-radius:12px;display:flex;align-items:center;justify-content:center;color:white;font-size:22px;">📐</div>
+                  <div style="flex:1;">
+                    <div style="font-weight:700;font-size:15px;">Математик 10А</div>
+                    <div style="font-size:12px;color:var(--gray-500);">28 сурагч • Код: MATH10A</div>
+                    <div style="display:flex;gap:8px;margin-top:6px;">
+                      <span class="badge badge-primary" style="font-size:11px;">3 даалгавар</span>
+                      <span class="badge badge-warning" style="font-size:11px;">1 шалгалт</span>
+                    </div>
+                  </div>
+                  <div style="text-align:center;">
+                    <div style="font-size:24px;font-weight:800;color:var(--primary);">87%</div>
+                    <div style="font-size:11px;color:var(--gray-500);">Дундаж</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card card-hover" style="padding:16px;cursor:pointer;" onclick="window.location.href='classroom.html'">
+                <div style="display:flex;align-items:center;gap:14px;">
+                  <div style="width:50px;height:50px;background:var(--primary-dark);border-radius:12px;display:flex;align-items:center;justify-content:center;color:white;font-size:22px;">📐</div>
+                  <div style="flex:1;">
+                    <div style="font-weight:700;font-size:15px;">Математик 10Б</div>
+                    <div style="font-size:12px;color:var(--gray-500);">31 сурагч • Код: MATH10B</div>
+                    <div style="display:flex;gap:8px;margin-top:6px;">
+                      <span class="badge badge-primary" style="font-size:11px;">4 даалгавар</span>
+                    </div>
+                  </div>
+                  <div style="text-align:center;">
+                    <div style="font-size:24px;font-weight:800;color:var(--primary);">79%</div>
+                    <div style="font-size:11px;color:var(--gray-500);">Дундаж</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card card-hover" style="padding:16px;cursor:pointer;" onclick="window.location.href='classroom.html'">
+                <div style="display:flex;align-items:center;gap:14px;">
+                  <div style="width:50px;height:50px;background:rgb(99,102,241);border-radius:12px;display:flex;align-items:center;justify-content:center;color:white;font-size:22px;">🔢</div>
+                  <div style="flex:1;">
+                    <div style="font-weight:700;font-size:15px;">ЭЕШ Математик</div>
+                    <div style="font-size:12px;color:var(--gray-500);">24 сурагч • Код: EEX2025</div>
+                    <div style="display:flex;gap:8px;margin-top:6px;">
+                      <span class="badge badge-success" style="font-size:11px;">ЭЕШ бэлдэлт</span>
+                    </div>
+                  </div>
+                  <div style="text-align:center;">
+                    <div style="font-size:24px;font-weight:800;color:rgb(99,102,241);">91%</div>
+                    <div style="font-size:11px;color:var(--gray-500);">Дундаж</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card card-hover" style="padding:16px;cursor:pointer;" onclick="window.location.href='classroom.html'">
+                <div style="display:flex;align-items:center;gap:14px;">
+                  <div style="width:50px;height:50px;background:rgb(245,158,11);border-radius:12px;display:flex;align-items:center;justify-content:center;color:white;font-size:22px;">🔬</div>
+                  <div style="flex:1;">
+                    <div style="font-weight:700;font-size:15px;">Физик 11А</div>
+                    <div style="font-size:12px;color:var(--gray-500);">24 сурагч • Код: PHY11A</div>
+                    <div style="display:flex;gap:8px;margin-top:6px;">
+                      <span class="badge badge-warning" style="font-size:11px;">2 даалгавар</span>
+                    </div>
+                  </div>
+                  <div style="text-align:center;">
+                    <div style="font-size:24px;font-weight:800;color:rgb(245,158,11);">75%</div>
+                    <div style="font-size:11px;color:var(--gray-500);">Дундаж</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Student performance table -->
+          <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+              <h3 style="font-size:16px;">👨‍🎓 Сурагчийн явц (Математик 10А)</h3>
+              <select class="form-select" style="width:auto;padding:7px 12px;font-size:13px;">
+                <option>Математик 10А</option>
+                <option>Математик 10Б</option>
+                <option>ЭЕШ Математик</option>
+              </select>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Нэр</th>
+                    <th>Даалгавар</th>
+                    <th>Дундаж оноо</th>
+                    <th>Сул сэдэв</th>
+                    <th>Статус</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="font-weight:700;">1</td>
+                    <td style="font-weight:600;">Б.Болд</td>
+                    <td>12/15</td>
+                    <td style="font-weight:700;color:var(--success-dark);">95%</td>
+                    <td style="font-size:12px;color:var(--warning);">Тригонометри</td>
+                    <td><span class="badge badge-success">Сайн</span></td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight:700;">2</td>
+                    <td style="font-weight:600;">Э.Энхтуяа</td>
+                    <td>14/15</td>
+                    <td style="font-weight:700;color:var(--success-dark);">92%</td>
+                    <td style="font-size:12px;color:var(--gray-400);">—</td>
+                    <td><span class="badge badge-success">Маш сайн</span></td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight:700;">3</td>
+                    <td style="font-weight:600;">М.Мөнх</td>
+                    <td>10/15</td>
+                    <td style="font-weight:700;color:var(--warning);">71%</td>
+                    <td style="font-size:12px;color:var(--danger);">Интеграл, Матриц</td>
+                    <td><span class="badge badge-warning">Дунд</span></td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight:700;">4</td>
+                    <td style="font-weight:600;">О.Оюунцэцэг</td>
+                    <td>8/15</td>
+                    <td style="font-weight:700;color:var(--danger);">58%</td>
+                    <td style="font-size:12px;color:var(--danger);">Олон сэдэв</td>
+                    <td><span class="badge badge-danger">Анхаарал хэрэгтэй</span></td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight:700;">5</td>
+                    <td style="font-weight:600;">Г.Ганболд</td>
+                    <td>13/15</td>
+                    <td style="font-weight:700;color:var(--primary);">88%</td>
+                    <td style="font-size:12px;color:var(--gray-400);">—</td>
+                    <td><span class="badge badge-primary">Сайн</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right -->
+        <div>
+          <!-- Marketplace requests -->
+          <div class="card" style="margin-bottom:20px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+              <h3 style="font-size:15px;">💼 Шинэ хүсэлтүүд</h3>
+              <span class="badge badge-accent">3 шинэ</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div style="padding:12px;border:1px solid var(--gray-200);border-radius:10px;">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+                  <div style="font-size:13px;font-weight:700;">Тригонометрийн бодлого</div>
+                  <div class="price-tag" style="font-size:13px;padding:4px 10px;">₮500</div>
+                </div>
+                <div style="font-size:12px;color:var(--gray-500);margin-bottom:10px;">sin²x + cos²x = 1 тэмдэглэлийг ашиглан... • 15 мин өмнө</div>
+                <div style="display:flex;gap:8px;">
+                  <button class="btn btn-success btn-sm flex-1" onclick="acceptTask(this)">✓ Хүлээн авах</button>
+                  <button class="btn btn-ghost btn-sm" onclick="window.location.href='marketplace.html'">Харах</button>
+                </div>
+              </div>
+              <div style="padding:12px;border:1px solid var(--gray-200);border-radius:10px;">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+                  <div style="font-size:13px;font-weight:700;">Дифференциалын жишээ</div>
+                  <div class="price-tag" style="font-size:13px;padding:4px 10px;">₮800</div>
+                </div>
+                <div style="font-size:12px;color:var(--gray-500);margin-bottom:10px;">f(x) = x³ + 2x² - 5x + 1 функцийн... • 32 мин өмнө</div>
+                <div style="display:flex;gap:8px;">
+                  <button class="btn btn-success btn-sm flex-1" onclick="acceptTask(this)">✓ Хүлээн авах</button>
+                  <button class="btn btn-ghost btn-sm" onclick="window.location.href='marketplace.html'">Харах</button>
+                </div>
+              </div>
+              <div style="padding:12px;border:1px solid var(--gray-200);border-radius:10px;">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+                  <div style="font-size:13px;font-weight:700;">Матрицын үйлдэл</div>
+                  <div class="price-tag" style="font-size:13px;padding:4px 10px;">₮1,200</div>
+                </div>
+                <div style="font-size:12px;color:var(--gray-500);margin-bottom:10px;">3x3 матрицын детерминантыг... • 1 цагийн өмнө</div>
+                <div style="display:flex;gap:8px;">
+                  <button class="btn btn-success btn-sm flex-1" onclick="acceptTask(this)">✓ Хүлээн авах</button>
+                  <button class="btn btn-ghost btn-sm" onclick="window.location.href='marketplace.html'">Харах</button>
+                </div>
+              </div>
+            </div>
+            <a href="marketplace.html" class="btn btn-outline btn-full btn-sm" style="margin-top:12px;text-align:center;display:block;">Бүгдийг харах →</a>
+          </div>
+
+          <!-- Quick actions -->
+          <div class="card" style="margin-bottom:20px;">
+            <h3 style="font-size:15px;margin-bottom:14px;">⚡ Хурдан үйлдэл</h3>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+              <button class="btn btn-outline" style="flex-direction:column;height:72px;font-size:13px;" onclick="window.location.href='exam.html'">
+                <span style="font-size:20px;">📝</span>
+                Шалгалт үүсгэх
+              </button>
+              <button class="btn btn-outline" style="flex-direction:column;height:72px;font-size:13px;" onclick="showSection('materials')">
+                <span style="font-size:20px;">📁</span>
+                Материал нэмэх
+              </button>
+              <button class="btn btn-outline" style="flex-direction:column;height:72px;font-size:13px;" onclick="window.location.href='chat.html'">
+                <span style="font-size:20px;">💬</span>
+                Чатлах
+              </button>
+              <button class="btn btn-outline" style="flex-direction:column;height:72px;font-size:13px;" onclick="showSection('analytics')">
+                <span style="font-size:20px;">📊</span>
+                Тайлан харах
+              </button>
+            </div>
+          </div>
+
+          <!-- Earnings -->
+          <div class="wallet-card">
+            <div class="wallet-label">Энэ сарын орлого</div>
+            <div class="wallet-balance">₮48,500</div>
+            <div style="display:flex;gap:20px;margin-top:12px;">
+              <div>
+                <div style="font-size:12px;opacity:0.7;">Шийдсэн</div>
+                <div style="font-weight:700;font-size:16px;">18 бодлого</div>
+              </div>
+              <div>
+                <div style="font-size:12px;opacity:0.7;">Дундаж</div>
+                <div style="font-weight:700;font-size:16px;">₮2,694</div>
+              </div>
+              <div>
+                <div style="font-size:12px;opacity:0.7;">Үнэлгээ</div>
+                <div style="font-weight:700;font-size:16px;">⭐ 4.9</div>
+              </div>
+            </div>
+            <button class="btn btn-accent btn-sm" style="margin-top:16px;" onclick="window.location.href='wallet.html'">Дэлгэрэнгүй →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ANALYTICS SECTION -->
+    <div id="section-analytics" style="display:none;">
+      <div class="page-header">
+        <h1>📊 Дэлгэрэнгүй аналитик</h1>
+        <p>Сурагчийн гүйцэтгэл, хичээлийн чанарын тайлан</p>
+      </div>
+      <div class="grid-3" style="margin-bottom:24px;">
+        <div class="card" style="text-align:center;padding:28px;">
+          <div style="font-size:48px;font-weight:900;color:var(--primary);">87%</div>
+          <div style="font-size:14px;color:var(--gray-500);">Нийт гүйцэтгэл</div>
+          <div class="stat-change up" style="margin:8px auto 0;display:inline-flex;">↑ +3.5%</div>
+        </div>
+        <div class="card" style="text-align:center;padding:28px;">
+          <div style="font-size:48px;font-weight:900;color:var(--success-dark);">93%</div>
+          <div style="font-size:14px;color:var(--gray-500);">Оролцооны хувь</div>
+          <div class="stat-change up" style="margin:8px auto 0;display:inline-flex;">↑ +1.2%</div>
+        </div>
+        <div class="card" style="text-align:center;padding:28px;">
+          <div style="font-size:48px;font-weight:900;color:var(--accent-dark);">4.9</div>
+          <div style="font-size:14px;color:var(--gray-500);">Сурагчийн үнэлгээ</div>
+          <div class="stat-change up" style="margin:8px auto 0;display:inline-flex;">⭐ Маш сайн</div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:18px;">Классуудын харьцуулалт</h3>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px;font-weight:600;">
+              <span>📐 Математик 10А</span><span style="color:var(--success-dark);">87%</span>
+            </div>
+            <div class="progress-bar" style="height:12px;">
+              <div class="progress-fill" style="width:87%;"></div>
+            </div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px;font-weight:600;">
+              <span>📐 Математик 10Б</span><span style="color:var(--warning);">79%</span>
+            </div>
+            <div class="progress-bar" style="height:12px;">
+              <div class="progress-fill" style="width:79%;background:var(--warning);"></div>
+            </div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px;font-weight:600;">
+              <span>🔢 ЭЕШ Математик</span><span style="color:var(--success-dark);">91%</span>
+            </div>
+            <div class="progress-bar" style="height:12px;">
+              <div class="progress-fill success" style="width:91%;"></div>
+            </div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px;font-weight:600;">
+              <span>🔬 Физик 11А</span><span style="color:var(--warning);">75%</span>
+            </div>
+            <div class="progress-bar" style="height:12px;">
+              <div class="progress-fill" style="width:75%;background:rgb(249,115,22);"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MATERIALS SECTION -->
+    <div id="section-materials" style="display:none;">
+      <div class="page-header" style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <div>
+          <h1>📁 Материалын сан</h1>
+          <p>Хичээлийн материал, видео, PDF файлуудыг удирдах</p>
+        </div>
+        <button class="btn btn-primary" onclick="showUploadModal()">+ Материал нэмэх</button>
+      </div>
+      <div class="grid-3">
+        <div class="card card-hover" style="cursor:pointer;">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+            <div style="width:44px;height:44px;background:rgb(254,226,226);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;">📄</div>
+            <div><div style="font-weight:700;font-size:14px;">Тригонометри лекц</div><div style="font-size:12px;color:var(--gray-500);">PDF • 2.3MB</div></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--gray-500);">
+            <span>Математик 10А</span><span>124 татагдсан</span>
+          </div>
+        </div>
+        <div class="card card-hover" style="cursor:pointer;">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+            <div style="width:44px;height:44px;background:rgb(254,226,226);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;">🎥</div>
+            <div><div style="font-weight:700;font-size:14px;">Интеграл тайлбар видео</div><div style="font-size:12px;color:var(--gray-500);">MP4 • 45 мин</div></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--gray-500);">
+            <span>Математик 10А</span><span>89 үзсэн</span>
+          </div>
+        </div>
+        <div class="card card-hover" style="cursor:pointer;">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+            <div style="width:44px;height:44px;background:rgb(220,252,231);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;">📝</div>
+            <div><div style="font-weight:700;font-size:14px;">Дасгалын ажлын хуудас</div><div style="font-size:12px;color:var(--gray-500);">DOCX • 450KB</div></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--gray-500);">
+            <span>Математик 10Б</span><span>67 татагдсан</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- CREATE CLASS MODAL -->
+<div class="modal-overlay" id="createClassModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <h3>Шинэ класс үүсгэх</h3>
+        <p style="font-size:13px;color:var(--gray-500);margin-top:4px;">Классын мэдээллийг бөглөнө үү</p>
+      </div>
+      <button class="modal-close" onclick="document.getElementById('createClassModal').classList.remove('open')">✕</button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Классын нэр</label>
+      <input type="text" class="form-input" placeholder="Жишээ: Математик 10А" id="className"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Хичээл</label>
+      <select class="form-select" id="classSubject">
+        <option>Математик</option>
+        <option>Физик</option>
+        <option>Хими</option>
+        <option>Биологи</option>
+        <option>Англи хэл</option>
+        <option>Монгол хэл</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Тайлбар</label>
+      <textarea class="form-textarea" placeholder="Классын тухай товч мэдээлэл..." rows="3"></textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Хамрах хугацаа</label>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <input type="date" class="form-input"/>
+        <input type="date" class="form-input"/>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="document.getElementById('createClassModal').classList.remove('open')">Болих</button>
+      <button class="btn btn-primary" onclick="createClass()">Класс үүсгэх →</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+  function showSection(name) {
+    document.getElementById('section-main').style.display = 'none';
+    document.getElementById('section-analytics').style.display = 'none';
+    document.getElementById('section-materials').style.display = 'none';
+    document.getElementById('section-students') && (document.getElementById('section-students').style.display = 'none');
+    const el = document.getElementById('section-' + name);
+    if (el) el.style.display = 'block';
+    document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+  }
+
+  function acceptTask(btn) {
+    btn.textContent = '🔒 Авлаа';
+    btn.className = 'btn btn-primary btn-sm flex-1';
+    btn.disabled = true;
+    showToast('✅ Бодлогыг хүлээн авлаа. 24 цагт шийдэж илгээнэ үү!', 'success');
+  }
+
+  function createClass() {
+    const name = document.getElementById('className').value;
+    if (!name) { showToast('Классын нэрийг оруулна уу', 'error'); return; }
+    const code = name.replace(/\s+/g,'').toUpperCase().substring(0,8);
+    showToast(`✅ "${name}" класс үүслээ! Код: ${code}`, 'success');
+    document.getElementById('createClassModal').classList.remove('open');
+  }
+
+  function showToast(msg, type = 'info') {
+    const c = document.getElementById('toastContainer');
+    const t = document.createElement('div');
+    t.className = `toast ${type}`;
+    t.textContent = msg;
+    c.appendChild(t);
+    requestAnimationFrame(() => t.classList.add('show'));
+    setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 400); }, 3500);
+  }
+</script>
+</body>
+</html>
