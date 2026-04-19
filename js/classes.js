@@ -23,7 +23,7 @@ function renderCourses(courses) {
         <img src="${course.image}" class="course-image" />
         <div class="rating">★ ${course.rating} <small>(${course.students})</small></div>
         <div class="tags"><span class="tag">${course.level}</span><span class="tag">${course.category}</span></div>
-        <div class="price-badge">${course.price === 0 ? 'Үнэгүй' : '$' + course.price}</div>
+        <div class="price-badge">${course.price === 0 ? 'Үнэгүй' : course.price + '₮'}</div>
       </div>
       <h3 class="course-title">${course.title}</h3>
       <div class="instructor">
