@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="mn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EduLearn – Нүүр</title>
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/sidebar.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/student.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -15,303 +16,316 @@
 
 <div class="page">
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-text">
-      <div class="hero-eyebrow"><i class="fas fa-star"></i> Монголын шилдэг сургалтын платформ</div>
-      <h1 class="hero-title">
-        <em>EduLearn</em>-д<br>тавтай морил!
-      </h1>
-      <p class="hero-desc">
-        Хүссэн хичээлээ цаг алдалгүй, хаанаас ч, мэргэжлийн багшийн хамтаар сур. Математикаас эхлээд бусад сэдвүүд хүртэл.
-      </p>
-      <a href="classes.html" class="hero-cta">Хичээл эхлэх <i class="fas fa-arrow-right"></i></a>
-    </div>
-  </section>
-
-  <!-- STATS -->
-  <div class="g4 section-block">
-    <div class="stat-card">
-      <div class="stat-icon"><i class="fas fa-book-open"></i></div>
-      <div class="stat-val">9+</div>
-      <div class="stat-lbl">Хичээлийн анги</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon" style="background:#d1fae5;color:#059669"><i class="fas fa-file-alt"></i></div>
-      <div class="stat-val">10+</div>
-      <div class="stat-lbl">Материал</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon" style="background:#fef3c7;color:#d97706"><i class="fas fa-pen-nib"></i></div>
-      <div class="stat-val">10+</div>
-      <div class="stat-lbl">Шалгалт</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon" style="background:#fce7f3;color:#db2777"><i class="fas fa-users"></i></div>
-      <div class="stat-val">100+</div>
-      <div class="stat-lbl">Идэвхтэй сурагч</div>
+  <!-- ── Banner ── -->
+  <div class="stu-banner">
+    <div class="stu-banner-blob" style="width:140px;height:140px;bottom:-50px;left:26%"></div>
+    <div class="stu-banner-inner">
+      <div class="stu-banner-left">
+        <div class="stu-banner-tag"><i class="fas fa-graduation-cap"></i> Сурагчийн самбар</div>
+        <div class="stu-banner-title">Сайн байна уу, <em id="studentName">Сурагч</em>!</div>
+        <div class="stu-banner-sub" id="studentMeta">Таны хичээлийн ахиц, даалгавар, шалгалт бүгд энд</div>
+        <div class="stu-banner-pills">
+          <div class="stu-banner-pill">
+            <div class="stu-banner-pill-icon"><i class="fas fa-book-open"></i></div>
+            <div><div class="stu-banner-pill-val">4</div><div class="stu-banner-pill-lbl">Хичээл</div></div>
+          </div>
+          <div class="stu-banner-pill">
+            <div class="stu-banner-pill-icon"><i class="fas fa-pen-square"></i></div>
+            <div><div class="stu-banner-pill-val">3</div><div class="stu-banner-pill-lbl">Шалгалт өгсөн</div></div>
+          </div>
+          <div class="stu-banner-pill">
+            <div class="stu-banner-pill-icon"><i class="fas fa-fire" style="color:#fbbf24"></i></div>
+            <div><div class="stu-banner-pill-val">7</div><div class="stu-banner-pill-lbl">Өдрийн streak</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="stu-banner-actions">
+        <a href="classes.html"     class="stu-btn solid"><i class="fas fa-book-open"></i> Хичээлүүд</a>
+        <a href="assignments.html" class="stu-btn"><i class="fas fa-tasks"></i> Даалгавар</a>
+      </div>
     </div>
   </div>
 
-  <!-- WHY EDULEARN -->
-  <section class="why-section section-block">
-    <div class="why-img">
-      <img src="../images/Thoughts-amico.png" alt="Thoughts" />
+  <!-- ── Stats ── -->
+  <div class="stu-stats">
+    <div class="stu-stat" style="--stat-accent:#3b82f6">
+      <div class="stu-stat-icon" style="background:#dbeafe;color:#1d4ed8"><i class="fas fa-layer-group"></i></div>
+      <div class="stu-stat-body">
+        <div class="stu-stat-val">4</div>
+        <div class="stu-stat-lbl">Миний хичээл</div>
+        <div class="stu-stat-trend neutral"><i class="fas fa-minus"></i> 2026 хичээлийн жил</div>
+      </div>
     </div>
-    <div>
-      <div class="section-head" style="margin-bottom:20px">
+    <div class="stu-stat" style="--stat-accent:#10b981">
+      <div class="stu-stat-icon" style="background:#d1fae5;color:#065f46"><i class="fas fa-pen-square"></i></div>
+      <div class="stu-stat-body">
+        <div class="stu-stat-val">3</div>
+        <div class="stu-stat-lbl">Өгсөн шалгалт</div>
+        <div class="stu-stat-trend up"><i class="fas fa-arrow-up"></i> +1 энэ долоо хоног</div>
+      </div>
+    </div>
+    <div class="stu-stat" style="--stat-accent:#f59e0b">
+      <div class="stu-stat-icon" style="background:#fef3c7;color:#92400e"><i class="fas fa-tasks"></i></div>
+      <div class="stu-stat-body">
+        <div class="stu-stat-val">2</div>
+        <div class="stu-stat-lbl">Хүлээгдэж буй даалгавар</div>
+        <div class="stu-stat-trend down"><i class="fas fa-exclamation"></i> 1 нь яаралтай</div>
+      </div>
+    </div>
+    <div class="stu-stat" style="--stat-accent:#8b5cf6">
+      <div class="stu-stat-icon" style="background:#ede9fe;color:#5b21b6"><i class="fas fa-chart-bar"></i></div>
+      <div class="stu-stat-body">
+        <div class="stu-stat-val">78<span style="font-size:14px;font-weight:600;color:#64748b">%</span></div>
+        <div class="stu-stat-lbl">Дундаж оноо</div>
+        <div class="stu-stat-trend up"><i class="fas fa-arrow-up"></i> +4% өнгөрсөн сараас</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Main grid ── -->
+  <div class="stu-grid">
+
+    <!-- LEFT column -->
+    <div class="stu-col">
+
+      <!-- My classes -->
+      <div class="stu-card">
+        <div class="stu-card-head">
+          <div>
+            <div class="stu-card-title"><i class="fas fa-layer-group"></i> Миний хичээлүүд</div>
+            <div class="stu-card-sub">Бүртгэлтэй хичээлийн жагсаалт ба ахиц</div>
+          </div>
+          <a href="classes.html" class="stu-see-all">Бүгдийг харах →</a>
+        </div>
+        <div class="my-class-list">
+          <a href="classes.html" class="my-class-row">
+            <div class="my-class-stripe" style="background:#3b82f6"></div>
+            <div class="my-class-icon" style="background:#dbeafe;color:#1d4ed8"><i class="fas fa-calculator"></i></div>
+            <div class="my-class-info">
+              <div class="my-class-name">Алгебр – 10А</div>
+              <div class="my-class-meta"><i class="fas fa-user" style="margin-right:4px;font-size:10px"></i>Б. Сарантуяа · 6 хичээл</div>
+            </div>
+            <div class="my-class-prog">
+              <div class="my-class-prog-pct">72%</div>
+              <div class="my-class-prog-bar">
+                <div class="my-class-prog-fill" style="width:72%;background:linear-gradient(90deg,#3b82f6,#60a5fa)"></div>
+              </div>
+            </div>
+          </a>
+          <a href="classes.html" class="my-class-row">
+            <div class="my-class-stripe" style="background:#10b981"></div>
+            <div class="my-class-icon" style="background:#d1fae5;color:#065f46"><i class="fas fa-shapes"></i></div>
+            <div class="my-class-info">
+              <div class="my-class-name">Геометр – 10А</div>
+              <div class="my-class-meta"><i class="fas fa-user" style="margin-right:4px;font-size:10px"></i>Д. Мөнхбаяр · 5 хичээл</div>
+            </div>
+            <div class="my-class-prog">
+              <div class="my-class-prog-pct">58%</div>
+              <div class="my-class-prog-bar">
+                <div class="my-class-prog-fill" style="width:58%;background:linear-gradient(90deg,#10b981,#34d399)"></div>
+              </div>
+            </div>
+          </a>
+          <a href="classes.html" class="my-class-row">
+            <div class="my-class-stripe" style="background:#8b5cf6"></div>
+            <div class="my-class-icon" style="background:#ede9fe;color:#5b21b6"><i class="fas fa-atom"></i></div>
+            <div class="my-class-info">
+              <div class="my-class-name">Физик – 10А</div>
+              <div class="my-class-meta"><i class="fas fa-user" style="margin-right:4px;font-size:10px"></i>Н. Батбаяр · 5 хичээл</div>
+            </div>
+            <div class="my-class-prog">
+              <div class="my-class-prog-pct">45%</div>
+              <div class="my-class-prog-bar">
+                <div class="my-class-prog-fill" style="width:45%;background:linear-gradient(90deg,#8b5cf6,#a78bfa)"></div>
+              </div>
+            </div>
+          </a>
+          <a href="classes.html" class="my-class-row">
+            <div class="my-class-stripe" style="background:#f59e0b"></div>
+            <div class="my-class-icon" style="background:#fef3c7;color:#92400e"><i class="fas fa-flask"></i></div>
+            <div class="my-class-info">
+              <div class="my-class-name">Хими – 10А</div>
+              <div class="my-class-meta"><i class="fas fa-user" style="margin-right:4px;font-size:10px"></i>О. Цэцэгмаа · 4 хичээл</div>
+            </div>
+            <div class="my-class-prog">
+              <div class="my-class-prog-pct">30%</div>
+              <div class="my-class-prog-bar">
+                <div class="my-class-prog-fill" style="width:30%;background:linear-gradient(90deg,#f59e0b,#fbbf24)"></div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Pending assignments -->
+      <div class="stu-card">
+        <div class="stu-card-head">
+          <div>
+            <div class="stu-card-title"><i class="fas fa-tasks"></i> Хүлээгдэж буй даалгавар</div>
+            <div class="stu-card-sub">Дуусах хугацааг анхаарна уу</div>
+          </div>
+          <a href="assignments.html" class="stu-see-all">Бүгд →</a>
+        </div>
+        <div class="assign-list">
+          <div class="assign-row">
+            <div class="assign-pulse urgent"></div>
+            <div class="assign-info">
+              <div class="assign-title">Квадрат тэгшитгэл – Гэрийн даалгавар</div>
+              <div class="assign-meta">Алгебр · 10А</div>
+            </div>
+            <span class="assign-due-badge urgent"><i class="fas fa-fire" style="margin-right:3px"></i>3 өдөр үлдсэн</span>
+          </div>
+          <div class="assign-row">
+            <div class="assign-pulse soon"></div>
+            <div class="assign-info">
+              <div class="assign-title">Функцийн утга – ГД</div>
+              <div class="assign-meta">Алгебр · 10А</div>
+            </div>
+            <span class="assign-due-badge soon">6 өдөр үлдсэн</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT column -->
+    <div class="stu-col">
+
+      <!-- Upcoming exams -->
+      <div class="stu-card">
+        <div class="stu-card-head">
+          <div>
+            <div class="stu-card-title"><i class="fas fa-pen-square"></i> Ойрын шалгалтууд</div>
+            <div class="stu-card-sub">Бэлдэж байгаарай</div>
+          </div>
+          <a href="progress.html" class="stu-see-all">Бүгд →</a>
+        </div>
         <div>
-          <h2>Яагаад <span>EduLearn</span> гэж?</h2>
-          <p>Бусдаас ялгарах 6 шалтгаан</p>
+          <div class="exam-upcoming-row">
+            <div class="exam-date-box"><span class="eday">22</span><span class="emonth">4-р сар</span></div>
+            <div class="exam-upcoming-info">
+              <div class="exam-upcoming-name">Алгебрийн дундын шалгалт</div>
+              <div class="exam-upcoming-meta">20 асуулт · 45 мин</div>
+            </div>
+            <span class="exam-upcoming-pill">3 хоног</span>
+          </div>
+          <div class="exam-upcoming-row">
+            <div class="exam-date-box"><span class="eday">25</span><span class="emonth">4-р сар</span></div>
+            <div class="exam-upcoming-info">
+              <div class="exam-upcoming-name">Геометрийн шалгалт</div>
+              <div class="exam-upcoming-meta">15 асуулт · 30 мин</div>
+            </div>
+            <span class="exam-upcoming-pill">6 хоног</span>
+          </div>
+          <div class="exam-upcoming-row">
+            <div class="exam-date-box" style="background:linear-gradient(135deg,#5b21b6,#8b5cf6)"><span class="eday">30</span><span class="emonth">4-р сар</span></div>
+            <div class="exam-upcoming-info">
+              <div class="exam-upcoming-name">Физикийн явцын шалгалт</div>
+              <div class="exam-upcoming-meta">18 асуулт · 40 мин</div>
+            </div>
+            <span class="exam-upcoming-pill" style="background:#ede9fe;color:#5b21b6">11 хоног</span>
+          </div>
         </div>
       </div>
-      <div class="why-grid">
-        <div class="why-item">
-          <div class="why-icon"><i class="fas fa-video"></i></div>
-          <h4>Видео хичээлүүд</h4>
-          <p>Мэргэжлийн багш нарын тайлбартай</p>
-        </div>
-        <div class="why-item">
-          <div class="why-icon"><i class="fas fa-clock"></i></div>
-          <h4>Цаг хэмнэлт</h4>
-          <p>Хаанаас ч, хэзээ ч нэвтэрч үзэх</p>
-        </div>
-        <div class="why-item">
-          <div class="why-icon"><i class="fas fa-file-alt"></i></div>
-          <h4>Үнэгүй материал</h4>
-          <p>10+ математикийн материал бүрэн үнэгүй</p>
-        </div>
-        <div class="why-item">
-          <div class="why-icon"><i class="fas fa-chart-line"></i></div>
-          <h4>Ахиц хянах</h4>
-          <p>Хичээлийн ахицыг дэлгэрэнгүй харах</p>
-        </div>
-        <div class="why-item">
-          <div class="why-icon"><i class="fas fa-pen"></i></div>
-          <h4>Шалгалтууд</h4>
-          <p>Мэдлэгээ шалгах тусгай шалгалтууд</p>
-        </div>
-        <div class="why-item">
-          <div class="why-icon"><i class="fas fa-shield-alt"></i></div>
-          <h4>Найдвартай</h4>
-          <p>Баталгаатай мэдлэг, тогтвортой платформ</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- FREE MATERIALS -->
-  <div class="section-block">
-    <div class="section-head">
-      <div>
-        <h2>10+ <span>үнэгүй</span> математик материал</h2>
-        <p>Суралцахад шаардлагатай бүх материал нэг дороо</p>
+      <!-- Subject progress -->
+      <div class="stu-card">
+        <div class="stu-card-head">
+          <div>
+            <div class="stu-card-title"><i class="fas fa-chart-bar"></i> Сэдвийн дундаж оноо</div>
+          </div>
+          <a href="progress.html" class="stu-see-all">Дэлгэрэнгүй →</a>
+        </div>
+        <div class="subj-progress-list">
+          <div class="subj-prog-row">
+            <div class="subj-prog-top">
+              <div class="subj-prog-name"><div class="subj-prog-dot" style="background:#3b82f6"></div>Алгебр</div>
+              <div class="subj-prog-pct">84%</div>
+            </div>
+            <div class="subj-prog-bar"><div class="subj-prog-fill" style="width:84%;background:linear-gradient(90deg,#3b82f6,#60a5fa)"></div></div>
+          </div>
+          <div class="subj-prog-row">
+            <div class="subj-prog-top">
+              <div class="subj-prog-name"><div class="subj-prog-dot" style="background:#10b981"></div>Геометр</div>
+              <div class="subj-prog-pct">71%</div>
+            </div>
+            <div class="subj-prog-bar"><div class="subj-prog-fill" style="width:71%;background:linear-gradient(90deg,#10b981,#34d399)"></div></div>
+          </div>
+          <div class="subj-prog-row">
+            <div class="subj-prog-top">
+              <div class="subj-prog-name"><div class="subj-prog-dot" style="background:#8b5cf6"></div>Физик</div>
+              <div class="subj-prog-pct">65%</div>
+            </div>
+            <div class="subj-prog-bar"><div class="subj-prog-fill" style="width:65%;background:linear-gradient(90deg,#8b5cf6,#a78bfa)"></div></div>
+          </div>
+          <div class="subj-prog-row">
+            <div class="subj-prog-top">
+              <div class="subj-prog-name"><div class="subj-prog-dot" style="background:#f59e0b"></div>Хими</div>
+              <div class="subj-prog-pct">72%</div>
+            </div>
+            <div class="subj-prog-bar"><div class="subj-prog-fill" style="width:72%;background:linear-gradient(90deg,#f59e0b,#fbbf24)"></div></div>
+          </div>
+        </div>
       </div>
-      <a href="materials.html" class="see-all">Бүгдийг үзэх →</a>
-    </div>
-    <div class="cards-row">
-      <a href="materials.html" class="mat-card">
-        <img src="../images/algebry.jpg" alt="Алгебр">
-        <div class="mat-card-label">Алгебр</div>
-      </a>
-      <a href="materials.html" class="mat-card">
-        <img src="../images/geometry.png" alt="Геометр">
-        <div class="mat-card-label">Геометр</div>
-      </a>
-      <a href="materials.html" class="mat-card">
-        <img src="../images/trignometry.jpg" alt="Тригонометр">
-        <div class="mat-card-label">Тригонометр</div>
-      </a>
-      <a href="materials.html" class="mat-card">
-        <img src="../images/data_analysis.jpg" alt="Комбинаторик">
-        <div class="mat-card-label">Комбинаторик</div>
-      </a>
-      <a href="materials.html" class="mat-card">
-        <img src="../images/c++.jpg" alt="Тооны онол">
-        <div class="mat-card-label">Тооны онол</div>
-      </a>
-      <a href="materials.html" class="mat-card">
-        <img src="../images/ux.jpg" alt="Арифметик">
-        <div class="mat-card-label">Арифметик</div>
-      </a>
+
+      <!-- Recent activity -->
+      <div class="stu-card">
+        <div class="stu-card-head">
+          <div><div class="stu-card-title"><i class="fas fa-history"></i> Сүүлийн идэвх</div></div>
+        </div>
+        <div class="act-feed">
+          <div class="act-item">
+            <div class="act-icon" style="background:#d1fae5;color:#065f46"><i class="fas fa-check-circle"></i></div>
+            <div class="act-body">
+              <div class="act-text"><strong>Физикийн тест</strong> дүгнэгдлээ — 88%</div>
+              <div class="act-time">Өнөөдөр · 14:32</div>
+            </div>
+          </div>
+          <div class="act-item">
+            <div class="act-icon" style="background:#dbeafe;color:#1d4ed8"><i class="fas fa-book-open"></i></div>
+            <div class="act-body">
+              <div class="act-text"><strong>Квадрат тэгшитгэл</strong> хичээл үзлээ</div>
+              <div class="act-time">Өчигдөр · 19:10</div>
+            </div>
+          </div>
+          <div class="act-item">
+            <div class="act-icon" style="background:#fef3c7;color:#92400e"><i class="fas fa-file-download"></i></div>
+            <div class="act-body">
+              <div class="act-text"><strong>Геометрийн материал</strong> татлаа</div>
+              <div class="act-time">2 өдрийн өмнө</div>
+            </div>
+          </div>
+          <div class="act-item">
+            <div class="act-icon" style="background:#ede9fe;color:#5b21b6"><i class="fas fa-star"></i></div>
+            <div class="act-body">
+              <div class="act-text"><strong>"Шалгагч"</strong> медаль олгогдлоо</div>
+              <div class="act-time">3 өдрийн өмнө</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
-
-  <!-- EXAMS -->
-  <div class="section-block">
-    <div class="section-head">
-      <div>
-        <h2>10+ <span>математикийн</span> шалгалт</h2>
-        <p>Ур чадвараа шалгаад өөрийгөө дэвшил</p>
-      </div>
-      <a href="exams.html" class="see-all">Бүгдийг үзэх →</a>
-    </div>
-    <div class="cards-row">
-      <a href="exams.html" class="exam-card">
-        <img src="../images/algebry.jpg" alt="Алгебр">
-        <div class="exam-card-body">
-          <h3>Алгебрийн шалгалт</h3>
-          <p>Алгебрийн мэдлэгээ шалгаарай.</p>
-        </div>
-      </a>
-      <a href="exams.html" class="exam-card">
-        <img src="../images/geometry.png" alt="Геометр">
-        <div class="exam-card-body">
-          <h3>Геометрийн шалгалт</h3>
-          <p>Геометрийн ур чадвараа туршаарай.</p>
-        </div>
-      </a>
-      <a href="exams.html" class="exam-card">
-        <img src="../images/trignometry.jpg" alt="Тригонометр">
-        <div class="exam-card-body">
-          <h3>Тригонометрийн шалгалт</h3>
-          <p>Тригонометрийн мэдлэгээ шалгаарай.</p>
-        </div>
-      </a>
-      <a href="exams.html" class="exam-card">
-        <img src="../images/data_analysis.jpg" alt="Комбинаторик">
-        <div class="exam-card-body">
-          <h3>Комбинаторикийн шалгалт</h3>
-          <p>Комбинаторикийн ур чадвараа туршаарай.</p>
-        </div>
-      </a>
-    </div>
-  </div>
-
-  <!-- PRICING -->
-  <div class="section-block">
-    <div class="section-head" style="margin-bottom:28px">
-      <div>
-        <h2>Төлбөрийн <span>багцууд</span></h2>
-        <p>Өөртөө тохирох багцаа сонгоорой</p>
-      </div>
-    </div>
-    <div class="pricing-grid">
-      <div class="plan-card">
-        <div class="plan-duration">30 хоног</div>
-        <div class="plan-name">Энгийн багц</div>
-        <div class="plan-price">10,000₮ <small>/ сар</small></div>
-        <ul class="plan-features">
-          <li><i class="fas fa-check"></i> Үнэгүй материалууд</li>
-          <li><i class="fas fa-check"></i> Үндсэн шалгалтууд</li>
-          <li><i class="fas fa-check"></i> Хичээлийн ахиц хянах</li>
-        </ul>
-        <button class="plan-btn">Эрх авах</button>
-      </div>
-      <div class="plan-card featured">
-        <div class="plan-badge">Хамгийн их сонголт</div>
-        <div class="plan-duration">90 хоног</div>
-        <div class="plan-name">Advanced багц</div>
-        <div class="plan-price">25,000₮ <small>/ 3 сар</small></div>
-        <ul class="plan-features">
-          <li><i class="fas fa-check"></i> Бүх материалууд</li>
-          <li><i class="fas fa-check"></i> Бүх шалгалтууд</li>
-          <li><i class="fas fa-check"></i> Дэлгэрэнгүй тайлан</li>
-        </ul>
-        <button class="plan-btn">Эрх авах</button>
-      </div>
-      <div class="plan-card">
-        <div class="plan-duration">1 жил</div>
-        <div class="plan-name">Premium багц</div>
-        <div class="plan-price">90,000₮ <small>/ жил</small></div>
-        <ul class="plan-features">
-          <li><i class="fas fa-check"></i> Бүх боломжууд</li>
-          <li><i class="fas fa-check"></i> Тусгай дэмжлэг</li>
-          <li><i class="fas fa-check"></i> Сертификат</li>
-        </ul>
-        <button class="plan-btn">Эрх авах</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- FAQ -->
-  <div class="faq-wrap section-block">
-    <img src="../images/FAQs-rafiki.png" alt="FAQ" />
-    <div>
-      <div class="section-head" style="margin-bottom:20px">
-        <div><h2>Түгээмэл <span>асуултууд</span></h2></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <span>EduLearn апп яагаад юу хийдэг вэ?</span>
-          <i class="fas fa-chevron-down arrow"></i>
-        </div>
-        <div class="faq-answer">EduLearn нь суралцагчдад мэргэжлийн багш нарын хичээлийг онлайнаар үзэх, шалгалт өгөх, материал татах боломжоор хангасан сургалтын платформ юм.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <span>Энэ аппын давуу тал юу вэ?</span>
-          <i class="fas fa-chevron-down arrow"></i>
-        </div>
-        <div class="faq-answer">Цаг алдалгүй, хаанаас ч суралцах боломж, мэргэжлийн багш нарын агуулга, болон үнэгүй материалуудын цуглуулга бол манай гол давуу тал.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <span>Ямар төрлийн материалууд байгаа вэ?</span>
-          <i class="fas fa-chevron-down arrow"></i>
-        </div>
-        <div class="faq-answer">Алгебр, Геометр, Тригонометр, Комбинаторик, Тооны онол, Арифметик зэрэг математикийн үндсэн сэдвүүдийн материалууд байна.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <span>Хэрхэн классын талаар мэдээлэл авах вэ?</span>
-          <i class="fas fa-chevron-down arrow"></i>
-        </div>
-        <div class="faq-answer">Зүүн талын цэснээс "Хичээлүүд" хэсэгт орж бүх классын мэдээллийг харах боломжтой.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <span>Энэ аппыг ашиглаад би юуг олж авах вэ?</span>
-          <i class="fas fa-chevron-down arrow"></i>
-        </div>
-        <div class="faq-answer">Математикийн хатуу суурь мэдлэг, шалгалтад бэлтгэх чадвар, болон хаанаас ч суралцах дадлыг олж авна.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer-grid">
-      <div>
-        <div class="footer-brand">EduLearn</div>
-        <p class="footer-desc">Монголын суралцагчдад дэлхийн түвшний боловсрол хүргэх зорилготой онлайн сургалтын платформ.</p>
-        <div class="social-icons">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-youtube"></i></a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Холбоо барих</h4>
-        <p>Монгол улс, Улаанбаатар хот</p>
-        <p>info@edulearn.mn</p>
-        <p>+976 9999-9999</p>
-      </div>
-      <div class="footer-col">
-        <h4>Тусламж</h4>
-        <a href="#">Үйлчилгээний нөхцөл</a>
-        <a href="#">Нууцлалын бодлого</a>
-        <a href="#">Өгөгдөл устгах заавар</a>
-        <a href="#">Түгээмэл асуулт хариулт</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>Copyright © 2026 EduLearn</span>
-      <span class="dev-tag">Developed by Team 21</span>
-    </div>
-  </footer>
 
 </div>
 
 <script src="../js/load.js"></script>
-<script src="../js/main.js"></script>
 <script>
-function toggleFaq(el) {
-  var item = el.closest('.faq-item');
-  var isOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-  if (!isOpen) item.classList.add('open');
-}
+document.addEventListener('DOMContentLoaded', () => {
+  const fn = sessionStorage.getItem('user_firstname') || '';
+  const ln = sessionStorage.getItem('user_lastname')  || '';
+  const gr = sessionStorage.getItem('user_grade')     || '';
+  const sc = sessionStorage.getItem('user_school')    || '';
+  const nameEl = document.getElementById('studentName');
+  const metaEl = document.getElementById('studentMeta');
+  const name = fn || ln;
+  if (nameEl && name) nameEl.textContent = name;
+  if (metaEl && (gr || sc)) {
+    const parts = [gr ? gr + '-р анги' : '', sc].filter(Boolean);
+    metaEl.textContent = parts.join(' · ') + ' · Таны хичээлийн ахиц, даалгавар, шалгалт бүгд энд';
+  }
+});
 </script>
 </body>
 </html>

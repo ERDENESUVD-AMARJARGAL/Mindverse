@@ -34,7 +34,10 @@
   --g200: #e2e8f0;
   --g100: #f1f5f9;
   --g50:  #f8fafc;
-  --white: #ffffff;
+  --white: #eef4ff;  /* cool blue-tinted off-white — harmonises with brand #07437d */
+  --card-border: rgba(7,67,125,0.14);
+  --card-shadow: 0 4px 20px rgba(7,67,125,0.18), 0 1px 4px rgba(0,0,0,0.12);
+  --card-shadow-hover: 0 10px 34px rgba(7,67,125,0.28), 0 0 0 1px rgba(7,67,125,0.12);
 
   /* Typography */
   --font: 'Inter', 'Segoe UI', sans-serif;
@@ -67,11 +70,15 @@
 }
 
 /* ═══════════════════ RESET & BASE ═══════════════════ */
-html { scroll-behavior: smooth; font-size: 14px; }
+html {
+  scroll-behavior: smooth;
+  font-size: 14px;
+  background: #050f1e; /* brand-blue deep dark fallback */
+}
 
 body {
   font-family: var(--font);
-  background: var(--g50);
+  background: transparent;
   color: var(--g800);
   line-height: 1.6;
   padding-left: var(--sb-w);
@@ -95,6 +102,8 @@ button { cursor: pointer; font-family: var(--font); }
   margin: 0 auto;
   padding: 36px 40px 60px;
   min-height: 100vh;
+  position: relative;
+  z-index: 1;
 }
 
 /* ═══════════════════ SECTION HEADER ═══════════════════ */
@@ -108,11 +117,11 @@ button { cursor: pointer; font-family: var(--font); }
 .section-head h2 {
   font-size: var(--fs-xl);
   font-weight: 700;
-  color: var(--g900);
+  color: #f1f5f9;
   letter-spacing: -.3px;
 }
-.section-head h2 span { color: var(--p-600); }
-.section-head p { color: var(--g500); margin-top: 3px; font-size: var(--fs-base); }
+.section-head h2 span { color: #93c5fd; }
+.section-head p { color: rgba(255,255,255,.6); margin-top: 3px; font-size: var(--fs-base); }
 .see-all {
   font-size: var(--fs-sm);
   font-weight: 600;
@@ -163,12 +172,15 @@ button { cursor: pointer; font-family: var(--font); }
 .card {
   background: var(--white);
   border-radius: var(--radius);
-  border: 1px solid var(--g200);
-  box-shadow: var(--sh-sm);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
   transition: box-shadow var(--t), transform var(--t);
   overflow: hidden;
 }
-.card:hover { box-shadow: var(--sh); transform: translateY(-2px); }
+.card:hover {
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-2px);
+}
 
 /* ═══════════════════ HERO ═══════════════════ */
 .hero {
@@ -743,7 +755,7 @@ body.dark {
   --accent-light: #2d2010;
   --ok-bg: #052e1c;
   --err-bg:#2d0a0a;
-  background: #0f172a;
+  background: transparent; /* star canvas handles background */
 }
 body.dark .hero {
   background: linear-gradient(135deg, #020f1e 0%, #03254a 55%, #05315e 100%);
@@ -756,7 +768,8 @@ body.dark .exam-card,
 body.dark .plan-card,
 body.dark .faq-item {
   background: var(--white);
-  border-color: var(--g200);
+  border-color: rgba(255,255,255,.10);
+  box-shadow: 0 4px 24px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.07);
 }
 body.dark .plan-card.featured {
   background: linear-gradient(135deg, #0d1e35, var(--white));

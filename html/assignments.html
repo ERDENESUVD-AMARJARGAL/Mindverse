@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EduLearn – Даалгавар</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/sidebar.css">
+  <link rel="stylesheet" href="../css/student.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    /* ── Two-column assignments layout ── */
+    .asgn-layout { display: grid; grid-template-columns: 1fr 300px; gap: 22px; align-items: start; }
+
+    /* Group label */
+    .asgn-group-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: #94a3b8;
+      margin-bottom: 12px; margin-top: 4px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .asgn-group-label::after {
+      content: ''; flex: 1; height: 1px; background: #f1f5f9;
+    }
+
+    /* Assign card done state */
+    .assign-card.done { opacity: .62; }
+    .assign-card.done .assign-card-title { text-decoration: line-through; }
+
+    /* Urgency glow on cards */
+    .assign-card.urgent-glow { border-color: #fca5a5; }
+    .assign-card.urgent-glow:hover { box-shadow: 0 8px 28px rgba(239,68,68,.14); }
+
+    /* Subject legend dot */
+    .sub-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; margin-right: 5px; }
+
+    /* Calendar mini */
+    .mini-cal { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(7,67,125,.18), 0 1px 4px rgba(0,0,0,.10); }
+    .mini-cal-head {
+      background: linear-gradient(135deg, #07437d, #1d4ed8);
+      padding: 14px 18px; color: #fff;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .mini-cal-month { font-size: 14px; font-weight: 700; }
+    .mini-cal-body  { padding: 14px; }
+    .cal-days-head  { display: grid; grid-template-columns: repeat(7,1fr); gap: 4px; margin-bottom: 6px; }
+    .cal-day-name   { text-align: center; font-size: 10px; font-weight: 600; color: #94a3b8; padding: 3px 0; }
+    .cal-days       { display: grid; grid-template-columns: repeat(7,1fr); gap: 4px; }
+    .cal-day {
+      aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 500; border-radius: 8px; color: #64748b;
+      cursor: default; position: relative;
+    }
+    .cal-day.other-month { color: #cbd5e1; }
+    .cal-day.today { background: #07437d; color: #fff; font-weight: 700; border-radius: 8px; }
+    .cal-day.has-deadline::after {
+      content: ''; position: absolute; bottom: 3px; left: 50%; transform: translateX(-50%);
+      width: 4px; height: 4px; border-radius: 50%; background: #ef4444;
+    }
+    .cal-day.today.has-deadline::after { background: #fca5a5; }
+
+    /* Subject legend */
+    .sub-legend { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 18px 20px; box-shadow: 0 4px 20px rgba(7,67,125,.18), 0 1px 4px rgba(0,0,0,.10); }
+    .sub-legend-title { font-size: 12px; font-weight: 700; color: #0f172a; margin-bottom: 12px; }
+    .sub-legend-item  { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px solid #f8fafc; }
+    .sub-legend-item:last-child { border-bottom: none; }
+    .sub-legend-dot   { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .sub-legend-name  { font-size: 12.5px; font-weight: 600; color: #1e293b; flex: 1; }
+    .sub-legend-cnt   { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 99px; background: #f1f5f9; color: #64748b; }
+
+    /* Summary donut-like ring card */
+    .asgn-summary { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 20px; box-shadow: 0 4px 20px rgba(7,67,125,.18), 0 1px 4px rgba(0,0,0,.10); }
+    .asgn-summary-title { font-size: 13px; font-weight: 700; color: #0f172a; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+    .asgn-summary-title i { color: #07437d; }
+    .asgn-summary-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .asgn-summary-bar { flex: 1; height: 8px; background: #f1f5f9; border-radius: 99px; overflow: hidden; }
+    .asgn-summary-fill{ height: 100%; border-radius: 99px; }
+    .asgn-summary-lbl { font-size: 11.5px; font-weight: 600; min-width: 80px; color: #64748b; }
+    .asgn-summary-cnt { font-size: 13px; font-weight: 700; color: #0f172a; min-width: 24px; text-align: right; }
+
+    @media (max-width: 1000px) { .asgn-layout { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<div id="sidebar-container"></div>
+
+<div class="page">
+
+  <!-- Banner -->
+  <div class="stu-banner">
+    <div class="stu-banner-blob" style="width:150px;height:150px;bottom:-60px;left:30%"></div>
+    <div class="stu-banner-inner">
+      <div class="stu-banner-left">
+        <div class="stu-banner-tag"><i class="fas fa-tasks"></i> Даалгаварын трекер</div>
+        <div class="stu-banner-title">Миний <em>Даалгаварууд</em></div>
+        <div class="stu-banner-sub">Бүх хичээлийн даалгаварыг нэг дор хянаж, цагтаа дуусга</div>
+        <div class="stu-banner-pills">
+          <div class="stu-banner-pill">
+            <div class="stu-banner-pill-icon" style="color:#ef4444"><i class="fas fa-fire"></i></div>
+            <div><div class="stu-banner-pill-val" id="pillUrgent">1</div><div class="stu-banner-pill-lbl">Яаралтай</div></div>
+          </div>
+          <div class="stu-banner-pill">
+            <div class="stu-banner-pill-icon" style="color:#fbbf24"><i class="fas fa-clock"></i></div>
+            <div><div class="stu-banner-pill-val" id="pillPending">3</div><div class="stu-banner-pill-lbl">Хүлээгдэж буй</div></div>
+          </div>
+          <div class="stu-banner-pill">
+            <div class="stu-banner-pill-icon" style="color:#34d399"><i class="fas fa-check-circle"></i></div>
+            <div><div class="stu-banner-pill-val" id="pillDone">4</div><div class="stu-banner-pill-lbl">Дуусгасан</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stu-stats">
+    <div class="stu-stat" style="--stat-accent:#ef4444">
+      <div class="stu-stat-icon" style="background:#fee2e2;color:#b91c1c"><i class="fas fa-exclamation-circle"></i></div>
+      <div class="stu-stat-body">
+        <div class="stu-stat-val" id="statUrgent">—</div>
+        <div class="stu-stat-lbl">Яаралтай (≤3 өдөр)</div>
+      </div>
+    </div>
+    <div class="stu-stat" style="--stat-accent:#f59e0b">
+      <div class="stu-stat-icon" style="background:#fef3c7;color:#92400e"><i class="fas fa-hourglass-half"></i></div>
+      <div class="stu-stat-body">
+        <div class="stu-stat-val" id="statPending">—</div>
+        <div class="stu-stat-lbl">Хийгдэж байна</div>
+      </div>
+    </div>
+    <div class="stu-stat" style="--stat-accent:#3b82f6">
+      <div class="stu-stat-icon" style="background:#dbeafe;color:#1d4ed8"><i class="fas fa-calendar-check"></i></div>
+      <div class="stu-stat-body">
+        <div class="stu-stat-val" id="statTotal">—</div>
+        <div class="stu-stat-lbl">Нийт даалгавар</div>
+      </div>
+    </div>
+    <div class="stu-stat" style="--stat-accent:#10b981">
+      <div class="stu-stat-icon" style="background:#d1fae5;color:#065f46"><i class="fas fa-check-double"></i></div>
+      <div class="stu-stat-body">
+        <div class="stu-stat-val" id="statDone">—</div>
+        <div class="stu-stat-lbl">Дуусгасан</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filter pills -->
+  <div class="filter-pills" id="filterPills">
+    <button class="filter-pill active" data-filter="all" onclick="setFilter('all',this)">
+      <i class="fas fa-list"></i> Бүгд <span class="fp-count" id="cntAll">0</span>
+    </button>
+    <button class="filter-pill" data-filter="urgent" onclick="setFilter('urgent',this)">
+      <i class="fas fa-fire"></i> Яаралтай <span class="fp-count" id="cntUrgent">0</span>
+    </button>
+    <button class="filter-pill" data-filter="pending" onclick="setFilter('pending',this)">
+      <i class="fas fa-hourglass-half"></i> Хийгдэж байна <span class="fp-count" id="cntPending">0</span>
+    </button>
+    <button class="filter-pill" data-filter="done" onclick="setFilter('done',this)">
+      <i class="fas fa-check-circle"></i> Дуусгасан <span class="fp-count" id="cntDone">0</span>
+    </button>
+  </div>
+
+  <div class="asgn-layout">
+    <!-- Main list -->
+    <div>
+      <div id="assignList"></div>
+    </div>
+
+    <!-- Right sidebar -->
+    <div style="display:flex;flex-direction:column;gap:16px">
+
+      <!-- Progress summary -->
+      <div class="asgn-summary">
+        <div class="asgn-summary-title"><i class="fas fa-chart-pie"></i> Явц товч</div>
+        <div class="asgn-summary-row">
+          <div class="asgn-summary-lbl">Дуусгасан</div>
+          <div class="asgn-summary-bar"><div class="asgn-summary-fill" id="barDone" style="background:#10b981;width:0%"></div></div>
+          <div class="asgn-summary-cnt" id="sumDone">0</div>
+        </div>
+        <div class="asgn-summary-row">
+          <div class="asgn-summary-lbl">Хийгдэж байна</div>
+          <div class="asgn-summary-bar"><div class="asgn-summary-fill" id="barPending" style="background:#f59e0b;width:0%"></div></div>
+          <div class="asgn-summary-cnt" id="sumPending">0</div>
+        </div>
+        <div class="asgn-summary-row">
+          <div class="asgn-summary-lbl">Яаралтай</div>
+          <div class="asgn-summary-bar"><div class="asgn-summary-fill" id="barUrgent" style="background:#ef4444;width:0%"></div></div>
+          <div class="asgn-summary-cnt" id="sumUrgent">0</div>
+        </div>
+      </div>
+
+      <!-- Mini calendar -->
+      <div class="mini-cal">
+        <div class="mini-cal-head">
+          <div class="mini-cal-month">2026 оны 4-р сар</div>
+          <i class="fas fa-calendar-alt" style="opacity:.7"></i>
+        </div>
+        <div class="mini-cal-body" id="miniCal"></div>
+      </div>
+
+      <!-- Subject legend -->
+      <div class="sub-legend">
+        <div class="sub-legend-title"><i class="fas fa-palette" style="margin-right:6px;color:#07437d"></i>Хичээлээр</div>
+        <div id="subLegend"></div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script src="../js/load.js"></script>
+<script>
+const SUBJECTS = {
+  'Алгебр':  {color:'#3b82f6', bg:'#dbeafe', icon:'fa-calculator'},
+  'Геометр': {color:'#10b981', bg:'#d1fae5', icon:'fa-shapes'},
+  'Физик':   {color:'#8b5cf6', bg:'#ede9fe', icon:'fa-atom'},
+  'Хими':    {color:'#f59e0b', bg:'#fef3c7', icon:'fa-flask'},
+};
+
+const ASSIGNMENTS = [
+  {
+    id:1, title:'Квадрат тэгшитгэл – Гэрийн даалгавар',
+    subject:'Алгебр', desc:'2.5, 3.1-р хэсгийн 12 бодлого бод.',
+    due:'2026-04-22', daysLeft:3, status:'pending', priority:'high',
+    teacher:'Б. Сарантуяа',
+  },
+  {
+    id:2, title:'Функцийн утга – ГД',
+    subject:'Алгебр', desc:'График зур, тайлбарла.',
+    due:'2026-04-25', daysLeft:6, status:'pending', priority:'medium',
+    teacher:'Б. Сарантуяа',
+  },
+  {
+    id:3, title:'Векторын тооцоо – Бие даалт',
+    subject:'Геометр', desc:'Координатын системд вектор нэмэх, хасах ажилладаг.',
+    due:'2026-04-28', daysLeft:9, status:'pending', priority:'medium',
+    teacher:'Д. Мөнхбаяр',
+  },
+  {
+    id:4, title:'Хүч ба энерги – Нэмэлт дасгал',
+    subject:'Физик', desc:'Хүчний диаграмм зур, тооцоо хий.',
+    due:'2026-04-30', daysLeft:11, status:'pending', priority:'low',
+    teacher:'Н. Батбаяр',
+  },
+  {
+    id:5, title:'Теорем Пифагор – Гэрийн даалгавар',
+    subject:'Геометр', desc:'Гурвалжны тооцоо.',
+    due:'2026-04-10', daysLeft:-9, status:'done', priority:'medium',
+    teacher:'Д. Мөнхбаяр',
+  },
+  {
+    id:6, title:'Тэгшитгэл ба тэгш бус байдал – ГД',
+    subject:'Алгебр', desc:'',
+    due:'2026-04-05', daysLeft:-14, status:'done', priority:'low',
+    teacher:'Б. Сарантуяа',
+  },
+  {
+    id:7, title:'Химийн тэмдгүүд цээжлэх',
+    subject:'Хими', desc:'1–20-р элемент.',
+    due:'2026-04-08', daysLeft:-11, status:'done', priority:'low',
+    teacher:'О. Цэцэгмаа',
+  },
+  {
+    id:8, title:'Механик хөдөлгөөн – Тайлан',
+    subject:'Физик', desc:'Туршилтын тайлан бич.',
+    due:'2026-04-12', daysLeft:-7, status:'done', priority:'medium',
+    teacher:'Н. Батбаяр',
+  },
+];
+
+let currentFilter = 'all';
+
+function getDueBadge(a) {
+  if (a.status === 'done') return '<span class="due-badge ok"><i class="fas fa-check" style="margin-right:3px"></i>Дуусгасан</span>';
+  if (a.daysLeft <= 0)  return `<span class="due-badge overdue"><i class="fas fa-times" style="margin-right:3px"></i>${Math.abs(a.daysLeft)} өдөр хоцорсон</span>`;
+  if (a.daysLeft <= 3)  return `<span class="due-badge urgent"><i class="fas fa-fire" style="margin-right:3px"></i>${a.daysLeft} өдөр үлдсэн</span>`;
+  if (a.daysLeft <= 7)  return `<span class="due-badge soon">${a.daysLeft} өдөр үлдсэн</span>`;
+  return `<span class="due-badge ok">${a.daysLeft} өдөр үлдсэн</span>`;
+}
+
+function getPriorityClass(a) {
+  if (a.status === 'done') return '';
+  return a.daysLeft <= 3 ? 'urgent-glow' : '';
+}
+
+function getStatusPill(a) {
+  if (a.status === 'done') return '<span class="status-pill done"><i class="fas fa-check"></i>Дуусгасан</span>';
+  if (a.daysLeft <= 3)     return '<span class="status-pill overdue"><i class="fas fa-fire"></i>Яаралтай</span>';
+  return '<span class="status-pill pending"><i class="fas fa-clock"></i>Хийгдэж байна</span>';
+}
+
+function renderList() {
+  const list = document.getElementById('assignList');
+  let filtered = ASSIGNMENTS;
+  if (currentFilter === 'urgent') filtered = ASSIGNMENTS.filter(a => a.status !== 'done' && a.daysLeft <= 3);
+  if (currentFilter === 'pending') filtered = ASSIGNMENTS.filter(a => a.status !== 'done' && a.daysLeft > 3);
+  if (currentFilter === 'done')   filtered = ASSIGNMENTS.filter(a => a.status === 'done');
+
+  if (!filtered.length) {
+    list.innerHTML = `<div class="stu-empty">
+      <div class="stu-empty-icon"><i class="fas fa-tasks"></i></div>
+      <h3>Даалгавар байхгүй байна</h3>
+      <p>Энэ ангилалд харуулах даалгавар алга</p>
+    </div>`;
+    return;
+  }
+
+  const active = filtered.filter(a => a.status !== 'done');
+  const done   = filtered.filter(a => a.status === 'done');
+
+  let html = '';
+  if (active.length) {
+    html += `<div class="asgn-group-label"><i class="fas fa-hourglass-half" style="color:#f59e0b"></i>Хийгдэж буй (${active.length})</div>`;
+    html += active.map(a => renderCard(a)).join('');
+  }
+  if (done.length) {
+    html += `<div class="asgn-group-label" style="margin-top:${active.length?'22px':'4px'}"><i class="fas fa-check-circle" style="color:#10b981"></i>Дуусгасан (${done.length})</div>`;
+    html += done.map(a => renderCard(a)).join('');
+  }
+  list.innerHTML = html;
+}
+
+function renderCard(a) {
+  const sub = SUBJECTS[a.subject] || {color:'#3b82f6', bg:'#dbeafe', icon:'fa-book'};
+  return `
+  <div class="assign-card ${a.status==='done'?'done':''} ${getPriorityClass(a)}">
+    <div class="assign-card-accent" style="--ac:${sub.color}"></div>
+    <div class="assign-card-body">
+      <div class="assign-card-top">
+        <div class="assign-card-title">${a.title}</div>
+        ${getDueBadge(a)}
+      </div>
+      ${a.desc ? `<div class="assign-card-desc">${a.desc}</div>` : ''}
+      <div class="assign-card-footer">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <span class="sub-tag" style="--tc:${sub.color}">
+            <i class="fas ${sub.icon}" style="font-size:10px"></i>${a.subject}
+          </span>
+          <span style="font-size:11px;color:#94a3b8"><i class="fas fa-user" style="margin-right:3px"></i>${a.teacher}</span>
+          <span style="font-size:11px;color:#94a3b8"><i class="fas fa-calendar-alt" style="margin-right:3px"></i>${a.due}</span>
+        </div>
+        ${getStatusPill(a)}
+      </div>
+    </div>
+  </div>`;
+}
+
+function setFilter(f, btn) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  renderList();
+}
+
+function updateStats() {
+  const total   = ASSIGNMENTS.length;
+  const done    = ASSIGNMENTS.filter(a => a.status==='done').length;
+  const pending = ASSIGNMENTS.filter(a => a.status!=='done' && a.daysLeft > 3).length;
+  const urgent  = ASSIGNMENTS.filter(a => a.status!=='done' && a.daysLeft <= 3).length;
+  document.getElementById('statTotal').textContent  = total;
+  document.getElementById('statDone').textContent   = done;
+  document.getElementById('statPending').textContent= pending;
+  document.getElementById('statUrgent').textContent = urgent;
+  document.getElementById('pillDone').textContent    = done;
+  document.getElementById('pillPending').textContent = pending;
+  document.getElementById('pillUrgent').textContent  = urgent;
+  document.getElementById('cntAll').textContent     = total;
+  document.getElementById('cntDone').textContent    = done;
+  document.getElementById('cntPending').textContent = pending;
+  document.getElementById('cntUrgent').textContent  = urgent;
+  const pct = total ? done/total*100 : 0;
+  document.getElementById('barDone').style.width    = pct + '%';
+  document.getElementById('barPending').style.width = (total ? pending/total*100 : 0) + '%';
+  document.getElementById('barUrgent').style.width  = (total ? urgent/total*100 : 0) + '%';
+  document.getElementById('sumDone').textContent    = done;
+  document.getElementById('sumPending').textContent = pending;
+  document.getElementById('sumUrgent').textContent  = urgent;
+}
+
+function buildSubjectLegend() {
+  const counts = {};
+  ASSIGNMENTS.forEach(a => { counts[a.subject] = (counts[a.subject]||0)+1; });
+  document.getElementById('subLegend').innerHTML = Object.entries(counts).map(([sub, cnt]) => {
+    const s = SUBJECTS[sub] || {color:'#3b82f6'};
+    return `<div class="sub-legend-item">
+      <div class="sub-legend-dot" style="background:${s.color}"></div>
+      <div class="sub-legend-name">${sub}</div>
+      <span class="sub-legend-cnt">${cnt}</span>
+    </div>`;
+  }).join('');
+}
+
+function buildCalendar() {
+  const year = 2026, month = 3; // April (0-indexed)
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month+1, 0).getDate();
+  const today = 19;
+  const deadlineDays = new Set(ASSIGNMENTS.filter(a=>a.status!=='done').map(a=>parseInt(a.due.split('-')[2])));
+  const dayNames = ['Да','Мя','Лх','Пү','Ба','Бя','Ня'];
+  let html = `<div class="cal-days-head">${dayNames.map(d=>`<div class="cal-day-name">${d}</div>`).join('')}</div>`;
+  html += '<div class="cal-days">';
+  const start = (firstDay + 6) % 7; // Mon-based
+  for (let i=0; i<start; i++) html += '<div class="cal-day other-month"></div>';
+  for (let d=1; d<=daysInMonth; d++) {
+    const isToday = d===today;
+    const hasDL   = deadlineDays.has(d);
+    html += `<div class="cal-day ${isToday?'today':''} ${hasDL?'has-deadline':''}">${d}</div>`;
+  }
+  html += '</div>';
+  document.getElementById('miniCal').innerHTML = html;
+}
+
+updateStats();
+buildSubjectLegend();
+buildCalendar();
+renderList();
+</script>
+</body>
+</html>
