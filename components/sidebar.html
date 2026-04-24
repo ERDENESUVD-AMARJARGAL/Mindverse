@@ -1,17 +1,11 @@
 <aside id="sidebar">
+
+  <!-- Logo + toggle -->
   <div class="sb-top">
-    <div class="sb-logo">EduLearn</div>
+    <img src="../images/logo.png" alt="EduLearn" class="sb-logo-img">
     <button class="sb-toggle" id="toggleBtn" title="Sidebar нуух/харуулах">
       <i class="fas fa-chevron-left" id="toggleIcon"></i>
     </button>
-  </div>
-
-  <div class="sb-profile">
-    <div class="sb-avatar" id="sbAvatarLetter">U</div>
-    <div class="sb-profile-text">
-      <div class="sb-user-name" id="sbUserName">Хэрэглэгч</div>
-      <div class="sb-user-role" id="sbUserRole">Сурагч</div>
-    </div>
   </div>
 
   <!-- Сурагчийн цэс -->
@@ -21,6 +15,7 @@
       <li><a href="main.html" data-title="Нүүр"><i class="fas fa-home"></i><span class="link-text">Нүүр</span></a></li>
       <li><a href="classes.html" data-title="Хичээлүүд"><i class="fas fa-book-open"></i><span class="link-text">Хичээлүүд</span></a></li>
       <li><a href="assignments.html" data-title="Даалгавар"><i class="fas fa-tasks"></i><span class="link-text">Даалгавар</span></a></li>
+      <li><a href="calendar.html" data-title="Хуваарь"><i class="fas fa-calendar-alt"></i><span class="link-text">Хуваарь</span></a></li>
       <li><a href="progress.html" data-title="Дүн"><i class="fas fa-chart-line"></i><span class="link-text">Дүн</span></a></li>
     </ul>
   </nav>
@@ -36,6 +31,10 @@
     </ul>
   </nav>
 
+  <!-- Spacer: nav-ийг дээш, profile-ийг доош тулгана -->
+  <div class="sb-spacer"></div>
+
+  <!-- Хаяг (profile / settings) -->
   <div class="sb-label">Хаяг</div>
   <nav>
     <ul>
@@ -44,12 +43,22 @@
     </ul>
   </nav>
 
-  <hr class="sb-divider" />
-  <nav>
-    <ul>
-      <li class="sb-logout"><a href="#" id="logoutBtn" data-title="Гарах"><i class="fas fa-sign-out-alt"></i><span class="link-text">Гарах</span></a></li>
-    </ul>
-  </nav>
+  <!-- Bottom profile card -->
+  <div class="sb-bottom-profile">
+    <div class="sb-bp-avatar">
+      <img src="../images/boy.png" alt="Profile" class="sb-bp-img">
+      <!-- Fallback letter (hidden when image loads) -->
+      <span class="sb-bp-letter" id="sbAvatarLetter"></span>
+    </div>
+    <div class="sb-profile-text">
+      <div class="sb-user-name" id="sbUserName">Хэрэглэгч</div>
+      <div class="sb-user-role" id="sbUserRole">Сурагч</div>
+    </div>
+    <a href="#" id="logoutBtn" class="sb-bp-logout" title="Гарах">
+      <i class="fas fa-sign-out-alt"></i>
+    </a>
+  </div>
+
 </aside>
 
 <button class="sb-hamburger" id="sbHamburger"><i class="fas fa-bars"></i></button>

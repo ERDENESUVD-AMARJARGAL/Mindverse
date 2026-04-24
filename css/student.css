@@ -16,12 +16,12 @@
 .stu-banner {
   position: relative;
   background: linear-gradient(135deg, #03254a 0%, #07437d 45%, #1d4ed8 100%);
-  border-radius: 22px;
-  padding: 34px 44px;
-  margin-bottom: 28px;
+  border-radius: 18px;
+  padding: 26px 36px;
+  margin-bottom: 18px;
   overflow: hidden;
   color: #fff;
-  box-shadow: 0 16px 48px rgba(7,67,125,.25);
+  box-shadow: 0 8px 28px rgba(7,67,125,.18);
 }
 .stu-banner::before {
   content: '';
@@ -113,15 +113,15 @@
 .stu-stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 15px; margin-bottom: 26px;
+  gap: 12px; margin-bottom: 18px;
 }
 .stu-stat {
-  background: var(--white, #eef4ff);
-  border: 1px solid rgba(7,67,125,.14);
-  border-radius: 18px;
-  padding: 20px 22px;
-  display: flex; align-items: center; gap: 15px;
-  box-shadow: 0 4px 20px rgba(7,67,125,.16), 0 1px 4px rgba(0,0,0,.10);
+  background: var(--white, #fff);
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 16px 18px;
+  display: flex; align-items: center; gap: 13px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.07), 0 4px 12px rgba(7,67,125,.07);
   transition: transform .2s, box-shadow .2s;
   position: relative; overflow: hidden;
 }
@@ -132,7 +132,7 @@
   transform: scaleX(0); transform-origin: left;
   transition: transform .25s ease;
 }
-.stu-stat:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(7,67,125,.28), 0 0 0 1px rgba(7,67,125,.16); }
+.stu-stat:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(7,67,125,.14), 0 1px 4px rgba(0,0,0,.06); }
 .stu-stat:hover::before { transform: scaleX(1); }
 .stu-stat-icon {
   width: 48px; height: 48px; border-radius: 14px;
@@ -153,15 +153,15 @@
 
 /* ══ SECTION CARD ══ */
 .stu-card {
-  background: var(--white, #eef4ff);
-  border: 1px solid rgba(7,67,125,.13);
+  background: var(--white, #fff);
+  border: 1px solid #e2e8f0;
   border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(7,67,125,.16), 0 1px 4px rgba(0,0,0,.10);
+  box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 4px 12px rgba(7,67,125,.07);
 }
 .stu-card-head {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 18px 24px 14px;
+  padding: 14px 20px 12px;
   border-bottom: 1px solid #f1f5f9;
 }
 .stu-card-title {
@@ -178,14 +178,14 @@
 .stu-see-all:hover { background: #eff7ff; border-color: #3b82f6; }
 
 /* ══ GRID LAYOUT ══ */
-.stu-grid { display: grid; grid-template-columns: 1fr 340px; gap: 20px; align-items: start; }
-.stu-col  { display: flex; flex-direction: column; gap: 18px; }
+.stu-grid { display: grid; grid-template-columns: 1fr 320px; gap: 18px; align-items: start; }
+.stu-col  { display: flex; flex-direction: column; gap: 14px; align-self: start; }
 
 /* ══ MY CLASSES LIST ══ */
 .my-class-list { padding: 6px 0; }
 .my-class-row {
-  display: flex; align-items: center; gap: 14px;
-  padding: 13px 24px; transition: background .12s; text-decoration: none;
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 18px; transition: background .12s; text-decoration: none;
   cursor: pointer;
 }
 .my-class-row:hover { background: #f8fafc; }
@@ -205,7 +205,7 @@
 
 /* ══ ASSIGNMENT ROWS ══ */
 .assign-list { padding: 6px 0; }
-.assign-row  { display: flex; align-items: center; gap: 13px; padding: 12px 24px; transition: background .12s; }
+.assign-row  { display: flex; align-items: center; gap: 12px; padding: 10px 18px; transition: background .12s; }
 .assign-row:hover { background: #f8fafc; }
 .assign-pulse {
   width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
@@ -226,8 +226,8 @@
 
 /* ══ UPCOMING EXAM ROWS ══ */
 .exam-upcoming-row {
-  display: flex; align-items: center; gap: 13px;
-  padding: 12px 24px; transition: background .12s;
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 18px; transition: background .12s;
 }
 .exam-upcoming-row:hover { background: #f8fafc; }
 .exam-date-box {
@@ -247,7 +247,7 @@
 }
 
 /* ══ SUBJECT PROGRESS (in dashboard) ══ */
-.subj-progress-list { padding: 14px 24px; display: flex; flex-direction: column; gap: 15px; }
+.subj-progress-list { padding: 12px 18px; display: flex; flex-direction: column; gap: 12px; }
 .subj-prog-row {}
 .subj-prog-top {
   display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;
@@ -263,7 +263,7 @@
 
 /* ══ ACTIVITY FEED ══ */
 .act-feed { padding: 6px 0; }
-.act-item { display: flex; align-items: flex-start; gap: 13px; padding: 11px 24px; }
+.act-item { display: flex; align-items: flex-start; gap: 12px; padding: 9px 18px; }
 .act-icon {
   width: 36px; height: 36px; border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
@@ -293,13 +293,13 @@
 /* ══ ASSIGNMENT CARDS (assignments.html) ══ */
 .assign-card {
   display: flex; border-radius: 16px; overflow: hidden;
-  border: 1px solid rgba(7,67,125,.13);
-  background: var(--white, #eef4ff);
+  border: 1px solid #e2e8f0;
+  background: var(--white, #fff);
   margin-bottom: 13px;
-  box-shadow: 0 4px 16px rgba(7,67,125,.14), 0 1px 3px rgba(0,0,0,.08);
+  box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 4px 12px rgba(7,67,125,.07);
   transition: transform .18s, box-shadow .18s;
 }
-.assign-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(7,67,125,.26); }
+.assign-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(7,67,125,.14); }
 .assign-card-accent { width: 6px; flex-shrink: 0; background: var(--ac, #3b82f6); }
 .assign-card-body { flex: 1; padding: 15px 18px; }
 .assign-card-top {
@@ -536,7 +536,7 @@
 /* ══ QUICK SECTION LABEL ══ */
 .stu-section-label {
   font-size: 11px; font-weight: 700; letter-spacing: 1px;
-  text-transform: uppercase; color: rgba(255,255,255,.45);
+  text-transform: uppercase; color: var(--g400);
   margin: 16px 0 10px;
 }
 

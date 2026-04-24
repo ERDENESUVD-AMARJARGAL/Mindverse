@@ -10,10 +10,11 @@ document.querySelectorAll('.nav-item').forEach(item => {
 
 // ── Pre-fill from sessionStorage ──
 (function () {
-  document.getElementById('set-name').value  = sessionStorage.getItem('user_name')  || '';
-  document.getElementById('set-email').value = sessionStorage.getItem('user_email') || '';
+  document.getElementById('set-lastname').value  = sessionStorage.getItem('user_lastname')  || '';
+  document.getElementById('set-firstname').value = sessionStorage.getItem('user_firstname') || '';
+  document.getElementById('set-email').value     = sessionStorage.getItem('user_email')     || '';
   const role = sessionStorage.getItem('user_role') || 'student';
-  document.getElementById('set-role').value  = role;
+  document.getElementById('set-role').value = role;
 })();
 
 // ── Save helpers ──
@@ -24,14 +25,18 @@ function flashConfirm(id) {
 }
 
 function saveAccount() {
-  const name  = document.getElementById('set-name').value.trim();
-  const email = document.getElementById('set-email').value.trim();
-  const role  = document.getElementById('set-role').value;
-  if (!name)  { alert('Нэрээ оруулна уу!'); return; }
+  const lastname  = document.getElementById('set-lastname').value.trim();
+  const firstname = document.getElementById('set-firstname').value.trim();
+  const email     = document.getElementById('set-email').value.trim();
+  const role      = document.getElementById('set-role').value;
+  if (!lastname)  { alert('Овогоо оруулна уу!'); return; }
+  if (!firstname) { alert('Нэрээ оруулна уу!'); return; }
   if (!email.includes('@')) { alert('Зөв имэйл оруулна уу!'); return; }
-  sessionStorage.setItem('user_name',  name);
-  sessionStorage.setItem('user_email', email);
-  sessionStorage.setItem('user_role',  role);
+  sessionStorage.setItem('user_lastname',  lastname);
+  sessionStorage.setItem('user_firstname', firstname);
+  sessionStorage.setItem('user_name',      firstname + ' ' + lastname);
+  sessionStorage.setItem('user_email',     email);
+  sessionStorage.setItem('user_role',      role);
   flashConfirm('acc-confirm');
 }
 

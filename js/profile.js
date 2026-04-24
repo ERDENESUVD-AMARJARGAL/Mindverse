@@ -1,11 +1,15 @@
 // ── Fill user info from sessionStorage ──
 (function () {
-  const name  = sessionStorage.getItem('user_name')  || 'Сурагч';
-  const email = sessionStorage.getItem('user_email') || '—';
-  const role  = sessionStorage.getItem('user_role');
-  document.getElementById('profileName').textContent  = name;
-  document.getElementById('profileEmail').textContent = email;
-  document.getElementById('profileRole').textContent  =
+  const lastname  = sessionStorage.getItem('user_lastname')  || '';
+  const firstname = sessionStorage.getItem('user_firstname') || '';
+  const name      = sessionStorage.getItem('user_name')      || 'Сурагч';
+  const email     = sessionStorage.getItem('user_email')     || '—';
+  const role      = sessionStorage.getItem('user_role');
+  document.getElementById('profileName').textContent      = name;
+  document.getElementById('profileLastName').textContent  = lastname  || '—';
+  document.getElementById('profileFirstName').textContent = firstname || '—';
+  document.getElementById('profileEmail').textContent     = email;
+  document.getElementById('profileRole').textContent      =
     role === 'teacher' ? 'Багш' : 'Сурагч';
 })();
 

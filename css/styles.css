@@ -34,10 +34,10 @@
   --g200: #e2e8f0;
   --g100: #f1f5f9;
   --g50:  #f8fafc;
-  --white: #eef4ff;  /* cool blue-tinted off-white — harmonises with brand #07437d */
-  --card-border: rgba(7,67,125,0.14);
-  --card-shadow: 0 4px 20px rgba(7,67,125,0.18), 0 1px 4px rgba(0,0,0,0.12);
-  --card-shadow-hover: 0 10px 34px rgba(7,67,125,0.28), 0 0 0 1px rgba(7,67,125,0.12);
+  --white: #ffffff;
+  --card-border: #e2e8f0;
+  --card-shadow: 0 1px 3px rgba(0,0,0,.07), 0 4px 12px rgba(7,67,125,.08);
+  --card-shadow-hover: 0 4px 20px rgba(7,67,125,.16), 0 1px 4px rgba(0,0,0,.06);
 
   /* Typography */
   --font: 'Inter', 'Segoe UI', sans-serif;
@@ -73,12 +73,11 @@
 html {
   scroll-behavior: smooth;
   font-size: 14px;
-  background: #050f1e; /* brand-blue deep dark fallback */
 }
 
 body {
   font-family: var(--font);
-  background: transparent;
+  background: #e8edf5;
   color: var(--g800);
   line-height: 1.6;
   padding-left: var(--sb-w);
@@ -86,6 +85,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 body.sb-collapsed { padding-left: var(--sb-sm); }
+body.dark { background: #0a1628; color: #e2e8f0; }
+body.dark .stu-card,
+body.dark .panel,
+body.dark .profile-card { border-color: rgba(255,255,255,.07); }
 
 a { color: inherit; text-decoration: none; }
 img { display: block; max-width: 100%; }
@@ -98,9 +101,7 @@ button { cursor: pointer; font-family: var(--font); }
 
 /* ═══════════════════ PAGE SHELL ═══════════════════ */
 .page {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 36px 40px 60px;
+  padding: 24px 28px 48px;
   min-height: 100vh;
   position: relative;
   z-index: 1;
@@ -112,16 +113,16 @@ button { cursor: pointer; font-family: var(--font); }
   align-items: flex-end;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 28px;
+  margin-bottom: 20px;
 }
 .section-head h2 {
   font-size: var(--fs-xl);
   font-weight: 700;
-  color: #f1f5f9;
+  color: var(--g900);
   letter-spacing: -.3px;
 }
-.section-head h2 span { color: #93c5fd; }
-.section-head p { color: rgba(255,255,255,.6); margin-top: 3px; font-size: var(--fs-base); }
+.section-head h2 span { color: var(--p-600); }
+.section-head p { color: var(--g500); margin-top: 3px; font-size: var(--fs-base); }
 .see-all {
   font-size: var(--fs-sm);
   font-weight: 600;
@@ -755,8 +756,10 @@ body.dark {
   --accent-light: #2d2010;
   --ok-bg: #052e1c;
   --err-bg:#2d0a0a;
-  background: transparent; /* star canvas handles background */
 }
+body.dark .section-head h2 { color: var(--g900); }
+body.dark .section-head h2 span { color: #93c5fd; }
+body.dark .section-head p { color: var(--g600); }
 body.dark .hero {
   background: linear-gradient(135deg, #020f1e 0%, #03254a 55%, #05315e 100%);
 }

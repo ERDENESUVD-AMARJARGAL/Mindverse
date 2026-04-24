@@ -7,368 +7,9 @@
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/sidebar.css">
   <link rel="stylesheet" href="../css/teacher.css">
+  <link rel="stylesheet" href="../css/teacher-classes.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    /* ══ PAGE HEADER ══ */
-    .tc-page-header {
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 14px; margin-bottom: 22px;
-    }
-    .tc-page-header h1 { font-size: 22px; font-weight: 800; color: #f1f5f9; margin-bottom: 3px; letter-spacing: -.3px; }
-    .tc-page-header p  { font-size: 13px; color: rgba(255,255,255,.55); }
-
-    /* ══ AGGREGATED STATS ══ */
-    .tc-summary {
-      display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 24px;
-    }
-    .tc-sum-card {
-      background: #eef4ff; border: 1px solid rgba(7,67,125,.14); border-radius: 16px;
-      padding: 16px 20px; display: flex; align-items: center; gap: 14px;
-      box-shadow: 0 4px 20px rgba(7,67,125,.18), 0 1px 4px rgba(0,0,0,.10);
-      transition: transform .18s, box-shadow .18s;
-    }
-    .tc-sum-card:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(7,67,125,.28); }
-    .tc-sum-icon {
-      width: 44px; height: 44px; border-radius: 12px;
-      display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;
-    }
-    .tc-sum-val { font-size: 24px; font-weight: 800; color: #0f172a; line-height: 1; }
-    .tc-sum-lbl { font-size: 12px; color: #64748b; margin-top: 3px; }
-
-    /* ══ CLASS GRID ══ */
-    .class-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-      gap: 16px; margin-bottom: 28px;
-    }
-
-    .class-card {
-      background: #eef4ff; border: 2px solid rgba(7,67,125,.16); border-radius: 18px;
-      cursor: pointer; transition: border-color .2s, box-shadow .2s, transform .18s;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(7,67,125,.18), 0 1px 4px rgba(0,0,0,.10);
-    }
-    .class-card:hover { border-color: #cbd5e1; box-shadow: 0 12px 36px rgba(7,67,125,.28); transform: translateY(-3px); }
-    .class-card.selected { transform: translateY(-4px) scale(1.015); }
-    .class-card-top { height: 8px; transition: height .18s; }
-    .class-card.selected .class-card-top { height: 14px; }
-
-    .class-card-body { padding: 18px 20px 14px; }
-    .cc-subject-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-    .cc-subject-icon {
-      width: 36px; height: 36px; border-radius: 10px;
-      display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0;
-    }
-    .cc-subject-text { flex: 1; }
-    .cc-class-name    { font-size: 15px; font-weight: 800; color: #0f172a; line-height: 1.2; }
-    .cc-subject-name  { font-size: 11.5px; color: #64748b; margin-top: 1px; }
-
-    .class-card-stats { display: flex; gap: 0; border-top: 1px solid #f1f5f9; border-bottom: 1px solid #f1f5f9; margin: 12px -20px; padding: 10px 20px; }
-    .cc-stat { flex: 1; text-align: center; }
-    .cc-stat + .cc-stat { border-left: 1px solid #f1f5f9; }
-    .cc-stat strong { display: block; font-size: 17px; font-weight: 800; color: #0f172a; line-height: 1.1; }
-    .cc-stat span   { font-size: 10px; color: #94a3b8; text-transform: uppercase; letter-spacing: .4px; }
-
-    /* Curriculum progress */
-    .cc-progress { padding: 10px 20px 14px; }
-    .cc-progress-header { display: flex; justify-content: space-between; font-size: 11.5px; margin-bottom: 6px; }
-    .cc-progress-header span:first-child { color: #64748b; font-weight: 500; }
-    .cc-progress-header span:last-child  { color: #07437d; font-weight: 700; }
-    .cc-progress-track { height: 7px; background: #f1f5f9; border-radius: 99px; overflow: hidden; }
-    .cc-progress-fill  { height: 100%; border-radius: 99px; transition: width .5s; }
-    .cc-progress-segs  { display: flex; gap: 8px; margin-top: 6px; }
-    .cc-seg { font-size: 10.5px; display: flex; align-items: center; gap: 3px; color: #94a3b8; }
-    .cc-seg-dot { width: 7px; height: 7px; border-radius: 50%; }
-
-    .class-card-footer {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 9px 20px; border-top: 1px solid #f1f5f9; background: #fafbfd;
-    }
-    .cc-avg { font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 99px; }
-    .cc-avg.good { background: #d1fae5; color: #065f46; }
-    .cc-avg.mid  { background: #fef3c7; color: #92400e; }
-    .cc-avg.low  { background: #fee2e2; color: #991b1b; }
-    .cc-arrow { font-size: 11px; color: #94a3b8; transition: color .15s, transform .15s; }
-    .class-card:hover .cc-arrow,
-    .class-card.selected .cc-arrow { color: #07437d; transform: rotate(90deg); }
-
-    /* ══ DETAIL PANEL ══ */
-    .class-detail {
-      display: none; background: #eef4ff; border: 1px solid rgba(7,67,125,.14);
-      border-radius: 20px;
-      box-shadow: 0 8px 40px rgba(7,67,125,.24), 0 2px 12px rgba(0,0,0,.12);
-      overflow: hidden;
-    }
-    .class-detail.visible { display: block; }
-
-    /* Colored gradient header */
-    .cd-banner {
-      padding: 24px 30px 0;
-      background: linear-gradient(160deg, color-mix(in srgb, var(--dc,#3b82f6) 10%, #fff) 0%, #fff 70%);
-      border-bottom: 1px solid #f1f5f9;
-    }
-    .cd-banner-top { display: flex; align-items: flex-start; gap: 18px; flex-wrap: wrap; margin-bottom: 18px; }
-    .cd-banner-icon {
-      width: 52px; height: 52px; border-radius: 16px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center; font-size: 22px;
-      background: color-mix(in srgb, var(--dc,#3b82f6) 14%, #fff);
-      color: var(--dc, #3b82f6);
-      box-shadow: 0 4px 12px color-mix(in srgb, var(--dc,#3b82f6) 25%, transparent);
-    }
-    .cd-banner-info { flex: 1; min-width: 0; }
-    .cd-banner-title { font-size: 19px; font-weight: 800; color: #0f172a; margin-bottom: 5px; }
-    .cd-banner-meta  { font-size: 13px; color: #64748b; display: flex; gap: 18px; flex-wrap: wrap; }
-    .cd-banner-meta span { display: flex; align-items: center; gap: 5px; }
-    .cd-banner-meta i    { color: var(--dc, #3b82f6); }
-    .cd-banner-actions   { display: flex; gap: 8px; flex-wrap: wrap; }
-
-    /* KPI mini cards inside banner */
-    .cd-kpis { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
-    .cd-kpi {
-      background: rgba(255,255,255,.8); border: 1px solid #e2e8f0;
-      border-radius: 12px; padding: 10px 16px; min-width: 90px; backdrop-filter: blur(4px);
-    }
-    .cd-kpi-val { font-size: 18px; font-weight: 800; color: var(--dc, #07437d); line-height: 1; }
-    .cd-kpi-lbl { font-size: 10.5px; color: #64748b; margin-top: 2px; }
-
-    /* Tab bar */
-    .cd-tabs {
-      display: flex; padding: 0 30px; border-bottom: 1px solid #e2e8f0; background: #fafbfd;
-    }
-    .cd-tab {
-      padding: 13px 20px; border: none; background: none;
-      font-size: 13px; font-weight: 600; color: #64748b; cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      border-bottom: 2.5px solid transparent; margin-bottom: -1px;
-      display: flex; align-items: center; gap: 7px;
-      transition: color .15s, border-color .15s; white-space: nowrap;
-    }
-    .cd-tab i { font-size: 14px; }
-    .cd-tab:hover { color: #07437d; }
-    .cd-tab.active { color: var(--dc, #07437d); border-bottom-color: var(--dc, #07437d); background: #fff; }
-    .cd-tab .tc {
-      background: #e2e8f0; color: #475569;
-      font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 20px;
-    }
-    .cd-tab.active .tc { background: color-mix(in srgb, var(--dc,#3b82f6) 15%, #fff); color: var(--dc, #1d4ed8); }
-
-    /* Tab content */
-    .cd-content { padding: 24px 30px 30px; }
-    .cd-pane     { display: none; }
-    .cd-pane.active { display: block; }
-    .cd-pane-head {
-      display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; flex-wrap: wrap; gap: 10px;
-    }
-    .cd-pane-head h4 { font-size: 14.5px; font-weight: 700; color: #0f172a; }
-    .cd-pane-head p  { font-size: 12px; color: #64748b; margin-top: 2px; }
-
-    /* Progress overview strip */
-    .cd-lesson-ov {
-      display: flex; gap: 10px; margin-bottom: 20px;
-      background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 14px; padding: 14px 18px;
-      flex-wrap: wrap;
-    }
-    .cd-ov-seg { flex: 1; min-width: 70px; text-align: center; }
-    .cd-ov-val { font-size: 22px; font-weight: 800; color: #0f172a; line-height: 1; }
-    .cd-ov-lbl { font-size: 10.5px; color: #94a3b8; margin-top: 2px; }
-    .cd-ov-seg + .cd-ov-seg { border-left: 1px solid #e2e8f0; }
-    .cd-ov-bar-wrap { margin-top: 10px; }
-    .cd-ov-stacked { height: 8px; border-radius: 99px; overflow: hidden; display: flex; }
-    .cd-ov-stacked-seg { height: 100%; transition: width .5s; }
-
-    /* Lesson items */
-    .lesson-list { display: flex; flex-direction: column; gap: 8px; }
-    .lesson-item {
-      display: flex; align-items: center; gap: 13px;
-      padding: 13px 16px; background: #f8fafc; border: 1px solid #e2e8f0;
-      border-radius: 12px; transition: background .15s, border-color .15s;
-    }
-    .lesson-item:hover { background: #eff7ff; border-color: #bfdbfe; }
-    .lesson-num {
-      width: 30px; height: 30px; border-radius: 8px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 12px; font-weight: 800; color: #fff;
-      background: linear-gradient(135deg, var(--dc,#07437d), color-mix(in srgb, var(--dc,#07437d) 70%, #000));
-    }
-    .lesson-num.done-num { background: linear-gradient(135deg, #10b981, #059669); }
-    .lesson-info { flex: 1; min-width: 0; }
-    .lesson-title { font-size: 13px; font-weight: 600; color: #1e293b; margin-bottom: 2px; }
-    .lesson-meta  { font-size: 11px; color: #64748b; }
-    .lesson-badge {
-      font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; white-space: nowrap;
-    }
-    .lesson-badge.done     { background: #d1fae5; color: #065f46; }
-    .lesson-badge.upcoming { background: #dbeafe; color: #1d4ed8; }
-    .lesson-badge.draft    { background: #f1f5f9; color: #64748b; }
-
-    /* Exam items */
-    .detail-exam-list { display: flex; flex-direction: column; gap: 8px; }
-    .detail-exam-item {
-      display: flex; align-items: center; gap: 13px;
-      padding: 14px 16px; background: #f8fafc; border: 1px solid #e2e8f0;
-      border-radius: 12px; transition: background .15s, border-color .15s;
-    }
-    .detail-exam-item:hover { background: #eff7ff; border-color: #bfdbfe; }
-    .exam-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
-    .exam-icon.upcoming { background: #dbeafe; color: #1d4ed8; }
-    .exam-icon.done     { background: #d1fae5; color: #065f46; }
-    .exam-icon.draft    { background: #f1f5f9; color: #94a3b8; }
-    .detail-exam-info { flex: 1; min-width: 0; }
-    .detail-exam-title { font-size: 13px; font-weight: 600; color: #1e293b; margin-bottom: 2px; }
-    .detail-exam-meta  { font-size: 11px; color: #64748b; }
-    .exam-result { text-align: right; white-space: nowrap; }
-    .exam-result .result-val { font-size: 18px; font-weight: 800; color: var(--dc, #07437d); display: block; line-height: 1; }
-    .exam-result .result-lbl { font-size: 10px; color: #94a3b8; }
-
-    /* Exam score bar */
-    .exam-score-bar { width: 100px; }
-    .esb-track { height: 6px; background: #e2e8f0; border-radius: 99px; overflow: hidden; margin-top: 4px; }
-    .esb-fill  { height: 100%; border-radius: 99px; background: var(--dc, #3b82f6); }
-
-    /* Assignment items */
-    .detail-assign-list { display: flex; flex-direction: column; gap: 8px; }
-    .detail-assign-item {
-      display: flex; align-items: center; gap: 13px;
-      padding: 13px 16px; background: #f8fafc; border: 1px solid #e2e8f0;
-      border-radius: 12px; transition: background .15s, border-color .15s;
-    }
-    .detail-assign-item:hover { background: #eff7ff; border-color: #bfdbfe; }
-    .assign-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
-    .assign-icon.active { background: #d1fae5; color: #065f46; }
-    .assign-icon.done   { background: #f1f5f9; color: #94a3b8; }
-    .assign-icon.late   { background: #fee2e2; color: #991b1b; }
-    .detail-assign-info { flex: 1; min-width: 0; }
-    .detail-assign-title { font-size: 13px; font-weight: 600; color: #1e293b; margin-bottom: 2px; }
-    .detail-assign-meta  { font-size: 11px; color: #64748b; }
-    .assign-submit-stat  { text-align: right; white-space: nowrap; }
-    .submit-bar-label { font-size: 10px; color: #94a3b8; margin-bottom: 3px; }
-    .submit-bar-track { height: 5px; background: #e2e8f0; border-radius: 99px; overflow: hidden; width: 80px; }
-    .submit-bar-fill  { height: 100%; background: linear-gradient(90deg, var(--dc,#07437d), #3589d0); border-radius: 99px; }
-    .submit-pct { font-size: 11px; font-weight: 700; color: var(--dc,#07437d); margin-top: 2px; text-align: right; }
-
-    /* ══ STUDENT TABLE ══ */
-    .student-table-header {
-      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-      margin-bottom: 14px;
-    }
-    .stu-search {
-      display: flex; align-items: center; gap: 8px;
-      background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 99px;
-      padding: 7px 14px; flex: 1; max-width: 280px; transition: border-color .15s;
-    }
-    .stu-search:focus-within { border-color: #3b82f6; background: #fff; }
-    .stu-search input { border: none; outline: none; background: none; font-size: 13px; color: #1e293b; font-family: 'Inter',sans-serif; flex: 1; }
-    .stu-search i { color: #94a3b8; font-size: 13px; }
-    .stu-sort-btn {
-      display: flex; align-items: center; gap: 6px;
-      padding: 7px 14px; border-radius: 99px;
-      border: 1.5px solid #e2e8f0; background: #fff;
-      font-size: 12px; font-weight: 600; color: #64748b; cursor: pointer;
-      transition: all .15s;
-    }
-    .stu-sort-btn:hover { border-color: #3b82f6; color: #1d4ed8; }
-
-    .student-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 10px; }
-    .student-card {
-      border: 1.5px solid #e2e8f0; border-radius: 14px; padding: 14px 16px;
-      display: flex; align-items: center; gap: 12px;
-      transition: border-color .15s, box-shadow .15s; background: #fff;
-    }
-    .student-card:hover { border-color: var(--dc,#3b82f6); box-shadow: 0 4px 14px rgba(7,67,125,.08); }
-    .student-av {
-      width: 40px; height: 40px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 15px; font-weight: 800; flex-shrink: 0;
-    }
-    .student-info { flex: 1; min-width: 0; }
-    .student-name { font-size: 13px; font-weight: 700; color: #1e293b; margin-bottom: 4px; }
-    .student-score-row { display: flex; align-items: center; gap: 8px; }
-    .student-score-bar { flex: 1; height: 5px; background: #f1f5f9; border-radius: 99px; overflow: hidden; }
-    .student-score-fill{ height: 100%; border-radius: 99px; }
-    .student-score-pct { font-size: 12px; font-weight: 700; min-width: 36px; text-align: right; }
-    .student-score-pct.high { color: #065f46; }
-    .student-score-pct.mid  { color: #92400e; }
-    .student-score-pct.low  { color: #991b1b; }
-    .student-rank {
-      width: 24px; height: 24px; border-radius: 6px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 10px; font-weight: 800; background: #f1f5f9; color: #64748b;
-    }
-    .student-rank.gold   { background: #fef3c7; color: #92400e; }
-    .student-rank.silver { background: #f1f5f9; color: #475569; }
-    .student-rank.bronze { background: #fff7ed; color: #9a3412; }
-
-    /* Full student table (list mode) */
-    .student-table { width: 100%; border-collapse: separate; border-spacing: 0; }
-    .student-table thead th {
-      padding: 10px 14px; text-align: left; font-size: 11px; font-weight: 700;
-      color: #94a3b8; text-transform: uppercase; letter-spacing: .7px;
-      border-bottom: 1px solid #f1f5f9; background: #fafbfd;
-    }
-    .student-table thead th:first-child { border-radius: 10px 0 0 0; }
-    .student-table thead th:last-child  { border-radius: 0 10px 0 0; }
-    .student-table tbody tr { transition: background .12s; }
-    .student-table tbody tr:hover td { background: #f8fafc; }
-    .student-table tbody td {
-      padding: 11px 14px; border-bottom: 1px solid #f8fafc; vertical-align: middle; font-size: 13px;
-    }
-    .student-table tbody tr:last-child td { border-bottom: none; }
-
-    /* Assign badge */
-    .assign-badge { font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 99px; }
-    .assign-badge.active { background: #d1fae5; color: #065f46; }
-    .assign-badge.done   { background: #dbeafe; color: #1d4ed8; }
-    .assign-badge.late   { background: #fee2e2; color: #b91c1c; }
-
-    /* Empty */
-    .empty-state { text-align: center; padding: 44px 20px; color: #94a3b8; }
-    .empty-state i { font-size: 34px; margin-bottom: 12px; display: block; opacity: .45; }
-    .empty-state p { font-size: 14px; }
-
-    /* Dark mode */
-    body.dark .tc-sum-card,
-    body.dark .class-card,
-    body.dark .class-detail {
-      background: #1a2640;
-      border-color: rgba(255,255,255,.09);
-      box-shadow: 0 4px 24px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.07);
-    }
-    body.dark .class-card-footer { background: #0f172a; }
-    body.dark .class-card-stats  { border-color: #1e293b; }
-    body.dark .cc-class-name,
-    body.dark .cc-stat strong,
-    body.dark .cd-banner-title,
-    body.dark .cd-kpi-val,
-    body.dark .cd-pane-head h4,
-    body.dark .lesson-title,
-    body.dark .detail-exam-title,
-    body.dark .detail-assign-title,
-    body.dark .student-name { color: #e2e8f0; }
-    body.dark .cd-tabs { background: #0f172a; border-color: #1e293b; }
-    body.dark .cd-tab.active { background: #1a2640; }
-    body.dark .lesson-item,
-    body.dark .detail-exam-item,
-    body.dark .detail-assign-item { background: #0f172a; border-color: #1e293b; }
-    body.dark .lesson-item:hover,
-    body.dark .detail-exam-item:hover,
-    body.dark .detail-assign-item:hover { background: #0d1e35; border-color: #1e3a62; }
-    body.dark .student-card { background: #0f172a; border-color: #1e293b; }
-    body.dark .cd-lesson-ov { background: #0f172a; border-color: #1e293b; }
-    body.dark .cd-kpi { background: rgba(255,255,255,.06); border-color: #1e293b; }
-
-    @media (max-width: 860px) {
-      .tc-summary { grid-template-columns: repeat(2,1fr); }
-      .cd-banner { padding: 18px 18px 0; }
-      .cd-tabs   { padding: 0 12px; overflow-x: auto; }
-      .cd-content { padding: 18px 18px 24px; }
-      .class-grid { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 560px) {
-      .class-grid { grid-template-columns: 1fr; }
-      .tc-summary { grid-template-columns: 1fr 1fr; }
-      .student-grid { grid-template-columns: 1fr; }
-    }
-  </style>
 </head>
 <body>
 
@@ -407,8 +48,23 @@
     </div>
   </div>
 
+  <!-- Search bar -->
+  <div class="class-search-wrap">
+    <div class="class-search-bar">
+      <i class="fas fa-search"></i>
+      <input type="text" id="classSearch" placeholder="Анги хайх — нэр, хичээл..." oninput="filterClasses(this.value)">
+      <button class="search-clear-btn" id="searchClearBtn" onclick="clearClassSearch()"><i class="fas fa-times"></i></button>
+    </div>
+    <span class="search-result-badge" id="searchBadge" style="display:none"></span>
+  </div>
+
   <!-- Class cards -->
-  <div class="class-grid" id="classGrid"></div>
+  <div class="class-grid" id="classGrid">
+    <div class="class-no-results" id="classNoResults">
+      <i class="fas fa-search"></i>
+      <p>Хайлтад тохирох анги олдсонгүй</p>
+    </div>
+  </div>
 
   <!-- Detail panel -->
   <div class="class-detail" id="classDetail">
@@ -499,6 +155,41 @@
         <div class="t-field"><label>Нийт оноо</label><input type="number" id="exmScore" placeholder="100" min="1"></div>
       </div>
       <div class="t-field"><label>Тайлбар</label><textarea id="exmDesc" placeholder="Шалгалтын хамрах хүрээ..."></textarea></div>
+      <div class="t-field">
+        <label>Нээгдэх горим</label>
+        <div class="smode-row">
+          <button type="button" class="smode-btn active" id="smodeNow" onclick="setScheduleMode('now')">
+            <i class="fas fa-bolt"></i> Шууд нэмэх
+          </button>
+          <button type="button" class="smode-btn" id="smodeScheduled" onclick="setScheduleMode('scheduled')">
+            <i class="fas fa-clock"></i> Хуваарьт нээлт
+          </button>
+        </div>
+        <div id="exmScheduleFields" style="display:none">
+          <div class="t-field-row">
+            <div class="t-field"><label>Нээгдэх огноо, цаг</label><input type="datetime-local" id="exmOpenAt" oninput="updateSchedulePreview()"></div>
+            <div class="t-field"><label>Хаагдах огноо, цаг</label><input type="datetime-local" id="exmCloseAt" oninput="updateSchedulePreview()"></div>
+          </div>
+          <div class="schedule-preview" id="schedulePreview" style="display:none">
+            <i class="fas fa-info-circle"></i>
+            <span id="schedulePreviewText"></span>
+          </div>
+        </div>
+      </div>
+      <div class="t-field">
+        <label>Материал хавсаргах <span style="font-weight:400;color:#94a3b8">(заавал биш)</span></label>
+        <div class="file-dropzone" id="exmDropZone"
+             onclick="document.getElementById('exmFiles').click()"
+             ondragover="event.preventDefault();this.classList.add('drag-over')"
+             ondragleave="this.classList.remove('drag-over')"
+             ondrop="handleFileDrop(event,'exmFiles','exmFileList')">
+          <i class="fas fa-file-upload"></i>
+          <div class="fdz-text">Шалгалтын материал нэмэх</div>
+          <div class="fdz-hint">PDF, DOC, DOCX — макс 20MB</div>
+          <input type="file" id="exmFiles" multiple accept=".pdf,.doc,.docx" style="display:none" onchange="handleFileSelect(this,'exmFileList')">
+        </div>
+        <div class="fdz-file-list" id="exmFileList"></div>
+      </div>
     </div>
     <div class="t-modal-foot">
       <button class="t-btn-cancel" onclick="closeModal('examModal')">Болих</button>
@@ -520,6 +211,20 @@
         <div class="t-field"><label>Нийт оноо</label><input type="number" id="asnScore" placeholder="10" min="1"></div>
       </div>
       <div class="t-field"><label>Даалгаврын агуулга</label><textarea id="asnDesc" placeholder="Даалгаврын тодорхой агуулга..."></textarea></div>
+      <div class="t-field">
+        <label>Файл хавсаргах <span style="font-weight:400;color:#94a3b8">(заавал биш)</span></label>
+        <div class="file-dropzone" id="asnDropZone"
+             onclick="document.getElementById('asnFiles').click()"
+             ondragover="event.preventDefault();this.classList.add('drag-over')"
+             ondragleave="this.classList.remove('drag-over')"
+             ondrop="handleFileDrop(event,'asnFiles','asnFileList')">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <div class="fdz-text">Файл чирэх эсвэл <span>товшиж сонгох</span></div>
+          <div class="fdz-hint">PDF, DOC, JPG, PNG — макс 10MB</div>
+          <input type="file" id="asnFiles" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.zip" style="display:none" onchange="handleFileSelect(this,'asnFileList')">
+        </div>
+        <div class="fdz-file-list" id="asnFileList"></div>
+      </div>
     </div>
     <div class="t-modal-foot">
       <button class="t-btn-cancel" onclick="closeModal('assignModal')">Болих</button>
@@ -569,481 +274,6 @@
 </div>
 
 <script src="../js/load.js"></script>
-<script>
-const CLASSES = [
-  {
-    name:'10А анги', subject:'Алгебр', icon:'fa-calculator', color:'#3b82f6',
-    students:24, avg:'84%', avgClass:'good', avgNum:84,
-    lessons:[
-      {title:'Квадрат тэгшитгэл',                   meta:'45 мин · 2026/04/10', badge:'done'},
-      {title:'Тэгшитгэлийн систем',                 meta:'50 мин · 2026/04/14', badge:'done'},
-      {title:'Үл мэдэгдэгчтэй тэгш бус байдал',    meta:'45 мин · 2026/04/18', badge:'done'},
-      {title:'Функцийн утга',                        meta:'40 мин · 2026/04/22', badge:'upcoming'},
-      {title:'Параболын график',                     meta:'50 мин · 2026/04/28', badge:'upcoming'},
-      {title:'Дундын шалгалтын давтлага',            meta:'60 мин · 2026/05/02', badge:'draft'},
-      {title:'Экспоненциал функц',                   meta:'45 мин · 2026/05/06', badge:'draft'},
-      {title:'Логарифм',                             meta:'45 мин · 2026/05/10', badge:'draft'},
-    ],
-    exams:[
-      {title:'Алгебрийн дундын шалгалт', meta:'2026/04/22 · 20 асуулт · 45 мин', status:'upcoming', result:null},
-      {title:'Тэгшитгэлийн тест',        meta:'2026/04/07 · 15 асуулт · 30 мин · Дундаж: 82%', status:'done', result:'82%', resultNum:82},
-      {title:'Эхний улирлын шалгалт',    meta:'2026/03/15 · 30 асуулт · 60 мин · Дундаж: 78%', status:'done', result:'78%', resultNum:78},
-    ],
-    assignments:[
-      {title:'Квадрат тэгшитгэл – ГД',      meta:'Дуусах: 2026/04/22', status:'active', submitted:18, total:24},
-      {title:'Функцийн утга – ГД',           meta:'Дуусах: 2026/04/25', status:'active', submitted:10, total:24},
-      {title:'Тэгшитгэлийн систем – ГД',    meta:'Дуусах: 2026/04/14', status:'done',   submitted:24, total:24},
-      {title:'Тэгш бус байдал – практик',   meta:'Дуусах: 2026/04/18', status:'done',   submitted:22, total:24},
-      {title:'Экспоненциал дасгал',          meta:'Дуусах: 2026/03/28', status:'late',   submitted:12, total:24},
-    ],
-    studentList:[
-      {name:'Болд Бат',       av:'Б', color:'#dbeafe', tc:'#1d4ed8', score:92},
-      {name:'Сарнай Гантулга',av:'С', color:'#ede9fe', tc:'#5b21b6', score:87},
-      {name:'Анхбаяр',        av:'А', color:'#d1fae5', tc:'#065f46', score:81},
-      {name:'Мөнхбаяр',       av:'М', color:'#fef3c7', tc:'#92400e', score:74},
-      {name:'Цэцэгмаа',       av:'Ц', color:'#fee2e2', tc:'#991b1b', score:63},
-    ],
-  },
-  {
-    name:'9Б анги', subject:'Геометр', icon:'fa-shapes', color:'#10b981',
-    students:18, avg:'71%', avgClass:'mid', avgNum:71,
-    lessons:[
-      {title:'Теорем нотлох',          meta:'45 мин · 2026/04/08', badge:'done'},
-      {title:'Гурвалжны өнцгүүд',     meta:'40 мин · 2026/04/12', badge:'done'},
-      {title:'Пифагорын теорем',       meta:'50 мин · 2026/04/17', badge:'done'},
-      {title:'Тойргийн шинж чанар',   meta:'45 мин · 2026/04/23', badge:'upcoming'},
-      {title:'Хавтгай дүрсийн талбай',meta:'50 мин · 2026/04/29', badge:'upcoming'},
-      {title:'Биетийн эзэлхүүн',      meta:'45 мин · 2026/05/05', badge:'draft'},
-    ],
-    exams:[
-      {title:'Геометрийн шалгалт',    meta:'2026/04/25 · 15 асуулт · 30 мин', status:'upcoming', result:null},
-      {title:'Теорем нотлолтын тест', meta:'2026/04/05 · 10 асуулт · 20 мин · Дундаж: 68%', status:'done', result:'68%', resultNum:68},
-    ],
-    assignments:[
-      {title:'Теорем нотлох – ГД',   meta:'Дуусах: 2026/04/24', status:'active', submitted:14, total:18},
-      {title:'Гурвалжны дасгал',     meta:'Дуусах: 2026/04/18', status:'done',   submitted:18, total:18},
-      {title:'Тойргийн бодлого',     meta:'Дуусах: 2026/04/12', status:'late',   submitted:9,  total:18},
-      {title:'Пифагор – гэрийн ажил',meta:'Дуусах: 2026/04/17', status:'done',   submitted:17, total:18},
-    ],
-    studentList:[
-      {name:'Номин Цэцэг', av:'Н', color:'#d1fae5', tc:'#065f46', score:88},
-      {name:'Баярмаа',     av:'Б', color:'#dbeafe', tc:'#1d4ed8', score:77},
-      {name:'Сувд',        av:'С', color:'#ede9fe', tc:'#5b21b6', score:72},
-      {name:'Ундрал',      av:'У', color:'#fef3c7', tc:'#92400e', score:65},
-    ],
-  },
-  {
-    name:'11А анги', subject:'Тригонометр', icon:'fa-wave-square', color:'#f59e0b',
-    students:22, avg:'79%', avgClass:'good', avgNum:79,
-    lessons:[
-      {title:'Синус, косинус тодорхойлолт',meta:'45 мин · 2026/04/05', badge:'done'},
-      {title:'Тригонометрийн нэгдэл',      meta:'50 мин · 2026/04/11', badge:'done'},
-      {title:'Давхардлын томъёо',           meta:'45 мин · 2026/04/16', badge:'done'},
-      {title:'Тригонометрийн тэгшитгэл',   meta:'50 мин · 2026/04/22', badge:'upcoming'},
-      {title:'График байгуулах',            meta:'55 мин · 2026/04/28', badge:'draft'},
-    ],
-    exams:[
-      {title:'Тригонометрийн тест',      meta:'2026/04/16 · 15 асуулт · 30 мин · Дундаж: 74%', status:'done', result:'74%', resultNum:74},
-      {title:'Улирлын эцсийн шалгалт',   meta:'2026/05/20 · 30 асуулт · 60 мин', status:'draft', result:null},
-    ],
-    assignments:[
-      {title:'Тригонометрийн нэгдэл',    meta:'Дуусах: 2026/04/18', status:'done',   submitted:21, total:22},
-      {title:'Давхардлын томъёо – ГД',   meta:'Дуусах: 2026/04/23', status:'active', submitted:16, total:22},
-      {title:'График байгуулах',          meta:'Дуусах: 2026/04/29', status:'active', submitted:4,  total:22},
-    ],
-    studentList:[
-      {name:'Гэрэлмаа',   av:'Г', color:'#d1fae5', tc:'#065f46', score:85},
-      {name:'Нарантуяа',  av:'Н', color:'#dbeafe', tc:'#1d4ed8', score:79},
-      {name:'Энхбаяр',    av:'Э', color:'#fef3c7', tc:'#92400e', score:76},
-      {name:'Дулгуун',    av:'Д', color:'#fee2e2', tc:'#991b1b', score:61},
-    ],
-  },
-  {
-    name:'8В анги', subject:'Арифметик', icon:'fa-hashtag', color:'#8b5cf6',
-    students:20, avg:'62%', avgClass:'low', avgNum:62,
-    lessons:[
-      {title:'Натурал тооны шинж', meta:'40 мин · 2026/04/09', badge:'done'},
-      {title:'Хуваагдах чанар',    meta:'40 мин · 2026/04/15', badge:'done'},
-      {title:'Нийтлэг хуваагч',   meta:'45 мин · 2026/04/22', badge:'upcoming'},
-      {title:'Нийтлэг үржвэр',    meta:'45 мин · 2026/04/28', badge:'draft'},
-    ],
-    exams:[
-      {title:'Арифметикийн тест', meta:'2026/04/10 · 12 асуулт · 25 мин · Дундаж: 59%', status:'done', result:'59%', resultNum:59},
-    ],
-    assignments:[
-      {title:'Натурал тооны шинж чанар', meta:'Дуусах: 2026/04/15', status:'done',   submitted:19, total:20},
-      {title:'Хуваагдах чанар – дасгал', meta:'Дуусах: 2026/04/22', status:'active', submitted:8,  total:20},
-    ],
-    studentList:[
-      {name:'Алтантуяа', av:'А', color:'#d1fae5', tc:'#065f46', score:73},
-      {name:'Оюунчимэг', av:'О', color:'#ede9fe', tc:'#5b21b6', score:68},
-      {name:'Мөнхзул',   av:'М', color:'#dbeafe', tc:'#1d4ed8', score:65},
-      {name:'Төгөлдөр',  av:'Т', color:'#fee2e2', tc:'#991b1b', score:54},
-    ],
-  },
-];
-
-let selectedClass = -1;
-const badgeLabel = {done:'Дууссан', upcoming:'Удахгүй', draft:'Ноорог'};
-const badgeCols   = {done:'#10b981', upcoming:'#3b82f6', draft:'#94a3b8'};
-const assignLabels= {active:'Идэвхтэй', done:'Дууссан', late:'Хоцорсон'};
-const examIcons   = {upcoming:'fa-clock', done:'fa-check-circle', draft:'fa-edit'};
-
-/* ── Build class cards ── */
-function buildCards() {
-  const grid = document.getElementById('classGrid');
-  grid.innerHTML = CLASSES.map((c, i) => {
-    const doneLessons     = c.lessons.filter(l => l.badge === 'done').length;
-    const upcomingLessons = c.lessons.filter(l => l.badge === 'upcoming').length;
-    const draftLessons    = c.lessons.filter(l => l.badge === 'draft').length;
-    const total = c.lessons.length || 1;
-    const donePct = Math.round(doneLessons / total * 100);
-    const upPct   = Math.round(upcomingLessons / total * 100);
-    return `
-    <div class="class-card" id="card${i}" onclick="selectClass(${i})">
-      <div class="class-card-top" style="background:${c.color}"></div>
-      <div class="class-card-body">
-        <div class="cc-subject-row">
-          <div class="cc-subject-icon" style="background:color-mix(in srgb,${c.color} 13%,#fff);color:${c.color}">
-            <i class="fas ${c.icon}"></i>
-          </div>
-          <div class="cc-subject-text">
-            <div class="cc-class-name">${c.name}</div>
-            <div class="cc-subject-name">${c.subject}</div>
-          </div>
-        </div>
-        <div class="class-card-stats">
-          <div class="cc-stat"><strong>${c.students}</strong><span>Сурагч</span></div>
-          <div class="cc-stat"><strong>${c.lessons.length}</strong><span>Хичээл</span></div>
-          <div class="cc-stat"><strong>${c.exams.length}</strong><span>Шалгалт</span></div>
-          <div class="cc-stat"><strong>${c.assignments.length}</strong><span>Даалгавар</span></div>
-        </div>
-        <div class="cc-progress">
-          <div class="cc-progress-header">
-            <span>Хөтөлбөрийн ахиц</span>
-            <span>${donePct}%</span>
-          </div>
-          <div class="cc-progress-track">
-            <div class="cc-progress-fill" style="width:${donePct}%;background:${c.color}"></div>
-          </div>
-          <div class="cc-progress-segs">
-            <span class="cc-seg"><span class="cc-seg-dot" style="background:${c.color}"></span>${doneLessons} дууссан</span>
-            <span class="cc-seg"><span class="cc-seg-dot" style="background:#93c5fd"></span>${upcomingLessons} удахгүй</span>
-            <span class="cc-seg"><span class="cc-seg-dot" style="background:#e2e8f0"></span>${draftLessons} ноорог</span>
-          </div>
-        </div>
-      </div>
-      <div class="class-card-footer">
-        <span class="cc-avg ${c.avgClass}"><i class="fas fa-chart-bar" style="margin-right:4px"></i>Дундаж: ${c.avg}</span>
-        <i class="fas fa-chevron-down cc-arrow"></i>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function hexToRgb(h) {
-  const r = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(h);
-  return r ? true : null;
-}
-
-function selectClass(idx) {
-  if (selectedClass === idx) { clearSelection(); return; }
-  selectedClass = idx;
-  const c = CLASSES[idx];
-
-  document.querySelectorAll('.class-card').forEach((card, i) => {
-    card.classList.remove('selected');
-    card.style.boxShadow = ''; card.style.borderColor = '';
-    if (i === idx) {
-      card.classList.add('selected');
-      card.style.borderColor = c.color;
-      card.style.boxShadow = `0 8px 0 ${c.color}22, 0 14px 38px ${c.color}55`;
-    }
-  });
-
-  renderDetail(idx);
-  document.getElementById('classDetail').classList.add('visible');
-  document.getElementById('classDetail').scrollIntoView({ behavior:'smooth', block:'nearest' });
-  switchTab('lessons', document.querySelectorAll('.cd-tab')[0]);
-}
-
-function clearSelection() {
-  document.querySelectorAll('.class-card').forEach(c => {
-    c.classList.remove('selected'); c.style.boxShadow = ''; c.style.borderColor = '';
-  });
-  document.getElementById('classDetail').classList.remove('visible');
-  selectedClass = -1;
-}
-
-function renderDetail(idx) {
-  const c = CLASSES[idx];
-  const det = document.getElementById('classDetail');
-  det.style.setProperty('--dc', c.color);
-
-  document.getElementById('cdIcon').innerHTML = `<i class="fas ${c.icon}"></i>`;
-  document.getElementById('cdIcon').style.background = `color-mix(in srgb,${c.color} 14%,#fff)`;
-  document.getElementById('cdIcon').style.color = c.color;
-  document.getElementById('cdTitle').textContent = c.name + ' – ' + c.subject;
-  document.getElementById('cdStudents').textContent = c.students;
-  document.getElementById('cdLessons').textContent = c.lessons.length;
-  document.getElementById('cdAvg').textContent = c.avg;
-  document.getElementById('tcLessons').textContent = c.lessons.length;
-  document.getElementById('tcExams').textContent = c.exams.length;
-  document.getElementById('tcAssign').textContent = c.assignments.length;
-  document.getElementById('tcStudents').textContent = c.students;
-
-  // KPI pills
-  const done = c.lessons.filter(l=>l.badge==='done').length;
-  const pct  = Math.round(done/c.lessons.length*100)||0;
-  const activeAssign = c.assignments.filter(a=>a.status==='active').length;
-  document.getElementById('cdKpis').innerHTML = `
-    <div class="cd-kpi"><div class="cd-kpi-val">${pct}%</div><div class="cd-kpi-lbl">Хөтөлбөр</div></div>
-    <div class="cd-kpi"><div class="cd-kpi-val">${done}/${c.lessons.length}</div><div class="cd-kpi-lbl">Хичээл дууссан</div></div>
-    <div class="cd-kpi"><div class="cd-kpi-val">${activeAssign}</div><div class="cd-kpi-lbl">Идэвхтэй даалгавар</div></div>
-    <div class="cd-kpi" style="border-color:${c.avgNum>=75?'#bbf7d0':c.avgNum>=60?'#fde68a':'#fecaca'}">
-      <div class="cd-kpi-val">${c.avg}</div><div class="cd-kpi-lbl">Ангийн дундаж</div>
-    </div>`;
-
-  renderLessonsPane(idx);
-  renderExamsPane(idx);
-  renderAssignmentsPane(idx);
-  renderStudentsPane(idx);
-}
-
-function renderLessonsPane(idx) {
-  const c = CLASSES[idx];
-  const doneLessons = c.lessons.filter(l=>l.badge==='done').length;
-  const upLessons   = c.lessons.filter(l=>l.badge==='upcoming').length;
-  const drLessons   = c.lessons.filter(l=>l.badge==='draft').length;
-  const total = c.lessons.length || 1;
-  const donePct= Math.round(doneLessons/total*100);
-  const upPct  = Math.round(upLessons/total*100);
-  const drPct  = 100 - donePct - upPct;
-
-  document.getElementById('pane-lessons').innerHTML = `
-    <div class="cd-pane-head">
-      <div><h4>Хичээлүүд</h4><p>Хөтөлбөрийн хэрэгжилт ба хичээл бүрийн статус</p></div>
-      <button class="t-btn-sm" onclick="openModal('lessonModal')"><i class="fas fa-plus"></i> Нэмэх</button>
-    </div>
-    <div class="cd-lesson-ov">
-      <div class="cd-ov-seg"><div class="cd-ov-val" style="color:#10b981">${doneLessons}</div><div class="cd-ov-lbl">Дууссан</div></div>
-      <div class="cd-ov-seg"><div class="cd-ov-val" style="color:#3b82f6">${upLessons}</div><div class="cd-ov-lbl">Удахгүй</div></div>
-      <div class="cd-ov-seg"><div class="cd-ov-val" style="color:#94a3b8">${drLessons}</div><div class="cd-ov-lbl">Ноорог</div></div>
-      <div class="cd-ov-seg"><div class="cd-ov-val">${total}</div><div class="cd-ov-lbl">Нийт</div></div>
-      <div class="cd-ov-bar-wrap" style="flex:2;align-self:center">
-        <div style="font-size:10.5px;color:#64748b;margin-bottom:5px">Ахиц — ${donePct}%</div>
-        <div class="cd-ov-stacked">
-          <div class="cd-ov-stacked-seg" style="width:${donePct}%;background:#10b981"></div>
-          <div class="cd-ov-stacked-seg" style="width:${upPct}%;background:#93c5fd"></div>
-          <div class="cd-ov-stacked-seg" style="width:${drPct}%;background:#e2e8f0"></div>
-        </div>
-      </div>
-    </div>
-    <div class="lesson-list">${c.lessons.length ? c.lessons.map((l,i) => `
-      <div class="lesson-item">
-        <div class="lesson-num ${l.badge==='done'?'done-num':''}">${i+1}</div>
-        <div class="lesson-info">
-          <div class="lesson-title">${l.title}</div>
-          <div class="lesson-meta"><i class="fas fa-clock" style="margin-right:4px;color:${CLASSES[idx].color}"></i>${l.meta}</div>
-        </div>
-        <span class="lesson-badge ${l.badge}">${badgeLabel[l.badge]}</span>
-        <div style="display:flex;gap:5px">
-          <button class="t-btn-icon" title="Засах"><i class="fas fa-edit"></i></button>
-          <button class="t-btn-icon red" title="Устгах" onclick="deleteLesson(${idx},${i})"><i class="fas fa-trash"></i></button>
-        </div>
-      </div>`).join('') : '<div class="empty-state"><i class="fas fa-book-open"></i><p>Хичээл байхгүй байна</p></div>'}</div>`;
-}
-
-function renderExamsPane(idx) {
-  const c = CLASSES[idx];
-  document.getElementById('pane-exams').innerHTML = `
-    <div class="cd-pane-head">
-      <div><h4>Шалгалтууд</h4><p>Ангийн шалгалтын жагсаалт ба үр дүн</p></div>
-      <button class="t-btn-sm" onclick="openModal('examModal')"><i class="fas fa-plus"></i> Нэмэх</button>
-    </div>
-    <div class="detail-exam-list">${c.exams.length ? c.exams.map((e,i) => `
-      <div class="detail-exam-item">
-        <div class="exam-icon ${e.status}"><i class="fas ${examIcons[e.status]}"></i></div>
-        <div class="detail-exam-info">
-          <div class="detail-exam-title">${e.title}</div>
-          <div class="detail-exam-meta">${e.meta}</div>
-        </div>
-        ${e.result ? `<div class="exam-score-bar">
-          <div style="font-size:15px;font-weight:800;color:var(--dc,#07437d);text-align:right">${e.result}</div>
-          <div class="esb-track"><div class="esb-fill" style="width:${e.resultNum||0}%"></div></div>
-        </div>` : `<span class="assign-badge ${e.status==='upcoming'?'active':'done'}">${e.status==='upcoming'?'Удахгүй':'Ноорог'}</span>`}
-        <div style="display:flex;gap:5px">
-          <button class="t-btn-icon" title="Засах"><i class="fas fa-edit"></i></button>
-          <button class="t-btn-icon red" title="Устгах" onclick="deleteExam(${idx},${i})"><i class="fas fa-trash"></i></button>
-        </div>
-      </div>`).join('') : '<div class="empty-state"><i class="fas fa-pen-square"></i><p>Шалгалт байхгүй байна</p></div>'}</div>`;
-}
-
-function renderAssignmentsPane(idx) {
-  const c = CLASSES[idx];
-  document.getElementById('pane-assignments').innerHTML = `
-    <div class="cd-pane-head">
-      <div><h4>Даалгаварууд</h4><p>Илгээлтийн явц ба статус</p></div>
-      <button class="t-btn-sm" onclick="openModal('assignModal')"><i class="fas fa-plus"></i> Нэмэх</button>
-    </div>
-    <div class="detail-assign-list">${c.assignments.length ? c.assignments.map((a,i) => {
-    const pct = Math.round(a.submitted/a.total*100);
-    return `<div class="detail-assign-item">
-      <div class="assign-icon ${a.status}"><i class="fas ${a.status==='active'?'fa-spinner':a.status==='done'?'fa-check':'fa-exclamation'}"></i></div>
-      <div class="detail-assign-info">
-        <div class="detail-assign-title">${a.title}</div>
-        <div class="detail-assign-meta">${a.meta}</div>
-      </div>
-      <div class="assign-submit-stat">
-        <div class="submit-bar-label">${a.submitted}/${a.total} илгээсэн</div>
-        <div class="submit-bar-track"><div class="submit-bar-fill" style="width:${pct}%"></div></div>
-        <div class="submit-pct">${pct}%</div>
-      </div>
-      <span class="assign-badge ${a.status}">${assignLabels[a.status]}</span>
-      <button class="t-btn-icon red" title="Устгах" onclick="deleteAssign(${idx},${i})"><i class="fas fa-trash"></i></button>
-    </div>`;
-  }).join('') : '<div class="empty-state"><i class="fas fa-tasks"></i><p>Даалгавар байхгүй байна</p></div>'}</div>`;
-}
-
-function renderStudentsPane(idx) {
-  const c = CLASSES[idx];
-  const sorted = [...c.studentList].sort((a,b) => b.score - a.score);
-  const rankIcon = i => i===0?'🥇':i===1?'🥈':i===2?'🥉':'';
-  const rankClass = i => i===0?'gold':i===1?'silver':i===2?'bronze':'';
-  const scoreColor = s => s>=80?'#065f46':s>=65?'#92400e':'#991b1b';
-  const fillColor  = s => s>=80?'#10b981':s>=65?'#f59e0b':'#ef4444';
-  const scClass    = s => s>=80?'high':s>=65?'mid':'low';
-
-  document.getElementById('pane-students').innerHTML = `
-    <div class="cd-pane-head">
-      <div><h4>Сурагчид</h4><p>${c.students} сурагч · Дундаж оноогоор эрэмблэсэн</p></div>
-    </div>
-    <div class="student-table-header">
-      <div class="stu-search">
-        <i class="fas fa-search"></i>
-        <input type="text" placeholder="Нэрээр хайх..." oninput="filterStudents(${idx},this.value)">
-      </div>
-      <span style="font-size:12px;color:#64748b;margin-left:4px">${sorted.length} сурагч</span>
-    </div>
-    <div class="student-grid" id="stuGrid${idx}">
-      ${sorted.map((s,i) => `
-        <div class="student-card">
-          <div class="student-rank ${rankClass(i)}">${rankIcon(i)||i+1}</div>
-          <div class="student-av" style="background:${s.color};color:${s.tc}">${s.av}</div>
-          <div class="student-info">
-            <div class="student-name">${s.name}</div>
-            <div class="student-score-row">
-              <div class="student-score-bar">
-                <div class="student-score-fill" style="width:${s.score}%;background:${fillColor(s.score)}"></div>
-              </div>
-              <div class="student-score-pct ${scClass(s.score)}" style="color:${scoreColor(s.score)}">${s.score}%</div>
-            </div>
-          </div>
-        </div>`).join('')}
-    </div>`;
-}
-
-function filterStudents(idx, q) {
-  const c      = CLASSES[idx];
-  const sorted = [...c.studentList].sort((a,b)=>b.score-a.score);
-  const scoreColor  = s => s>=80?'#065f46':s>=65?'#92400e':'#991b1b';
-  const fillColor   = s => s>=80?'#10b981':s>=65?'#f59e0b':'#ef4444';
-  const rankClass   = i => i===0?'gold':i===1?'silver':i===2?'bronze':'';
-  const rankIcon    = i => i===0?'🥇':i===1?'🥈':i===2?'🥉':'';
-  const scClass     = s => s>=80?'high':s>=65?'mid':'low';
-  const filtered    = sorted.filter(s => s.name.toLowerCase().includes(q.toLowerCase()));
-  document.getElementById(`stuGrid${idx}`).innerHTML = filtered.map((s,i) => `
-    <div class="student-card">
-      <div class="student-rank ${rankClass(i)}">${rankIcon(i)||i+1}</div>
-      <div class="student-av" style="background:${s.color};color:${s.tc}">${s.av}</div>
-      <div class="student-info">
-        <div class="student-name">${s.name}</div>
-        <div class="student-score-row">
-          <div class="student-score-bar">
-            <div class="student-score-fill" style="width:${s.score}%;background:${fillColor(s.score)}"></div>
-          </div>
-          <div class="student-score-pct ${scClass(s.score)}" style="color:${scoreColor(s.score)}">${s.score}%</div>
-        </div>
-      </div>
-    </div>`).join('');
-}
-
-function switchTab(tab, btn) {
-  document.querySelectorAll('.cd-tab').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.cd-pane').forEach(p => p.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-  document.getElementById('pane-' + tab).classList.add('active');
-}
-
-function deleteLesson(ci,li){ CLASSES[ci].lessons.splice(li,1); renderLessonsPane(ci); document.getElementById('tcLessons').textContent=CLASSES[ci].lessons.length; }
-function deleteExam(ci,ei)  { CLASSES[ci].exams.splice(ei,1);   renderExamsPane(ci);   document.getElementById('tcExams').textContent=CLASSES[ci].exams.length; }
-function deleteAssign(ci,ai){ CLASSES[ci].assignments.splice(ai,1); renderAssignmentsPane(ci); document.getElementById('tcAssign').textContent=CLASSES[ci].assignments.length; }
-
-function openModal(id)  { document.getElementById(id).classList.add('show');    document.body.style.overflow='hidden'; }
-function closeModal(id) { document.getElementById(id).classList.remove('show'); document.body.style.overflow=''; }
-
-function addLesson() {
-  if (selectedClass<0) { closeModal('lessonModal'); return; }
-  const title=document.getElementById('lsnTitle').value.trim();
-  const dur  =document.getElementById('lsnDuration').value;
-  const date =document.getElementById('lsnDate').value;
-  if (!title) return;
-  CLASSES[selectedClass].lessons.push({title, meta:(dur?dur+' мин':'')+(date?' · '+date:''), badge:'upcoming'});
-  renderDetail(selectedClass);
-  ['lsnTitle','lsnDuration','lsnDate','lsnDesc','lsnUrl'].forEach(id=>document.getElementById(id).value='');
-  closeModal('lessonModal');
-  switchTab('lessons', document.querySelectorAll('.cd-tab')[0]);
-}
-
-function addExam() {
-  if (selectedClass<0) { closeModal('examModal'); return; }
-  const title=document.getElementById('exmTitle').value.trim();
-  const date =document.getElementById('exmDate').value;
-  const dur  =document.getElementById('exmDuration').value;
-  const q    =document.getElementById('exmQuestions').value;
-  if (!title) return;
-  CLASSES[selectedClass].exams.push({title, meta:[date,q?q+' асуулт':'',dur?dur+' мин':''].filter(Boolean).join(' · '), status:'upcoming', result:null});
-  renderDetail(selectedClass);
-  ['exmTitle','exmDate','exmDuration','exmQuestions','exmScore','exmDesc'].forEach(id=>document.getElementById(id).value='');
-  closeModal('examModal');
-  switchTab('exams', document.querySelectorAll('.cd-tab')[1]);
-}
-
-function addAssignment() {
-  if (selectedClass<0) { closeModal('assignModal'); return; }
-  const title=document.getElementById('asnTitle').value.trim();
-  const date =document.getElementById('asnDate').value;
-  if (!title) return;
-  const total=CLASSES[selectedClass].students;
-  CLASSES[selectedClass].assignments.push({title, meta:date?'Дуусах: '+date:'Хугацаа тодорхойгүй', status:'active', submitted:0, total});
-  renderDetail(selectedClass);
-  ['asnTitle','asnDate','asnScore','asnDesc'].forEach(id=>document.getElementById(id).value='');
-  closeModal('assignModal');
-  switchTab('assignments', document.querySelectorAll('.cd-tab')[2]);
-}
-
-let pickedColor='#3b82f6';
-function pickColor(btn) {
-  document.querySelectorAll('.color-pick').forEach(b=>b.style.borderColor='transparent');
-  btn.style.borderColor='#0f172a';
-  pickedColor=btn.dataset.color;
-  document.getElementById('clsColor').value=pickedColor;
-}
-
-function addClass() {
-  const name=document.getElementById('clsName').value.trim();
-  const subj=document.getElementById('clsSubject').value;
-  const color=document.getElementById('clsColor').value||'#3b82f6';
-  if (!name) return;
-  CLASSES.push({name,subject:subj,icon:'fa-layer-group',color,students:0,avg:'—',avgClass:'mid',avgNum:0,lessons:[],exams:[],assignments:[],studentList:[]});
-  buildCards();
-  ['clsName','clsMax','clsDesc'].forEach(id=>document.getElementById(id).value='');
-  closeModal('classModal');
-}
-
-// Init
-buildCards();
-setTimeout(()=>document.querySelectorAll('.color-pick')[0].style.borderColor='#0f172a', 0);
-</script>
+<script src="../js/teacher-classes.js"></script>
 </body>
 </html>

@@ -1,3 +1,5 @@
+if (localStorage.getItem('dark_mode') === '1') document.body.classList.add('dark');
+
 // ── Role switcher ──
 function selectRole(role) {
   document.getElementById('roleInput').value = role;

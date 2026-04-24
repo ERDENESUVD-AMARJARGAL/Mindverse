@@ -1,8 +1,14 @@
-/* FAQ accordion */
-document.querySelectorAll('.faq-item').forEach(item => {
-  item.querySelector('.faq-question').addEventListener('click', () => {
-    const wasOpen = item.classList.contains('active');
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
-    if (!wasOpen) item.classList.add('active');
-  });
+document.addEventListener('DOMContentLoaded', () => {
+  const fn = sessionStorage.getItem('user_firstname') || '';
+  const ln = sessionStorage.getItem('user_lastname')  || '';
+  const gr = sessionStorage.getItem('user_grade')     || '';
+  const sc = sessionStorage.getItem('user_school')    || '';
+  const nameEl = document.getElementById('studentName');
+  const metaEl = document.getElementById('studentMeta');
+  const name = fn || ln;
+  if (nameEl && name) nameEl.textContent = name;
+  if (metaEl && (gr || sc)) {
+    const parts = [gr, sc].filter(Boolean);
+    metaEl.textContent = parts.join(' · ') + ' · Таны хичээлийн ахиц, даалгавар, шалгалт бүгд энд';
+  }
 });
