@@ -1,0 +1,94 @@
+/* ── Grade ring (SVG) ── */
+.grade-ring-wrap { position: relative; flex-shrink: 0; }
+.grade-ring-wrap svg { transform: rotate(-90deg); display: block; }
+.grade-ring-center {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+}
+.grade-ring-pct   { font-size: 32px; font-weight: 800; color: #fff; line-height: 1; }
+.grade-ring-label { font-size: 11px; color: rgba(255,255,255,.65); margin-top: 2px; }
+
+/* Weekly activity bars */
+.week-chart { display: flex; align-items: flex-end; gap: 6px; height: 64px; padding: 0 24px 14px; }
+.week-bar-col { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; }
+.week-bar {
+  width: 100%; border-radius: 5px 5px 0 0;
+  background: var(--wb, #dbeafe); transition: height .5s ease;
+  min-height: 4px;
+}
+.week-bar.active { background: var(--wb-a, #3b82f6); }
+.week-bar-day { font-size: 9.5px; color: #94a3b8; font-weight: 500; }
+
+/* Radar-like subject ring grid */
+.subject-rings { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; padding: 20px 24px; }
+.subject-ring-item { text-align: center; }
+.subject-ring-svg-wrap { position: relative; width: 72px; height: 72px; margin: 0 auto 8px; }
+.subject-ring-svg-wrap svg { transform: rotate(-90deg); }
+.subject-ring-val {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 800; color: #0f172a;
+}
+.subject-ring-name { font-size: 11.5px; font-weight: 600; color: #1e293b; }
+.subject-ring-grade{
+  font-size: 10.5px; font-weight: 700; padding: 2px 8px;
+  border-radius: 99px; margin-top: 4px; display: inline-block;
+}
+
+/* Comparison bar */
+.compare-row { padding: 12px 24px; border-bottom: 1px solid #f8fafc; }
+.compare-row:last-child { border-bottom: none; }
+.compare-labels { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px; }
+.compare-label-name { font-weight: 600; color: #1e293b; display: flex; align-items: center; gap: 6px; }
+.compare-label-pct  { font-weight: 700; color: #07437d; }
+.compare-track { height: 8px; background: #f1f5f9; border-radius: 99px; overflow: hidden; position: relative; }
+.compare-fill-me  { height: 100%; border-radius: 99px; }
+.compare-fill-avg {
+  position: absolute; top: 0; width: 2px; height: 100%;
+  background: #94a3b8; border-radius: 1px;
+}
+.compare-legend { display: flex; gap: 14px; font-size: 10.5px; color: #94a3b8; margin-top: 5px; }
+.compare-legend span { display: flex; align-items: center; gap: 4px; }
+
+/* Exam table */
+.exam-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13px; }
+.exam-table thead th {
+  padding: 10px 24px; text-align: left;
+  font-size: 11px; font-weight: 700; color: #94a3b8;
+  text-transform: uppercase; letter-spacing: .8px;
+  border-bottom: 1px solid #f1f5f9; background: #fafafa;
+}
+.exam-table tbody tr { transition: background .12s; }
+.exam-table tbody tr:hover td { background: #f8fafc; }
+.exam-table tbody td { padding: 13px 24px; border-bottom: 1px solid #f8fafc; vertical-align: middle; }
+.exam-table tbody tr:last-child td { border-bottom: none; }
+.score-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 12px; border-radius: 99px; font-weight: 700; font-size: 12px;
+}
+.score-chip.A  { background: #d1fae5; color: #065f46; }
+.score-chip.B  { background: #dbeafe; color: #1d4ed8; }
+.score-chip.C  { background: #fef3c7; color: #92400e; }
+.score-chip.D  { background: #fee2e2; color: #b91c1c; }
+.score-chip.np { background: #f1f5f9; color: #64748b; }
+
+/* Achievement card grid */
+.ach-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 18px 20px; }
+.ach-card {
+  border: 1.5px solid #e2e8f0; border-radius: 14px; padding: 14px;
+  display: flex; align-items: center; gap: 12px;
+  transition: border-color .15s, box-shadow .15s;
+}
+.ach-card:hover { border-color: #93c5fd; box-shadow: 0 6px 22px rgba(0,0,0,.32); }
+.ach-card.locked { opacity: .4; }
+.ach-icon {
+  width: 40px; height: 40px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+.ach-name { font-size: 12px; font-weight: 700; color: #1e293b; }
+.ach-desc { font-size: 10.5px; color: #94a3b8; margin-top: 2px; }
+
+@media (max-width: 900px) { .subject-rings { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .subject-rings { grid-template-columns: repeat(2, 1fr); } }

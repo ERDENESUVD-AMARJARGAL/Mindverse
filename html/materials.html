@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EduLearn – Материалууд</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/sidebar.css">
+  <link rel="stylesheet" href="../css/materials.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<div id="sidebar-container"></div>
+
+<div class="page">
+  <div class="section-head">
+    <div>
+      <h2>Үнэгүй <span>материалууд</span></h2>
+      <p style="margin-top:4px">Суралцахад шаардлагатай бүх материал нэг дороо</p>
+    </div>
+  </div>
+
+  <div class="search-bar">
+    <i class="fas fa-search"></i>
+    <input type="text" id="matSearch" placeholder="Материал хайх...">
+  </div>
+
+  <div class="filter-tabs" id="filterTabs">
+    <button class="tab-btn active" data-cat="all">Бүгд</button>
+    <button class="tab-btn" data-cat="Алгебр">Алгебр</button>
+    <button class="tab-btn" data-cat="Геометр">Геометр</button>
+    <button class="tab-btn" data-cat="Тригонометр">Тригонометр</button>
+    <button class="tab-btn" data-cat="Комбинаторик">Комбинаторик</button>
+    <button class="tab-btn" data-cat="Тооны онол">Тооны онол</button>
+    <button class="tab-btn" data-cat="Арифметик">Арифметик</button>
+  </div>
+
+  <p id="mat-count"></p>
+
+  <div class="materials-grid" id="materialsGrid"></div>
+</div>
+
+<script src="../js/load.js"></script>
+<script src="../js/materials.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EduLearn – Даалгаврын маркет</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/sidebar.css">
+  <link rel="stylesheet" href="../css/teacher.css">
+  <link rel="stylesheet" href="../css/task-market.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div id="sidebar-container"></div>
+
+<div class="page">
+
+  <!-- Page header -->
+  <div class="tm-page-head">
+    <div>
+      <h1><i class="fas fa-store" style="color:#07437d;margin-right:10px"></i>Даалгаврын маркет</h1>
+      <p>Сурагчдын нийтэлсэн бодлогуудыг аваад тусал — урамшуулал авна</p>
+    </div>
+    <div class="tm-teacher-kpis">
+      <div class="tm-tkpi">
+        <span class="tm-tkpi-val" id="openCount">0</span>
+        <span class="tm-tkpi-lbl">Нээлттэй</span>
+      </div>
+      <div class="tm-tkpi">
+        <span class="tm-tkpi-val" id="myClaimedCount">0</span>
+        <span class="tm-tkpi-lbl">Миний авсан</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Subject filter bar -->
+  <div class="tm-filter-bar" id="subjectFilter">
+    <button class="tm-pill active" onclick="filterBySubject('all', this)">Бүгд</button>
+  </div>
+
+  <!-- Open tasks -->
+  <div class="tm-section-head">
+    <div class="tm-section-title"><i class="fas fa-store"></i>Нийтэлсэн даалгаврууд</div>
+  </div>
+  <div class="tm-tasks-grid" id="marketGrid"></div>
+
+  <!-- My claimed tasks -->
+  <div class="tm-section-head" style="margin-top:36px">
+    <div class="tm-section-title" style="color:#059669">
+      <i class="fas fa-check-circle" style="color:#059669"></i>Миний авсан даалгаврууд
+    </div>
+  </div>
+  <div class="tm-tasks-grid" id="myClaimedGrid"></div>
+
+</div><!-- /page -->
+
+<script src="../js/load.js"></script>
+<script src="../js/teacher-market.js"></script>
+</body>
+</html>

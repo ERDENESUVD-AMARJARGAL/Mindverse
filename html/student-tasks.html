@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EduLearn – Асуулт маркет</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/sidebar.css">
+  <link rel="stylesheet" href="../css/task-market.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div id="sidebar-container"></div>
+
+<div class="page">
+
+  <!-- Page header -->
+  <div class="tm-page-head">
+    <div>
+      <h1><i class="fas fa-store" style="color:#07437d;margin-right:10px"></i>Асуулт маркет</h1>
+      <p>Мэдэхгүй бодлогоо нийтлэж, багш нараас тусламж ав</p>
+    </div>
+    <button class="tm-post-btn" onclick="openPostModal()">
+      <i class="fas fa-plus"></i> Даалгавар нийтлэх
+    </button>
+  </div>
+
+  <!-- Wallet card -->
+  <div class="tm-wallet-card">
+    <div class="tm-wallet-left">
+      <div class="tm-wallet-icon"><i class="fas fa-wallet"></i></div>
+      <div>
+        <div class="tm-wallet-label">Миний данс</div>
+        <div class="tm-wallet-balance" id="walletBalance">₮0</div>
+      </div>
+    </div>
+    <div class="tm-wallet-right">
+      <div class="tm-wallet-stat">
+        <div class="tm-ws-val" id="walletPosted">0</div>
+        <div class="tm-ws-lbl">Нийтлэсэн</div>
+      </div>
+      <div class="tm-wallet-divider"></div>
+      <div class="tm-wallet-stat">
+        <div class="tm-ws-val" id="walletClaimed">0</div>
+        <div class="tm-ws-lbl">Авсан</div>
+      </div>
+      <div class="tm-wallet-divider"></div>
+      <div class="tm-wallet-stat">
+        <div class="tm-ws-val" id="walletSpent">₮0</div>
+        <div class="tm-ws-lbl">Зарцуулсан</div>
+      </div>
+      <button class="tm-charge-btn" onclick="openChargeModal()">
+        <i class="fas fa-plus-circle"></i> Цэнэглэх
+      </button>
+    </div>
+  </div>
+
+  <!-- My tasks section header -->
+  <div class="tm-section-head">
+    <div class="tm-section-title"><i class="fas fa-list-alt"></i>Миний нийтлэлүүд</div>
+    <div class="tm-tab-pills">
+      <button class="tm-pill active" onclick="filterMyTasks('all',this)">Бүгд</button>
+      <button class="tm-pill" onclick="filterMyTasks('open',this)">Нээлттэй</button>
+      <button class="tm-pill" onclick="filterMyTasks('claimed',this)">Авсан</button>
+    </div>
+  </div>
+
+  <!-- My tasks grid -->
+  <div class="tm-tasks-grid" id="myTasksGrid"></div>
+
+</div><!-- /page -->
+
+<!-- ══ Charge Modal ══ -->
+<div class="tm-overlay" id="chargeOverlay" onclick="if(event.target===this)closeChargeModal()">
+  <div class="tm-modal">
+    <div class="tm-modal-head">
+      <h3><i class="fas fa-wallet"></i> Данс цэнэглэх</h3>
+      <button class="tm-modal-close" onclick="closeChargeModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="tm-modal-body">
+      <div class="tm-quick-amounts">
+        <button class="tm-qa-btn" onclick="setChargeAmount(5000,this)">₮5,000</button>
+        <button class="tm-qa-btn" onclick="setChargeAmount(10000,this)">₮10,000</button>
+        <button class="tm-qa-btn" onclick="setChargeAmount(20000,this)">₮20,000</button>
+        <button class="tm-qa-btn" onclick="setChargeAmount(50000,this)">₮50,000</button>
+      </div>
+      <div class="tm-field">
+        <label>Дүн (₮)</label>
+        <input type="number" id="chargeAmount" placeholder="5000" min="1000" step="500">
+      </div>
+      <p class="tm-hint">
+        <i class="fas fa-info-circle"></i>
+        Энэ нь демо систем учир жинхэнэ гүйлгээ хийгдэхгүй. Тоог оруулахад данс руу нэмэгдэнэ.
+      </p>
+    </div>
+    <div class="tm-modal-foot">
+      <button class="tm-btn-cancel" onclick="closeChargeModal()">Болих</button>
+      <button class="tm-btn-confirm" onclick="doCharge()"><i class="fas fa-check"></i> Нэмэх</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ Post Task Modal ══ -->
+<div class="tm-overlay" id="postOverlay" onclick="if(event.target===this)closePostModal()">
+  <div class="tm-modal tm-modal-lg">
+    <div class="tm-modal-head">
+      <h3><i class="fas fa-paper-plane"></i> Даалгавар нийтлэх</h3>
+      <button class="tm-modal-close" onclick="closePostModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="tm-modal-body">
+      <div class="tm-field">
+        <label>Хичээл</label>
+        <select id="postSubject">
+          <option value="">— Сонгох —</option>
+          <option>Алгебр</option>
+          <option>Геометр</option>
+          <option>Тригонометр</option>
+          <option>Арифметик</option>
+          <option>Комбинаторик</option>
+          <option>Тооны онол</option>
+          <option>C++ програмчлал</option>
+          <option>Бусад</option>
+        </select>
+      </div>
+      <div class="tm-field">
+        <label>Гарчиг</label>
+        <input type="text" id="postTitle" placeholder="Жишээ: 2x² + 5x - 3 = 0 бодлого">
+      </div>
+      <div class="tm-field">
+        <label>Хүндрэлийн түвшин</label>
+        <div class="tm-diff-pills">
+          <button type="button" class="tm-diff-btn active" data-diff="easy" onclick="selectDiff(this)">
+            <i class="fas fa-circle" style="font-size:8px"></i> Хялбар
+          </button>
+          <button type="button" class="tm-diff-btn" data-diff="medium" onclick="selectDiff(this)">
+            <i class="fas fa-circle" style="font-size:8px"></i> Дунд
+          </button>
+          <button type="button" class="tm-diff-btn" data-diff="hard" onclick="selectDiff(this)">
+            <i class="fas fa-circle" style="font-size:8px"></i> Хэцүү
+          </button>
+        </div>
+      </div>
+      <div class="tm-field">
+        <label>Бодлого / тайлбар <span id="descCounter" class="tm-balance-hint">0/800</span></label>
+        <textarea id="postDesc" rows="5" placeholder="Бодлогоо дэлгэрэнгүй бич. Юуг ойлгохгүй байгааг тайлбарла..." maxlength="800" oninput="updateDescCounter()"></textarea>
+      </div>
+      <div class="tm-field">
+        <label>Зураг / агшин хавсаргах <span class="tm-balance-hint">(заавал биш)</span></label>
+        <div class="tm-img-dropzone" id="imgDropZone"
+             onclick="document.getElementById('postImages').click()"
+             ondragover="event.preventDefault();this.classList.add('drag-over')"
+             ondragleave="this.classList.remove('drag-over')"
+             ondrop="handleImgDrop(event)">
+          <i class="fas fa-image"></i>
+          <span>Зураг оруулах эсвэл чирж тавих</span>
+          <span class="tm-balance-hint">JPG, PNG, WEBP — макс 5MB</span>
+          <input type="file" id="postImages" multiple accept="image/*" style="display:none" onchange="handleImgSelect(this)">
+        </div>
+        <div class="tm-img-preview" id="imgPreview"></div>
+      </div>
+      <div class="tm-field">
+        <label>Урамшуулал (₮) <span id="balanceHint" class="tm-balance-hint"></span></label>
+        <input type="number" id="postReward" placeholder="2000" min="500" step="500">
+      </div>
+      <div id="postError" class="tm-error" style="display:none"></div>
+    </div>
+    <div class="tm-modal-foot">
+      <button class="tm-btn-cancel" onclick="closePostModal()">Болих</button>
+      <button class="tm-btn-confirm" onclick="submitTask()">
+        <i class="fas fa-paper-plane"></i> Нийтлэх
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/load.js"></script>
+<script src="../js/task-market.js"></script>
+</body>
+</html>

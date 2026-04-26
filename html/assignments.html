@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EduLearn – Даалгавар</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/sidebar.css">
+  <link rel="stylesheet" href="../css/student.css">
+  <link rel="stylesheet" href="../css/assignments.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<div id="sidebar-container"></div>
+
+<div class="page">
+
+  <!-- Banner -->
+  <div class="stu-banner">
+    <div class="stu-banner-blob" style="width:150px;height:150px;bottom:-60px;left:30%"></div>
+    <div class="stu-banner-inner">
+      <div class="stu-banner-left">
+        <div class="stu-banner-tag"><i class="fas fa-tasks"></i> Даалгаварын трекер</div>
+        <div class="stu-banner-title">Миний <em>Даалгаварууд</em></div>
+        <div class="stu-banner-sub">Бүх хичээлийн даалгаварыг нэг дор хянаж, цагтаа дуусга</div>
+        <div class="stu-banner-pills">
+          <div class="stu-banner-pill">
+            <div class="stu-banner-pill-icon" style="color:#ef4444"><i class="fas fa-fire"></i></div>
+            <div><div class="stu-banner-pill-val" id="pillUrgent">1</div><div class="stu-banner-pill-lbl">Яаралтай</div></div>
+          </div>
+          <div class="stu-banner-pill">
+            <div class="stu-banner-pill-icon" style="color:#fbbf24"><i class="fas fa-clock"></i></div>
+            <div><div class="stu-banner-pill-val" id="pillPending">3</div><div class="stu-banner-pill-lbl">Хүлээгдэж буй</div></div>
+          </div>
+          <div class="stu-banner-pill">
+            <div class="stu-banner-pill-icon" style="color:#34d399"><i class="fas fa-check-circle"></i></div>
+            <div><div class="stu-banner-pill-val" id="pillDone">4</div><div class="stu-banner-pill-lbl">Дуусгасан</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stu-stats">
+    <div class="stu-stat" style="--stat-accent:#ef4444">
+      <div class="stu-stat-icon" style="background:#fee2e2;color:#b91c1c"><i class="fas fa-exclamation-circle"></i></div>
+      <div class="stu-stat-body">
+        <div class="stu-stat-val" id="statUrgent">—</div>
+        <div class="stu-stat-lbl">Яаралтай (≤3 өдөр)</div>
+      </div>
+    </div>
+    <div class="stu-stat" style="--stat-accent:#f59e0b">
+      <div class="stu-stat-icon" style="background:#fef3c7;color:#92400e"><i class="fas fa-hourglass-half"></i></div>
+      <div class="stu-stat-body">
+        <div class="stu-stat-val" id="statPending">—</div>
+        <div class="stu-stat-lbl">Хийгдэж байна</div>
+      </div>
+    </div>
+    <div class="stu-stat" style="--stat-accent:#3b82f6">
+      <div class="stu-stat-icon" style="background:#dbeafe;color:#1d4ed8"><i class="fas fa-calendar-check"></i></div>
+      <div class="stu-stat-body">
+        <div class="stu-stat-val" id="statTotal">—</div>
+        <div class="stu-stat-lbl">Нийт даалгавар</div>
+      </div>
+    </div>
+    <div class="stu-stat" style="--stat-accent:#10b981">
+      <div class="stu-stat-icon" style="background:#d1fae5;color:#065f46"><i class="fas fa-check-double"></i></div>
+      <div class="stu-stat-body">
+        <div class="stu-stat-val" id="statDone">—</div>
+        <div class="stu-stat-lbl">Дуусгасан</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filter pills -->
+  <div class="filter-pills" id="filterPills">
+    <button class="filter-pill active" data-filter="all" onclick="setFilter('all',this)">
+      <i class="fas fa-list"></i> Бүгд <span class="fp-count" id="cntAll">0</span>
+    </button>
+    <button class="filter-pill" data-filter="urgent" onclick="setFilter('urgent',this)">
+      <i class="fas fa-fire"></i> Яаралтай <span class="fp-count" id="cntUrgent">0</span>
+    </button>
+    <button class="filter-pill" data-filter="pending" onclick="setFilter('pending',this)">
+      <i class="fas fa-hourglass-half"></i> Хийгдэж байна <span class="fp-count" id="cntPending">0</span>
+    </button>
+    <button class="filter-pill" data-filter="done" onclick="setFilter('done',this)">
+      <i class="fas fa-check-circle"></i> Дуусгасан <span class="fp-count" id="cntDone">0</span>
+    </button>
+  </div>
+
+  <div class="asgn-layout">
+    <!-- Main list -->
+    <div>
+      <div id="assignList"></div>
+    </div>
+
+    <!-- Right sidebar -->
+    <div style="display:flex;flex-direction:column;gap:16px">
+
+      <!-- Progress summary -->
+      <div class="asgn-summary">
+        <div class="asgn-summary-title"><i class="fas fa-chart-pie"></i> Явц товч</div>
+        <div class="asgn-summary-row">
+          <div class="asgn-summary-lbl">Дуусгасан</div>
+          <div class="asgn-summary-bar"><div class="asgn-summary-fill" id="barDone" style="background:#10b981;width:0%"></div></div>
+          <div class="asgn-summary-cnt" id="sumDone">0</div>
+        </div>
+        <div class="asgn-summary-row">
+          <div class="asgn-summary-lbl">Хийгдэж байна</div>
+          <div class="asgn-summary-bar"><div class="asgn-summary-fill" id="barPending" style="background:#f59e0b;width:0%"></div></div>
+          <div class="asgn-summary-cnt" id="sumPending">0</div>
+        </div>
+        <div class="asgn-summary-row">
+          <div class="asgn-summary-lbl">Яаралтай</div>
+          <div class="asgn-summary-bar"><div class="asgn-summary-fill" id="barUrgent" style="background:#ef4444;width:0%"></div></div>
+          <div class="asgn-summary-cnt" id="sumUrgent">0</div>
+        </div>
+      </div>
+
+      <!-- Mini calendar -->
+      <div class="mini-cal">
+        <div class="mini-cal-head">
+          <div class="mini-cal-month">2026 оны 4-р сар</div>
+          <i class="fas fa-calendar-alt" style="opacity:.7"></i>
+        </div>
+        <div class="mini-cal-body" id="miniCal"></div>
+      </div>
+
+      <!-- Subject legend -->
+      <div class="sub-legend">
+        <div class="sub-legend-title"><i class="fas fa-palette" style="margin-right:6px;color:#07437d"></i>Хичээлээр</div>
+        <div id="subLegend"></div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- ════ Assignment Viewer Modal ════ -->
+<div class="assign-viewer-modal" id="assignViewerModal">
+  <div class="av-container">
+    <div class="av-header">
+      <div class="av-header-icon" id="avSubjectIcon"></div>
+      <div class="av-header-info">
+        <div class="av-header-title" id="avTitle"></div>
+        <div class="av-header-meta">
+          <span><i class="fas fa-user"></i> <span id="avTeacher"></span></span>
+          <span><i class="fas fa-calendar-alt"></i> <span id="avDue"></span></span>
+          <span><i class="fas fa-book"></i> <span id="avSubject"></span></span>
+        </div>
+      </div>
+      <button class="av-close-btn" onclick="closeAssignmentViewer()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="av-body">
+      <div class="av-left">
+        <div class="av-left-top">
+          <div class="av-section-label">Даалгаврын тайлбар</div>
+          <div class="av-desc-text" id="avDesc"></div>
+        </div>
+        <div class="av-files-label">Багшийн материал</div>
+        <div class="av-file-list" id="avTeacherFiles"></div>
+        <div class="av-preview-label">Урьдчилан харах</div>
+        <div class="av-preview-scroll">
+          <div id="avPreviewArea"></div>
+        </div>
+      </div>
+      <div class="av-right">
+        <div class="av-right-head"><i class="fas fa-paper-plane"></i> Хариу илгээх</div>
+        <div class="av-submit-body">
+          <div id="avSubmitSection"></div>
+        </div>
+      </div>
+    </div>
+    <div class="av-footer">
+      <button class="av-cancel-btn" onclick="closeAssignmentViewer()">Хаах</button>
+      <button class="av-submit-btn" id="avSubmitBtn" onclick="submitAssignment()">
+        <i class="fas fa-paper-plane"></i> Илгээх
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ════ Schedule View Modal ════ -->
+<div class="sched-modal" id="schedModal" onclick="if(event.target===this)closeSchedModal()">
+  <div class="sched-box">
+    <div class="sched-head">
+      <div>
+        <div class="sched-head-title" id="schedDateTitle"></div>
+        <div class="sched-head-sub" id="schedDateSub"></div>
+      </div>
+      <button class="sched-close" onclick="closeSchedModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="sched-body" id="schedBody"></div>
+  </div>
+</div>
+
+<script src="../js/load.js"></script>
+<script src="../js/assignments.js"></script>
+</body>
+</html>
