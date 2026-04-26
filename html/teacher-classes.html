@@ -129,7 +129,50 @@
         <div class="t-field"><label>Огноо</label><input type="date" id="lsnDate"></div>
       </div>
       <div class="t-field"><label>Тайлбар</label><textarea id="lsnDesc" placeholder="Хичээлийн агуулга..."></textarea></div>
+<<<<<<< HEAD
       <div class="t-field"><label>Материал (PDF/видео холбоос)</label><input type="url" id="lsnUrl" placeholder="https://..."></div>
+=======
+
+      <!-- Файл хавсаргах -->
+      <div class="t-field">
+        <label>Файл хавсаргах <span style="font-weight:400;color:#94a3b8">(ямар ч төрлийн файл)</span></label>
+        <div class="file-dropzone" id="lsnDropZone"
+             onclick="document.getElementById('lsnFiles').click()"
+             ondragover="event.preventDefault();this.classList.add('drag-over')"
+             ondragleave="this.classList.remove('drag-over')"
+             ondrop="handleFileDrop(event,'lsnFiles','lsnFileList')">
+          <i class="fas fa-file-upload"></i>
+          <div class="fdz-text">Файл оруулах эсвэл чирж тавих</div>
+          <div class="fdz-hint">PDF, DOC, PPT, MP4, ZIP, зураг — хязгааргүй</div>
+          <input type="file" id="lsnFiles" multiple style="display:none"
+                 onchange="handleFileSelect(this,'lsnFileList')">
+        </div>
+        <div class="fdz-file-list" id="lsnFileList"></div>
+      </div>
+
+      <!-- Холбоос / линк -->
+      <div class="t-field">
+        <label>Холбоос / линк нэмэх <span style="font-weight:400;color:#94a3b8">(YouTube, Google Drive, гэх мэт)</span></label>
+        <div id="lsnLinkRows">
+          <div class="lsn-link-row">
+            <div class="lsn-link-type-wrap">
+              <select class="lsn-link-type">
+                <option value="video">🎥 Видео</option>
+                <option value="doc">📄 Баримт</option>
+                <option value="link">🔗 Холбоос</option>
+                <option value="other">📎 Бусад</option>
+              </select>
+            </div>
+            <input class="lsn-link-url" type="url" placeholder="https://...">
+            <input class="lsn-link-label" type="text" placeholder="Нэр (заавал биш)">
+            <button type="button" class="lsn-link-del" onclick="removeLinkRow(this)">✕</button>
+          </div>
+        </div>
+        <button type="button" class="lsn-add-link-btn" onclick="addLinkRow()">
+          <i class="fas fa-plus"></i> Холбоос нэмэх
+        </button>
+      </div>
+>>>>>>> 3c1f094 (4/26)
     </div>
     <div class="t-modal-foot">
       <button class="t-btn-cancel" onclick="closeModal('lessonModal')">Болих</button>

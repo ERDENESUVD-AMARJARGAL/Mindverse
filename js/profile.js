@@ -1,3 +1,45 @@
+<<<<<<< HEAD
+=======
+/* ── Avatar helpers ── */
+function getAvatarKey() {
+  return 'avatar_' + (sessionStorage.getItem('user_name') || 'user');
+}
+function loadAvatar() {
+  const saved = localStorage.getItem(getAvatarKey());
+  const img = document.getElementById('avatarImg');
+  if (saved && img) img.src = saved;
+}
+function setupAvatarChange() {
+  const btn   = document.getElementById('avatarEditBtn');
+  const input = document.getElementById('avatarInput');
+  const img   = document.getElementById('avatarImg');
+  if (!btn || !input) return;
+  btn.addEventListener('click', () => input.click());
+  img.addEventListener('click', () => input.click());
+  img.style.cursor = 'pointer';
+  input.addEventListener('change', () => {
+    const file = input.files[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) {
+      alert('Файлын хэмжээ 5MB-аас хэтрэхгүй байна'); return;
+    }
+    const reader = new FileReader();
+    reader.onload = e => {
+      const data = e.target.result;
+      img.src = data;
+      localStorage.setItem(getAvatarKey(), data);
+      // Update sidebar avatar too
+      const sbImg = document.getElementById('sbAvatarImg');
+      if (sbImg) sbImg.src = data;
+      // Show success feedback
+      btn.innerHTML = '<i class="fas fa-check"></i>';
+      setTimeout(() => { btn.innerHTML = '<i class="fas fa-camera"></i>'; }, 2000);
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+>>>>>>> 3c1f094 (4/26)
 // ── Fill user info from sessionStorage ──
 (function () {
   const lastname  = sessionStorage.getItem('user_lastname')  || '';
@@ -64,3 +106,9 @@ document.getElementById('statAvg').textContent   = taken > 0 ? Math.round(total 
 
 // badge unlock
 if (taken >= 5) document.getElementById('badge5exams').classList.remove('locked');
+<<<<<<< HEAD
+=======
+
+loadAvatar();
+setupAvatarChange();
+>>>>>>> 3c1f094 (4/26)

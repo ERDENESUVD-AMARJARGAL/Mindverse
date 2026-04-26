@@ -293,19 +293,60 @@ function renderLessonsPane(idx) {
         </div>
       </div>
     </div>
+<<<<<<< HEAD
     <div class="lesson-list">${c.lessons.length ? c.lessons.map((l,i) => `
       <div class="lesson-item">
         <div class="lesson-num ${l.badge==='done'?'done-num':''}">${i+1}</div>
         <div class="lesson-info">
           <div class="lesson-title">${l.title}</div>
           <div class="lesson-meta"><i class="fas fa-clock" style="margin-right:4px;color:${CLASSES[idx].color}"></i>${l.meta}</div>
+=======
+    <div class="lesson-list">${c.lessons.length ? c.lessons.map((l,i) => {
+      const extIcon = ext => {
+        const e = ext.toLowerCase();
+        if (['pdf'].includes(e)) return 'fa-file-pdf';
+        if (['doc','docx'].includes(e)) return 'fa-file-word';
+        if (['ppt','pptx'].includes(e)) return 'fa-file-powerpoint';
+        if (['mp4','mov','avi'].includes(e)) return 'fa-file-video';
+        if (['zip','rar'].includes(e)) return 'fa-file-archive';
+        if (['jpg','png','gif','webp'].includes(e)) return 'fa-file-image';
+        return 'fa-file';
+      };
+      const filesHtml = l.files && l.files.length
+        ? l.files.map(f => {
+            const ext = f.name.split('.').pop();
+            return `<a class="lsn-att-chip file" href="${f.dataUrl}" download="${f.name}" title="${f.name}">
+              <i class="fas ${extIcon(ext)}"></i>${f.name}
+            </a>`;
+          }).join('') : '';
+      const linkTypeIcon = { video:'fa-play-circle', doc:'fa-file-alt', link:'fa-external-link-alt', other:'fa-paperclip' };
+      const linkTypeClass = { video:'video', doc:'doc', link:'link', other:'link' };
+      const linksHtml = l.links && l.links.length
+        ? l.links.filter(lk => lk.url).map(lk => `
+            <a class="lsn-att-chip ${linkTypeClass[lk.type]||'link'}" href="${lk.url}" target="_blank" rel="noopener" title="${lk.url}">
+              <i class="fas ${linkTypeIcon[lk.type]||'fa-link'}"></i>${lk.label || lk.url}
+            </a>`).join('') : '';
+      const hasAtts = filesHtml || linksHtml;
+      return `
+      <div class="lesson-item">
+        <div class="lesson-num ${l.badge==='done'?'done-num':''}">${i+1}</div>
+        <div class="lesson-info" style="flex:1;min-width:0">
+          <div class="lesson-title">${l.title}</div>
+          <div class="lesson-meta"><i class="fas fa-clock" style="margin-right:4px;color:${CLASSES[idx].color}"></i>${l.meta}</div>
+          ${hasAtts ? `<div class="lsn-attachments">${filesHtml}${linksHtml}</div>` : ''}
+>>>>>>> 3c1f094 (4/26)
         </div>
         <span class="lesson-badge ${l.badge}">${badgeLabel[l.badge]}</span>
         <div style="display:flex;gap:5px">
           <button class="t-btn-icon" title="Засах"><i class="fas fa-edit"></i></button>
           <button class="t-btn-icon red" title="Устгах" onclick="deleteLesson(${idx},${i})"><i class="fas fa-trash"></i></button>
         </div>
+<<<<<<< HEAD
       </div>`).join('') : '<div class="empty-state"><i class="fas fa-book-open"></i><p>Хичээл байхгүй байна</p></div>'}</div>`;
+=======
+      </div>`;
+    }).join('') : '<div class="empty-state"><i class="fas fa-book-open"></i><p>Хичээл байхгүй байна</p></div>'}</div>`;
+>>>>>>> 3c1f094 (4/26)
 }
 
 function renderExamsPane(idx) {
@@ -443,6 +484,7 @@ function deleteAssign(ci,ai){ CLASSES[ci].assignments.splice(ai,1); renderAssign
 function openModal(id)  { document.getElementById(id).classList.add('show');    document.body.style.overflow='hidden'; }
 function closeModal(id) { document.getElementById(id).classList.remove('show'); document.body.style.overflow=''; }
 
+<<<<<<< HEAD
 function addLesson() {
   if (selectedClass<0) { closeModal('lessonModal'); return; }
   const title=document.getElementById('lsnTitle').value.trim();
@@ -452,6 +494,140 @@ function addLesson() {
   CLASSES[selectedClass].lessons.push({title, meta:(dur?dur+' мин':'')+(date?' · '+date:''), badge:'upcoming'});
   renderDetail(selectedClass);
   ['lsnTitle','lsnDuration','lsnDate','lsnDesc','lsnUrl'].forEach(id=>document.getElementById(id).value='');
+=======
+/* ── Link rows (lesson modal) ── */
+function addLinkRow() {
+  const row = document.createElement('div');
+  row.className = 'lsn-link-row';
+  row.innerHTML = `
+    <div class="lsn-link-type-wrap">
+      <select class="lsn-link-type">
+        <option value="video">🎥 Видео</option>
+        <option value="doc">📄 Баримт</option>
+        <option value="link">🔗 Холбоос</option>
+        <option value="other">📎 Бусад</option>
+      </select>
+    </div>
+    <input class="lsn-link-url" type="url" placeholder="https://...">
+    <input class="lsn-link-label" type="text" placeholder="Нэр (заавал биш)">
+    <button type="button" class="lsn-link-del" onclick="removeLinkRow(this)">✕</button>`;
+  document.getElementById('lsnLinkRows').appendChild(row);
+}
+function removeLinkRow(btn) {
+  const rows = document.querySelectorAll('#lsnLinkRows .lsn-link-row');
+  if (rows.length > 1) btn.closest('.lsn-link-row').remove();
+}
+
+/* ── File handling (shared for lesson + exam) ── */
+let _lsnFiles = [];
+
+function handleFileSelect(input, listId) {
+  const fileArr = _getFileArr(listId);
+  Array.from(input.files).forEach(f => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      fileArr.push({ name: f.name, type: f.type, size: f.size, dataUrl: e.target.result });
+      renderFileList(listId, fileArr);
+    };
+    reader.readAsDataURL(f);
+  });
+  input.value = '';
+}
+function handleFileDrop(event, inputId, listId) {
+  event.preventDefault();
+  const dz = event.currentTarget;
+  dz.classList.remove('drag-over');
+  const fileArr = _getFileArr(listId);
+  Array.from(event.dataTransfer.files).forEach(f => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      fileArr.push({ name: f.name, type: f.type, size: f.size, dataUrl: e.target.result });
+      renderFileList(listId, fileArr);
+    };
+    reader.readAsDataURL(f);
+  });
+}
+function _getFileArr(listId) {
+  return listId === 'lsnFileList' ? _lsnFiles : _exmFiles;
+}
+let _exmFiles = [];
+
+function renderFileList(listId, arr) {
+  const el = document.getElementById(listId);
+  if (!el) return;
+  el.innerHTML = arr.map((f, i) => {
+    const ext = f.name.split('.').pop().toLowerCase();
+    const icon = ['pdf'].includes(ext) ? 'fa-file-pdf' :
+                 ['doc','docx'].includes(ext) ? 'fa-file-word' :
+                 ['ppt','pptx'].includes(ext) ? 'fa-file-powerpoint' :
+                 ['mp4','mov','avi'].includes(ext) ? 'fa-file-video' :
+                 ['zip','rar'].includes(ext) ? 'fa-file-archive' :
+                 ['jpg','png','gif','webp'].includes(ext) ? 'fa-file-image' : 'fa-file';
+    const size = f.size < 1024*1024 ? Math.round(f.size/1024)+'KB' : (f.size/1024/1024).toFixed(1)+'MB';
+    return `<div class="fdz-file-item">
+      <i class="fas ${icon}"></i>
+      <span class="fdz-fname">${f.name}</span>
+      <span class="fdz-fsize">${size}</span>
+      <button type="button" class="fdz-fdel" onclick="removeFile('${listId}',${i})">✕</button>
+    </div>`;
+  }).join('');
+}
+function removeFile(listId, i) {
+  const arr = _getFileArr(listId);
+  arr.splice(i, 1);
+  renderFileList(listId, arr);
+}
+
+function addLesson() {
+  if (selectedClass < 0) { closeModal('lessonModal'); return; }
+  const title = document.getElementById('lsnTitle').value.trim();
+  const dur   = document.getElementById('lsnDuration').value;
+  const date  = document.getElementById('lsnDate').value;
+  if (!title) return;
+
+  // Collect links
+  const links = [];
+  document.querySelectorAll('#lsnLinkRows .lsn-link-row').forEach(row => {
+    const url   = row.querySelector('.lsn-link-url').value.trim();
+    const label = row.querySelector('.lsn-link-label').value.trim();
+    const type  = row.querySelector('.lsn-link-type').value;
+    if (url) links.push({ url, label: label || url, type });
+  });
+
+  // Collect files (shallow copy, dataUrl stored)
+  const files = [..._lsnFiles];
+
+  CLASSES[selectedClass].lessons.push({
+    title,
+    meta: (dur ? dur + ' мин' : '') + (date ? ' · ' + date : ''),
+    badge: 'upcoming',
+    files,
+    links
+  });
+
+  renderDetail(selectedClass);
+
+  // Reset form
+  ['lsnTitle','lsnDuration','lsnDate','lsnDesc'].forEach(id => document.getElementById(id).value = '');
+  _lsnFiles = [];
+  renderFileList('lsnFileList', _lsnFiles);
+  // Reset link rows to one empty row
+  const lsnRows = document.getElementById('lsnLinkRows');
+  if (lsnRows) {
+    lsnRows.innerHTML = `<div class="lsn-link-row">
+      <div class="lsn-link-type-wrap">
+        <select class="lsn-link-type">
+          <option value="video">🎥 Видео</option><option value="doc">📄 Баримт</option>
+          <option value="link">🔗 Холбоос</option><option value="other">📎 Бусад</option>
+        </select>
+      </div>
+      <input class="lsn-link-url" type="url" placeholder="https://...">
+      <input class="lsn-link-label" type="text" placeholder="Нэр (заавал биш)">
+      <button type="button" class="lsn-link-del" onclick="removeLinkRow(this)">✕</button>
+    </div>`;
+  }
+
+>>>>>>> 3c1f094 (4/26)
   closeModal('lessonModal');
   switchTab('lessons', document.querySelectorAll('.cd-tab')[0]);
 }
@@ -479,6 +655,7 @@ function updateSchedulePreview() {
   }
 }
 
+<<<<<<< HEAD
 /* ── File handling ── */
 const attachedFiles = { asnFiles: [], exmFiles: [] };
 
@@ -515,6 +692,8 @@ function renderFileList(key, listId) {
     </div>`;
   }).join('');
 }
+=======
+>>>>>>> 3c1f094 (4/26)
 
 function removeFile(key, listId, idx) {
   attachedFiles[key].splice(idx, 1);

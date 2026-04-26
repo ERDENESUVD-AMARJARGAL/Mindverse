@@ -106,7 +106,11 @@ function renderTable() {
     const rkC = rankClass(rk);
     const rkL = rk <= 3 ? (rk === 1 ? '🥇' : rk === 2 ? '🥈' : '🥉') : rk;
     return `
+<<<<<<< HEAD
     <tr>
+=======
+    <tr style="cursor:pointer" onclick='openStdModal(${JSON.stringify(s)})'>
+>>>>>>> 3c1f094 (4/26)
       <td><div class="rank-badge ${rkC}">${rkL}</div></td>
       <td>
         <div class="st-name-cell">
@@ -212,6 +216,95 @@ function buildClassFilterCards() {
   });
 }
 
+<<<<<<< HEAD
+=======
+/* ── Student Detail Modal ── */
+function openStdModal(s) {
+  const c = CLASS_COLORS[s.cls] || PALETTE[0];
+  const isWarn = s.score < 65;
+
+  const scoreCol = s.score >= 80 ? '#10b981' : s.score >= 65 ? '#f59e0b' : '#ef4444';
+  const gradeLetter = s.score >= 90 ? 'A' : s.score >= 75 ? 'B' : s.score >= 60 ? 'C' : 'D';
+
+  // Simulated subject breakdown based on overall score
+  const subjects = [
+    { name: 'Алгебр',    score: Math.min(100, s.score + 8) },
+    { name: 'Геометр',   score: Math.max(30, s.score - 5)  },
+    { name: 'Тригонометр', score: Math.max(30, s.score - 12) },
+    { name: 'Арифметик', score: Math.min(100, s.score + 4)  },
+  ];
+
+  document.getElementById('stdModalHeader').innerHTML = `
+    <div class="std-avatar-row">
+      <div class="std-big-av" style="background:${c.bg};color:${c.tc}">${s.name.charAt(0).toUpperCase()}</div>
+      <div class="std-name-block">
+        <div class="std-full-name">${s.name}</div>
+        <span class="std-class-tag">${s.cls} анги · ${CLASS_META[s.cls]?.subject || ''}</span>
+      </div>
+    </div>
+    <div class="std-kpi-row">
+      <div class="std-kpi-card">
+        <div class="std-kpi-val">${s.score}%</div>
+        <div class="std-kpi-lbl">Дундаж оноо</div>
+      </div>
+      <div class="std-kpi-card">
+        <div class="std-kpi-val">${s.exams}</div>
+        <div class="std-kpi-lbl">Шалгалт</div>
+      </div>
+      <div class="std-kpi-card">
+        <div class="std-kpi-val">${s.assigns}</div>
+        <div class="std-kpi-lbl">Даалгавар</div>
+      </div>
+    </div>`;
+
+  document.getElementById('stdModalBody').innerHTML = `
+    <div class="std-section-title">Гүйцэтгэлийн ерөнхий байдал</div>
+    <div class="std-perf-bar-wrap">
+      <div class="std-perf-label">
+        <span>Нийт дундаж оноо</span>
+        <span style="color:${scoreCol};font-weight:800">${s.score}% · ${gradeLetter}</span>
+      </div>
+      <div class="std-perf-track">
+        <div class="std-perf-fill" style="width:${s.score}%;background:${scoreCol}"></div>
+      </div>
+    </div>
+    <div class="std-perf-bar-wrap">
+      <div class="std-perf-label">
+        <span>Даалгаврын гүйцэтгэл</span>
+        <span style="color:#3b82f6;font-weight:800">${Math.round(s.assigns / 5 * 100)}%</span>
+      </div>
+      <div class="std-perf-track">
+        <div class="std-perf-fill" style="width:${Math.round(s.assigns/5*100)}%;background:#3b82f6"></div>
+      </div>
+    </div>
+
+    <div class="std-section-title" style="margin-top:20px">Хичээлийн дүн</div>
+    <div class="std-subject-grid">
+      ${subjects.map(sub => {
+        const sc = sub.score >= 80 ? '#10b981' : sub.score >= 65 ? '#f59e0b' : '#ef4444';
+        return `
+        <div class="std-subj-card">
+          <div class="std-subj-name">${sub.name}</div>
+          <div class="std-subj-score" style="color:${sc}">${sub.score}%</div>
+          <div class="std-subj-bar"><div class="std-subj-fill" style="width:${sub.score}%;background:${sc}"></div></div>
+        </div>`;
+      }).join('')}
+    </div>
+
+    <div class="std-section-title">Ерөнхий дүгнэлт</div>
+    <div class="std-status-badge ${isWarn ? 'warn' : 'good'}">
+      <i class="fas fa-${isWarn ? 'exclamation-triangle' : 'check-circle'}"></i>
+      ${isWarn ? 'Анхааруулга: Дүн доогуур байна' : 'Гүйцэтгэл сайн байна'}
+    </div>`;
+
+  document.getElementById('stdOverlay').classList.add('open');
+}
+
+function closeStdModal() {
+  document.getElementById('stdOverlay').classList.remove('open');
+}
+
+>>>>>>> 3c1f094 (4/26)
 // ── Init ──
 CLASS_COLORS = buildClassColors(ALL_STUDENTS);
 buildClassFilterCards();

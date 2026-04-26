@@ -343,7 +343,13 @@ function renderLessonsPane(c) {
             ${l.status==='done' ? '<i class="fas fa-check" style="font-size:.7rem"></i>' : i+1}
           </div>
           <div class="cls-tl-body">
+<<<<<<< HEAD
             <div class="cls-tl-card ${l.status==='done'?'done':l.status==='pending'?'pending':''}">
+=======
+            <div class="cls-tl-card ${l.status==='done'?'done':l.status==='pending'?'pending':''}"
+              ${l.status!=='new'?`onclick="openLesson(${selectedIdx},${i})" style="cursor:pointer"`:''}
+            >
+>>>>>>> 3c1f094 (4/26)
               <div class="cls-tl-card-top">
                 <div class="cls-tl-title">${l.title}</div>
                 <span class="cls-tl-badge ${l.status}">${l.status==='done'?'Дууссан':l.status==='pending'?'Явагдаж байна':'Удахгүй'}</span>
@@ -351,6 +357,10 @@ function renderLessonsPane(c) {
               <div class="cls-tl-meta">
                 <div class="cls-tl-meta-item"><i class="fas fa-clock"></i>${l.dur}</div>
                 <div class="cls-tl-meta-item"><i class="fas fa-calendar"></i>${l.date}</div>
+<<<<<<< HEAD
+=======
+                ${l.status!=='new'?'<div class="cls-tl-meta-item" style="color:#3b82f6;font-weight:600"><i class="fas fa-play-circle"></i>Нээх</div>':''}
+>>>>>>> 3c1f094 (4/26)
               </div>
             </div>
           </div>
@@ -490,5 +500,75 @@ function renderExamsPane(c) {
     }).join('')}`;
 }
 
+<<<<<<< HEAD
+=======
+/* ── Lesson Viewer Modal ── */
+function openLesson(classIdx, lessonIdx) {
+  const c = CLASSES[classIdx];
+  const l = c.lessons[lessonIdx];
+
+  const tag  = document.getElementById('lsnStatusTag');
+  const title = document.getElementById('lsnModalTitle');
+  const meta  = document.getElementById('lsnModalMeta');
+  const body  = document.getElementById('lsnModalBody');
+
+  tag.textContent = l.status === 'done' ? '✓ Дууссан' : '▶ Явагдаж байна';
+  tag.className   = 'lsn-status-tag ' + (l.status === 'done' ? 'done' : 'pending');
+  title.textContent = l.title;
+  meta.innerHTML  = `
+    <span><i class="fas fa-clock"></i>${l.dur}</span>
+    <span><i class="fas fa-calendar"></i>${l.date}</span>
+    <span><i class="fas fa-book"></i>${c.subject}</span>`;
+
+  const doneRibbon = l.status === 'done'
+    ? `<div class="lsn-done-ribbon"><i class="fas fa-check-circle"></i>Дууссан</div>` : '';
+
+  body.innerHTML = `
+    <div class="lsn-video-box">
+      ${doneRibbon}
+      <div class="lsn-play-btn"><i class="fas fa-play"></i></div>
+      <div class="lsn-video-label">Хичээлийн бичлэг</div>
+    </div>
+    <div class="lsn-info-grid">
+      <div class="lsn-info-card">
+        <div class="lsn-info-card-lbl">Үргэлжлэх хугацаа</div>
+        <div class="lsn-info-card-val"><i class="fas fa-clock" style="color:#3b82f6;margin-right:6px"></i>${l.dur}</div>
+      </div>
+      <div class="lsn-info-card">
+        <div class="lsn-info-card-lbl">Огноо</div>
+        <div class="lsn-info-card-val"><i class="fas fa-calendar" style="color:#8b5cf6;margin-right:6px"></i>${l.date}</div>
+      </div>
+      <div class="lsn-info-card">
+        <div class="lsn-info-card-lbl">Хичээл</div>
+        <div class="lsn-info-card-val"><i class="fas fa-book-open" style="color:#10b981;margin-right:6px"></i>${c.subject}</div>
+      </div>
+      <div class="lsn-info-card">
+        <div class="lsn-info-card-lbl">Багш</div>
+        <div class="lsn-info-card-val"><i class="fas fa-chalkboard-teacher" style="color:#f59e0b;margin-right:6px"></i>${c.teacher.split(' ')[0]}</div>
+      </div>
+    </div>
+    ${l.status === 'done'
+      ? `<div class="lsn-completed-note"><i class="fas fa-check-circle"></i>Та энэ хичээлийг амжилттай дүүргэсэн байна.</div>`
+      : `<button class="lsn-complete-btn" onclick="markLessonDone(${classIdx},${lessonIdx})">
+           <i class="fas fa-check"></i>Дуусгасан тэмдэглэх
+         </button>`
+    }`;
+
+  document.getElementById('lsnOverlay').classList.add('open');
+}
+
+function closeLsnModal() {
+  document.getElementById('lsnOverlay').classList.remove('open');
+}
+
+function markLessonDone(classIdx, lessonIdx) {
+  CLASSES[classIdx].lessons[lessonIdx].status = 'done';
+  closeLsnModal();
+  buildSummary();
+  buildCards();
+  if (selectedIdx === classIdx) selectClass(classIdx);
+}
+
+>>>>>>> 3c1f094 (4/26)
 buildSummary();
 buildCards();

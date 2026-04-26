@@ -152,6 +152,42 @@ let currentQ     = 0;
 let score        = 0;
 let answered     = false;
 
+<<<<<<< HEAD
+=======
+let timerInterval = null;
+let timeLeft      = 0;
+let totalTime     = 0;
+
+function startTimer(seconds) {
+  clearInterval(timerInterval);
+  timeLeft  = seconds;
+  totalTime = seconds;
+  const bar = document.getElementById('examTimerBar');
+  if (bar) bar.style.display = 'flex';
+  updateTimerDisplay();
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    updateTimerDisplay();
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      showResult();
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const bar  = document.getElementById('examTimerBar');
+  const disp = document.getElementById('timerDisplay');
+  const fill = document.getElementById('timerFill');
+  if (!disp) return;
+  const mins = Math.floor(timeLeft / 60);
+  const secs = timeLeft % 60;
+  disp.textContent = `${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
+  if (fill && totalTime > 0) fill.style.width = (timeLeft / totalTime * 100) + '%';
+  if (bar) bar.classList.toggle('urgent', timeLeft <= 60 && timeLeft > 0);
+}
+
+>>>>>>> 3c1f094 (4/26)
 function startExam(idx) {
   currentExam = exams[idx];
   currentQ    = 0;
@@ -162,6 +198,10 @@ function startExam(idx) {
     currentExam.questions + ' асуулт · ' + currentExam.duration + ' минут';
   document.getElementById('btnNext').textContent = 'Дараагийн асуулт';
   document.getElementById('modalOverlay').classList.add('open');
+<<<<<<< HEAD
+=======
+  startTimer(currentExam.duration * 60);
+>>>>>>> 3c1f094 (4/26)
   showQuestion();
 }
 
@@ -206,6 +246,12 @@ function nextQuestion() {
 }
 
 function showResult() {
+<<<<<<< HEAD
+=======
+  clearInterval(timerInterval);
+  const bar = document.getElementById('examTimerBar');
+  if (bar) bar.style.display = 'none';
+>>>>>>> 3c1f094 (4/26)
   const pct = Math.round((score / currentExam.quiz.length) * 100);
   const idx  = exams.indexOf(currentExam);
   localStorage.setItem('exam_score_' + idx, pct);
@@ -219,6 +265,10 @@ function showResult() {
 }
 
 function closeModal() {
+<<<<<<< HEAD
+=======
+  clearInterval(timerInterval);
+>>>>>>> 3c1f094 (4/26)
   document.getElementById('modalOverlay').classList.remove('open');
   document.getElementById('btnNext').style.display = '';
   document.getElementById('examsGrid').innerHTML = '';

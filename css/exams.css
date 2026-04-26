@@ -114,3 +114,34 @@
 .result-box { text-align: center; padding: 12px 0 4px; }
 .result-score { font-size: 56px; font-weight: 800; color: var(--p-600); line-height: 1; }
 .result-msg   { font-size: 15px; color: var(--g500); margin-top: 8px; }
+<<<<<<< HEAD
+=======
+
+/* ── Exam Timer Bar ── */
+.exam-timer-bar {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px; border-radius: 10px;
+  background: #eff6ff; border: 1.5px solid #bfdbfe;
+  margin-bottom: 20px; transition: background .3s, border-color .3s;
+}
+.exam-timer-bar i { color: #3b82f6; font-size: 15px; flex-shrink: 0; }
+#timerDisplay {
+  font-size: 22px; font-weight: 800; color: #1d4ed8;
+  letter-spacing: 2px; font-variant-numeric: tabular-nums; flex-shrink: 0;
+}
+.timer-label { font-size: 12px; color: #94a3b8; font-weight: 500; flex-shrink: 0; }
+.timer-track {
+  flex: 1; height: 6px; background: #e2e8f0;
+  border-radius: 99px; overflow: hidden;
+}
+.timer-fill {
+  height: 100%; width: 100%;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  border-radius: 99px; transition: width 1s linear;
+}
+.exam-timer-bar.urgent { background: #fef2f2; border-color: #fecaca; }
+.exam-timer-bar.urgent i { color: #ef4444; }
+.exam-timer-bar.urgent #timerDisplay { color: #991b1b; animation: timerBlink .8s infinite; }
+.exam-timer-bar.urgent .timer-fill { background: linear-gradient(90deg, #ef4444, #f87171); }
+@keyframes timerBlink { 0%,100%{opacity:1} 50%{opacity:.45} }
+>>>>>>> 3c1f094 (4/26)
