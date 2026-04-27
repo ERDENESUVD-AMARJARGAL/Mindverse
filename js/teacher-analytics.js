@@ -1,3 +1,12 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+function setPeriod(btn) {
+  document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+=======
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433
 /* ══════════════════════════════════════
    Teacher Analytics — Dynamic JS
 ══════════════════════════════════════ */
@@ -306,3 +315,7 @@ function patchHTML() {
 
 patchHTML();
 renderPeriod(currentPeriod);
+<<<<<<< HEAD
+=======
+>>>>>>> 3c1f094 (4/26)
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433

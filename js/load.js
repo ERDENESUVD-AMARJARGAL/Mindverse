@@ -31,6 +31,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (nameEl) nameEl.textContent = fullname;
       if (avEl)   avEl.textContent   = fullname.charAt(0).toUpperCase();
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433
 
       // Load saved profile avatar
       const avatarKey  = 'avatar_' + (sessionStorage.getItem('user_name') || 'user');
@@ -44,6 +49,10 @@ document.addEventListener("DOMContentLoaded", () => {
           if (avEl) avEl.style.display = 'none';
         }
       }
+<<<<<<< HEAD
+=======
+>>>>>>> 3c1f094 (4/26)
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433
       if (roleEl) {
         if (role === 'teacher') {
           roleEl.textContent = '🎓 Багш';

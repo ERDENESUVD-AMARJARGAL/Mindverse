@@ -152,6 +152,11 @@ let currentQ     = 0;
 let score        = 0;
 let answered     = false;
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433
 let timerInterval = null;
 let timeLeft      = 0;
 let totalTime     = 0;
@@ -185,6 +190,10 @@ function updateTimerDisplay() {
   if (bar) bar.classList.toggle('urgent', timeLeft <= 60 && timeLeft > 0);
 }
 
+<<<<<<< HEAD
+=======
+>>>>>>> 3c1f094 (4/26)
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433
 function startExam(idx) {
   currentExam = exams[idx];
   currentQ    = 0;
@@ -195,7 +204,14 @@ function startExam(idx) {
     currentExam.questions + ' асуулт · ' + currentExam.duration + ' минут';
   document.getElementById('btnNext').textContent = 'Дараагийн асуулт';
   document.getElementById('modalOverlay').classList.add('open');
+<<<<<<< HEAD
   startTimer(currentExam.duration * 60);
+=======
+<<<<<<< HEAD
+=======
+  startTimer(currentExam.duration * 60);
+>>>>>>> 3c1f094 (4/26)
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433
   showQuestion();
 }
 
@@ -240,9 +256,18 @@ function nextQuestion() {
 }
 
 function showResult() {
+<<<<<<< HEAD
   clearInterval(timerInterval);
   const bar = document.getElementById('examTimerBar');
   if (bar) bar.style.display = 'none';
+=======
+<<<<<<< HEAD
+=======
+  clearInterval(timerInterval);
+  const bar = document.getElementById('examTimerBar');
+  if (bar) bar.style.display = 'none';
+>>>>>>> 3c1f094 (4/26)
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433
   const pct = Math.round((score / currentExam.quiz.length) * 100);
   const idx  = exams.indexOf(currentExam);
   localStorage.setItem('exam_score_' + idx, pct);
@@ -256,7 +281,14 @@ function showResult() {
 }
 
 function closeModal() {
+<<<<<<< HEAD
   clearInterval(timerInterval);
+=======
+<<<<<<< HEAD
+=======
+  clearInterval(timerInterval);
+>>>>>>> 3c1f094 (4/26)
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433
   document.getElementById('modalOverlay').classList.remove('open');
   document.getElementById('btnNext').style.display = '';
   document.getElementById('examsGrid').innerHTML = '';

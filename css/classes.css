@@ -408,6 +408,11 @@
   .cls-mat-grid { grid-template-columns: 1fr; }
   .cls-summary { grid-template-columns: repeat(2,1fr); }
 }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433
 
 /* ══ Lesson Viewer Modal ══ */
 .lsn-overlay {
@@ -492,3 +497,7 @@
   background: #f0fdf4; border: 1.5px solid #bbf7d0; color: #065f46;
   font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px;
 }
+<<<<<<< HEAD
+=======
+>>>>>>> 3c1f094 (4/26)
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433

@@ -343,9 +343,19 @@ function renderLessonsPane(c) {
             ${l.status==='done' ? '<i class="fas fa-check" style="font-size:.7rem"></i>' : i+1}
           </div>
           <div class="cls-tl-body">
+<<<<<<< HEAD
             <div class="cls-tl-card ${l.status==='done'?'done':l.status==='pending'?'pending':''}"
               ${l.status!=='new'?`onclick="openLesson(${selectedIdx},${i})" style="cursor:pointer"`:''}
             >
+=======
+<<<<<<< HEAD
+            <div class="cls-tl-card ${l.status==='done'?'done':l.status==='pending'?'pending':''}">
+=======
+            <div class="cls-tl-card ${l.status==='done'?'done':l.status==='pending'?'pending':''}"
+              ${l.status!=='new'?`onclick="openLesson(${selectedIdx},${i})" style="cursor:pointer"`:''}
+            >
+>>>>>>> 3c1f094 (4/26)
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433
               <div class="cls-tl-card-top">
                 <div class="cls-tl-title">${l.title}</div>
                 <span class="cls-tl-badge ${l.status}">${l.status==='done'?'Дууссан':l.status==='pending'?'Явагдаж байна':'Удахгүй'}</span>
@@ -353,7 +363,14 @@ function renderLessonsPane(c) {
               <div class="cls-tl-meta">
                 <div class="cls-tl-meta-item"><i class="fas fa-clock"></i>${l.dur}</div>
                 <div class="cls-tl-meta-item"><i class="fas fa-calendar"></i>${l.date}</div>
+<<<<<<< HEAD
                 ${l.status!=='new'?'<div class="cls-tl-meta-item" style="color:#3b82f6;font-weight:600"><i class="fas fa-play-circle"></i>Нээх</div>':''}
+=======
+<<<<<<< HEAD
+=======
+                ${l.status!=='new'?'<div class="cls-tl-meta-item" style="color:#3b82f6;font-weight:600"><i class="fas fa-play-circle"></i>Нээх</div>':''}
+>>>>>>> 3c1f094 (4/26)
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433
               </div>
             </div>
           </div>
@@ -493,6 +510,11 @@ function renderExamsPane(c) {
     }).join('')}`;
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433
 /* ── Lesson Viewer Modal ── */
 function openLesson(classIdx, lessonIdx) {
   const c = CLASSES[classIdx];
@@ -560,5 +582,9 @@ function markLessonDone(classIdx, lessonIdx) {
   if (selectedIdx === classIdx) selectClass(classIdx);
 }
 
+<<<<<<< HEAD
+=======
+>>>>>>> 3c1f094 (4/26)
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433
 buildSummary();
 buildCards();

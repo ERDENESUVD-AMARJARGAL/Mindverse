@@ -293,6 +293,17 @@ function renderLessonsPane(idx) {
         </div>
       </div>
     </div>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    <div class="lesson-list">${c.lessons.length ? c.lessons.map((l,i) => `
+      <div class="lesson-item">
+        <div class="lesson-num ${l.badge==='done'?'done-num':''}">${i+1}</div>
+        <div class="lesson-info">
+          <div class="lesson-title">${l.title}</div>
+          <div class="lesson-meta"><i class="fas fa-clock" style="margin-right:4px;color:${CLASSES[idx].color}"></i>${l.meta}</div>
+=======
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433
     <div class="lesson-list">${c.lessons.length ? c.lessons.map((l,i) => {
       const extIcon = ext => {
         const e = ext.toLowerCase();
@@ -326,14 +337,27 @@ function renderLessonsPane(idx) {
           <div class="lesson-title">${l.title}</div>
           <div class="lesson-meta"><i class="fas fa-clock" style="margin-right:4px;color:${CLASSES[idx].color}"></i>${l.meta}</div>
           ${hasAtts ? `<div class="lsn-attachments">${filesHtml}${linksHtml}</div>` : ''}
+<<<<<<< HEAD
+=======
+>>>>>>> 3c1f094 (4/26)
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433
         </div>
         <span class="lesson-badge ${l.badge}">${badgeLabel[l.badge]}</span>
         <div style="display:flex;gap:5px">
           <button class="t-btn-icon" title="Засах"><i class="fas fa-edit"></i></button>
           <button class="t-btn-icon red" title="Устгах" onclick="deleteLesson(${idx},${i})"><i class="fas fa-trash"></i></button>
         </div>
+<<<<<<< HEAD
       </div>`;
     }).join('') : '<div class="empty-state"><i class="fas fa-book-open"></i><p>Хичээл байхгүй байна</p></div>'}</div>`;
+=======
+<<<<<<< HEAD
+      </div>`).join('') : '<div class="empty-state"><i class="fas fa-book-open"></i><p>Хичээл байхгүй байна</p></div>'}</div>`;
+=======
+      </div>`;
+    }).join('') : '<div class="empty-state"><i class="fas fa-book-open"></i><p>Хичээл байхгүй байна</p></div>'}</div>`;
+>>>>>>> 3c1f094 (4/26)
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433
 }
 
 function renderExamsPane(idx) {
@@ -471,6 +495,20 @@ function deleteAssign(ci,ai){ CLASSES[ci].assignments.splice(ai,1); renderAssign
 function openModal(id)  { document.getElementById(id).classList.add('show');    document.body.style.overflow='hidden'; }
 function closeModal(id) { document.getElementById(id).classList.remove('show'); document.body.style.overflow=''; }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+function addLesson() {
+  if (selectedClass<0) { closeModal('lessonModal'); return; }
+  const title=document.getElementById('lsnTitle').value.trim();
+  const dur  =document.getElementById('lsnDuration').value;
+  const date =document.getElementById('lsnDate').value;
+  if (!title) return;
+  CLASSES[selectedClass].lessons.push({title, meta:(dur?dur+' мин':'')+(date?' · '+date:''), badge:'upcoming'});
+  renderDetail(selectedClass);
+  ['lsnTitle','lsnDuration','lsnDate','lsnDesc','lsnUrl'].forEach(id=>document.getElementById(id).value='');
+=======
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433
 /* ── Link rows (lesson modal) ── */
 function addLinkRow() {
   const row = document.createElement('div');
@@ -603,6 +641,10 @@ function addLesson() {
     </div>`;
   }
 
+<<<<<<< HEAD
+=======
+>>>>>>> 3c1f094 (4/26)
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433
   closeModal('lessonModal');
   switchTab('lessons', document.querySelectorAll('.cd-tab')[0]);
 }
@@ -630,6 +672,48 @@ function updateSchedulePreview() {
   }
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+/* ── File handling ── */
+const attachedFiles = { asnFiles: [], exmFiles: [] };
+
+function handleFileSelect(input, listId) {
+  const key = input.id;
+  Array.from(input.files).forEach(f => {
+    if (!attachedFiles[key].find(x => x.name === f.name)) attachedFiles[key].push(f);
+  });
+  renderFileList(key, listId);
+  input.value = '';
+}
+
+function handleFileDrop(e, inputId, listId) {
+  e.preventDefault();
+  document.getElementById(inputId.replace('Files','DropZone') || '').classList.remove('drag-over');
+  const key = inputId;
+  Array.from(e.dataTransfer.files).forEach(f => {
+    if (!attachedFiles[key].find(x => x.name === f.name)) attachedFiles[key].push(f);
+  });
+  renderFileList(key, listId);
+}
+
+function renderFileList(key, listId) {
+  const iconMap = { pdf:'fa-file-pdf', doc:'fa-file-word', docx:'fa-file-word', jpg:'fa-file-image', jpeg:'fa-file-image', png:'fa-file-image', zip:'fa-file-archive' };
+  document.getElementById(listId).innerHTML = attachedFiles[key].map((f, i) => {
+    const ext  = f.name.split('.').pop().toLowerCase();
+    const icon = iconMap[ext] || 'fa-file';
+    const size = f.size > 1048576 ? (f.size/1048576).toFixed(1)+' MB' : Math.round(f.size/1024)+' KB';
+    return `<div class="fdz-file-item">
+      <i class="fas ${icon} fdz-file-icon"></i>
+      <span class="fdz-file-name">${f.name}</span>
+      <span class="fdz-file-size">${size}</span>
+      <button class="fdz-file-remove" onclick="removeFile('${key}','${listId}',${i})"><i class="fas fa-times"></i></button>
+    </div>`;
+  }).join('');
+}
+=======
+>>>>>>> 3c1f094 (4/26)
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433
 
 function removeFile(key, listId, idx) {
   attachedFiles[key].splice(idx, 1);

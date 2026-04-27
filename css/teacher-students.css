@@ -354,6 +354,11 @@ body.dark .rp-search input:focus { background: #162032; }
   .student-table td:nth-child(4) { display: none; }
   .score-bar-wrap { display: none; }
 }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433
 
 /* ══ Student Detail Modal ══ */
 .std-overlay {
@@ -431,3 +436,7 @@ body.dark .rp-search input:focus { background: #162032; }
 }
 .std-status-badge.good { background: #f0fdf4; color: #065f46; border: 1px solid #bbf7d0; }
 .std-status-badge.warn { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+<<<<<<< HEAD
+=======
+>>>>>>> 3c1f094 (4/26)
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433

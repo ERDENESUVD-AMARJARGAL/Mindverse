@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433
 /* ── Avatar helpers ── */
 function getAvatarKey() {
   return 'avatar_' + (sessionStorage.getItem('user_name') || 'user');
@@ -37,6 +42,10 @@ function setupAvatarChange() {
   });
 }
 
+<<<<<<< HEAD
+=======
+>>>>>>> 3c1f094 (4/26)
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433
 // ── Fill user info from sessionStorage ──
 (function () {
   const lastname  = sessionStorage.getItem('user_lastname')  || '';
@@ -103,6 +112,15 @@ document.getElementById('statAvg').textContent   = taken > 0 ? Math.round(total 
 
 // badge unlock
 if (taken >= 5) document.getElementById('badge5exams').classList.remove('locked');
+<<<<<<< HEAD
 
 loadAvatar();
 setupAvatarChange();
+=======
+<<<<<<< HEAD
+=======
+
+loadAvatar();
+setupAvatarChange();
+>>>>>>> 3c1f094 (4/26)
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433

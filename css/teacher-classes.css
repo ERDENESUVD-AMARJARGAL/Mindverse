@@ -468,6 +468,11 @@ body.dark .fdz-file-item { background: #0f172a; border-color: #1e293b; }
   .tc-summary { grid-template-columns: 1fr 1fr; }
   .student-grid { grid-template-columns: 1fr; }
 }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433
 
 /* ── Lesson link rows ── */
 .lsn-link-row {
@@ -521,3 +526,7 @@ body.dark .fdz-file-item { background: #0f172a; border-color: #1e293b; }
 .lsn-att-chip.video { background: #fef2f2; border-color: #fecaca; color: #991b1b; }
 .lsn-att-chip.doc   { background: #f0fdf4; border-color: #bbf7d0; color: #065f46; }
 .lsn-att-chip.link  { background: #fdf4ff; border-color: #e9d5ff; color: #7c3aed; }
+<<<<<<< HEAD
+=======
+>>>>>>> 3c1f094 (4/26)
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433

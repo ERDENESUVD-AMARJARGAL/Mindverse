@@ -106,7 +106,15 @@ function renderTable() {
     const rkC = rankClass(rk);
     const rkL = rk <= 3 ? (rk === 1 ? '🥇' : rk === 2 ? '🥈' : '🥉') : rk;
     return `
+<<<<<<< HEAD
     <tr style="cursor:pointer" onclick='openStdModal(${JSON.stringify(s)})'>
+=======
+<<<<<<< HEAD
+    <tr>
+=======
+    <tr style="cursor:pointer" onclick='openStdModal(${JSON.stringify(s)})'>
+>>>>>>> 3c1f094 (4/26)
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433
       <td><div class="rank-badge ${rkC}">${rkL}</div></td>
       <td>
         <div class="st-name-cell">
@@ -212,6 +220,11 @@ function buildClassFilterCards() {
   });
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433
 /* ── Student Detail Modal ── */
 function openStdModal(s) {
   const c = CLASS_COLORS[s.cls] || PALETTE[0];
@@ -298,6 +311,10 @@ function closeStdModal() {
   document.getElementById('stdOverlay').classList.remove('open');
 }
 
+<<<<<<< HEAD
+=======
+>>>>>>> 3c1f094 (4/26)
+>>>>>>> ab0a688ef45561a79761793fe43613ad52d75433
 // ── Init ──
 CLASS_COLORS = buildClassColors(ALL_STUDENTS);
 buildClassFilterCards();
