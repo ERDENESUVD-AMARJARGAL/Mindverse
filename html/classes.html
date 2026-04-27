@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="../css/sidebar.css">
   <link rel="stylesheet" href="../css/student.css">
   <link rel="stylesheet" href="../css/classes.css">
+  <link rel="stylesheet" href="../css/assignments.css">
+  <link rel="stylesheet" href="../css/progress.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 </head>
@@ -17,15 +19,19 @@
 
 <div class="page">
 
-  <!-- Page header -->
-  <div class="cls-page-head">
-    <div class="cls-page-head-left">
-      <h1>Хичээлүүд</h1>
-      <p>Бүртгэлтэй хичээлүүд — хичээл, материал, шалгалт бүгд энд</p>
-    </div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap">
-      <div class="cls-head-tag"><i class="fas fa-layer-group"></i>4 хичээл</div>
-      <div class="cls-head-tag"><i class="fas fa-calendar-week"></i>2026 оны 2-р улирал</div>
+  <!-- Hero banner -->
+  <div class="cls-hero">
+    <div class="cls-hero-blob"></div>
+    <div class="cls-hero-inner">
+      <div class="cls-hero-left">
+        <div class="cls-hero-tag"><i class="fas fa-book-open"></i> Хичээлүүд</div>
+        <h1 class="cls-hero-title">Миний <em>Хичээлүүд</em></h1>
+        <p class="cls-hero-sub">Хичээл, материал, шалгалт, даалгавар — бүгд нэг дор</p>
+      </div>
+      <div class="cls-hero-tags">
+        <div class="cls-head-tag-hero"><i class="fas fa-layer-group"></i>4 хичээл</div>
+        <div class="cls-head-tag-hero"><i class="fas fa-calendar-week"></i>2026 оны 2-р улирал</div>
+      </div>
     </div>
   </div>
 
@@ -44,8 +50,8 @@
       <div><div class="cls-kpi-val" id="kpiAvg">0%</div><div class="cls-kpi-lbl">Дундаж оноо</div></div>
     </div>
     <div class="cls-kpi" style="--kc:#f59e0b">
-      <div class="cls-kpi-icon"><i class="fas fa-file-alt"></i></div>
-      <div><div class="cls-kpi-val" id="kpiUpcoming">0</div><div class="cls-kpi-lbl">Удахгүй шалгалт</div></div>
+      <div class="cls-kpi-icon"><i class="fas fa-tasks"></i></div>
+      <div><div class="cls-kpi-val" id="kpiAssign">0</div><div class="cls-kpi-lbl">Хүлээгдэж буй даалгавар</div></div>
     </div>
   </div>
 
@@ -84,15 +90,19 @@
         </div>
         <div class="cls-det-kpis" id="detKpis"></div>
         <div class="cls-tabs">
-          <button class="cls-tab active" data-tab="lessons"   onclick="switchTab('lessons',this)"><i class="fas fa-road"></i>Хичээлүүд</button>
-          <button class="cls-tab"        data-tab="materials" onclick="switchTab('materials',this)"><i class="fas fa-folder-open"></i>Материалууд</button>
-          <button class="cls-tab"        data-tab="exams"     onclick="switchTab('exams',this)"><i class="fas fa-clipboard-list"></i>Шалгалтууд</button>
+          <button class="cls-tab active"  data-tab="lessons"     onclick="switchTab('lessons',this)"><i class="fas fa-road"></i>Хичээлүүд</button>
+          <button class="cls-tab"         data-tab="materials"   onclick="switchTab('materials',this)"><i class="fas fa-folder-open"></i>Материалууд</button>
+          <button class="cls-tab"         data-tab="exams"       onclick="switchTab('exams',this)"><i class="fas fa-clipboard-list"></i>Шалгалтууд</button>
+          <button class="cls-tab"         data-tab="assignments" onclick="switchTab('assignments',this)"><i class="fas fa-tasks"></i>Даалгавар</button>
+          <button class="cls-tab"         data-tab="grades"      onclick="switchTab('grades',this)"><i class="fas fa-chart-line"></i>Дүн</button>
         </div>
       </div>
       <div class="cls-tab-body">
         <div class="cls-tab-panel active" id="tabLessons"></div>
         <div class="cls-tab-panel"        id="tabMaterials"></div>
         <div class="cls-tab-panel"        id="tabExams"></div>
+        <div class="cls-tab-panel"        id="tabAssignments"></div>
+        <div class="cls-tab-panel"        id="tabGrades"></div>
       </div>
     </div>
 
@@ -113,6 +123,50 @@
       <button class="lsn-close-btn" onclick="closeLsnModal()"><i class="fas fa-times"></i></button>
     </div>
     <div class="lsn-modal-body" id="lsnModalBody"></div>
+  </div>
+</div>
+
+<!-- Assignment Viewer Modal -->
+<div class="assign-viewer-modal" id="assignViewerModal">
+  <div class="av-container">
+    <div class="av-header">
+      <div class="av-header-icon" id="avSubjectIcon"></div>
+      <div class="av-header-info">
+        <div class="av-header-title" id="avTitle"></div>
+        <div class="av-header-meta">
+          <span><i class="fas fa-user"></i> <span id="avTeacher"></span></span>
+          <span><i class="fas fa-calendar-alt"></i> <span id="avDue"></span></span>
+          <span><i class="fas fa-book"></i> <span id="avSubject"></span></span>
+        </div>
+      </div>
+      <button class="av-close-btn" onclick="closeAssignmentViewer()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="av-body">
+      <div class="av-left">
+        <div class="av-left-top">
+          <div class="av-section-label">Даалгаврын тайлбар</div>
+          <div class="av-desc-text" id="avDesc"></div>
+        </div>
+        <div class="av-files-label">Багшийн материал</div>
+        <div class="av-file-list" id="avTeacherFiles"></div>
+        <div class="av-preview-label">Урьдчилан харах</div>
+        <div class="av-preview-scroll">
+          <div id="avPreviewArea"></div>
+        </div>
+      </div>
+      <div class="av-right">
+        <div class="av-right-head"><i class="fas fa-paper-plane"></i> Хариу илгээх</div>
+        <div class="av-submit-body">
+          <div id="avSubmitSection"></div>
+        </div>
+      </div>
+    </div>
+    <div class="av-footer">
+      <button class="av-cancel-btn" onclick="closeAssignmentViewer()">Хаах</button>
+      <button class="av-submit-btn" id="avSubmitBtn" onclick="submitAssignment()">
+        <i class="fas fa-paper-plane"></i> Илгээх
+      </button>
+    </div>
   </div>
 </div>
 

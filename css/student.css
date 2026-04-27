@@ -178,8 +178,8 @@
 .stu-see-all:hover { background: #eff7ff; border-color: #3b82f6; }
 
 /* ══ GRID LAYOUT ══ */
-.stu-grid { display: grid; grid-template-columns: 1fr 320px; gap: 18px; align-items: start; }
-.stu-col  { display: flex; flex-direction: column; gap: 14px; align-self: start; }
+.stu-grid { display: grid; grid-template-columns: 1fr 320px; gap: 22px; align-items: start; }
+.stu-col  { display: flex; flex-direction: column; gap: 18px; align-self: start; }
 
 /* ══ MY CLASSES LIST ══ */
 .my-class-list { padding: 6px 0; }
@@ -245,21 +245,6 @@
   font-size: 11px; font-weight: 600; padding: 3px 10px;
   border-radius: 99px; background: #dbeafe; color: #1d4ed8; white-space: nowrap;
 }
-
-/* ══ SUBJECT PROGRESS (in dashboard) ══ */
-.subj-progress-list { padding: 12px 18px; display: flex; flex-direction: column; gap: 12px; }
-.subj-prog-row {}
-.subj-prog-top {
-  display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;
-}
-.subj-prog-name {
-  font-size: 13px; font-weight: 600; color: #1e293b;
-  display: flex; align-items: center; gap: 8px;
-}
-.subj-prog-dot { width: 9px; height: 9px; border-radius: 50%; }
-.subj-prog-pct { font-size: 12px; font-weight: 700; color: #07437d; }
-.subj-prog-bar  { height: 7px; background: #f1f5f9; border-radius: 99px; overflow: hidden; }
-.subj-prog-fill { height: 100%; border-radius: 99px; transition: width .6s ease; }
 
 /* ══ ACTIVITY FEED ══ */
 .act-feed { padding: 6px 0; }
@@ -559,7 +544,6 @@ body.dark .exam-hist-name,
 body.dark .prog-tl-title,
 body.dark .achievement-name { color: #e2e8f0; }
 body.dark .stu-card-head     { border-color: #1e293b; }
-body.dark .subj-prog-bar,
 body.dark .grade-bar-track   { background: #1e293b; }
 body.dark .grade-row:hover,
 body.dark .exam-hist-row:hover,
