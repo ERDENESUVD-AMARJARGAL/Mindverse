@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EduLearn – Хуваарь</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/sidebar.css">
+  <link rel="stylesheet" href="../css/student.css">
+  <link rel="stylesheet" href="../css/calendar.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<div id="sidebar-container"></div>
+
+<div class="page">
+
+  <!-- Header -->
+  <div class="cal-page-header">
+    <div>
+      <div class="cal-page-title"><i class="fas fa-calendar-alt" style="color:#3b82f6;margin-right:10px"></i>Хуваарь</div>
+      <div class="cal-page-sub">Шалгалт болон даалгаврын дуусах хугацааг хянаарай</div>
+    </div>
+  </div>
+
+  <div class="cal-layout">
+
+    <!-- ── Left: Calendar ── -->
+    <div class="cal-card">
+      <div class="cal-month-header">
+        <div class="cal-month-nav">
+          <button class="cal-nav-btn" onclick="prevMonth()"><i class="fas fa-chevron-left"></i></button>
+          <div class="cal-month-label" id="calMonthLabel"></div>
+          <button class="cal-nav-btn" onclick="nextMonth()"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div class="cal-legend">
+          <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#3b82f6"></div>Шалгалт</div>
+          <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#f59e0b"></div>Даалгавар</div>
+          <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#ef4444"></div>Яаралтай</div>
+        </div>
+      </div>
+
+      <div class="cal-day-names">
+        <div class="cal-dname">Да</div>
+        <div class="cal-dname">Мя</div>
+        <div class="cal-dname">Лх</div>
+        <div class="cal-dname">Пү</div>
+        <div class="cal-dname">Ба</div>
+        <div class="cal-dname">Бя</div>
+        <div class="cal-dname">Ня</div>
+      </div>
+
+      <div class="cal-grid" id="calGrid"></div>
+    </div>
+
+    <!-- ── Right: Sidebar ── -->
+    <div class="cal-sidebar">
+
+      <!-- Day detail panel -->
+      <div class="cal-detail">
+        <div class="cal-detail-head" id="calDetailHead">
+          <div class="cal-detail-date-box" style="background:linear-gradient(135deg,#94a3b8,#64748b)">
+            <div class="cal-dnum" style="font-size:14px"><i class="fas fa-hand-pointer"></i></div>
+          </div>
+          <div class="cal-detail-info">
+            <h4>Өдөр сонгоно уу</h4>
+            <p>Хуваарийг харахын тулд өдөрт дарна уу</p>
+          </div>
+        </div>
+        <div class="cal-event-list" id="calEventList">
+          <div class="cal-no-events">
+            <i class="fas fa-calendar"></i>
+            <p>Харахыг хүсэж буй өдрийг дарна уу</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Month stats -->
+      <div class="cal-month-stats">
+        <div class="cal-ms-head"><i class="fas fa-chart-pie"></i>Сарын хураангуй</div>
+        <div class="cal-ms-row">
+          <div class="cal-ms-dot" style="background:#3b82f6"></div>
+          <div class="cal-ms-lbl">Шалгалт</div>
+          <div class="cal-ms-val" id="calStatExams">0</div>
+        </div>
+        <div class="cal-ms-row">
+          <div class="cal-ms-dot" style="background:#f59e0b"></div>
+          <div class="cal-ms-lbl">Даалгавар</div>
+          <div class="cal-ms-val" id="calStatAssigns">0</div>
+        </div>
+        <div class="cal-ms-row" style="margin-bottom:0">
+          <div class="cal-ms-dot" style="background:#ef4444"></div>
+          <div class="cal-ms-lbl">Яаралтай</div>
+          <div class="cal-ms-val" id="calStatUrgent">0</div>
+        </div>
+      </div>
+
+      <!-- Upcoming -->
+      <div class="cal-month-stats">
+        <div class="cal-ms-head"><i class="fas fa-clock"></i>Ойрын хуваарь</div>
+        <div class="cal-upcoming-list" id="calUpcoming"></div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script src="../js/load.js"></script>
+<script src="../js/calendar.js"></script>
+</body>
+</html>

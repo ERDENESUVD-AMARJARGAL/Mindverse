@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EduLearn – Тохиргоо</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/sidebar.css">
+  <link rel="stylesheet" href="../css/settings.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<div id="sidebar-container"></div>
+
+<div class="page">
+  <div class="section-head">
+    <div>
+      <h2>Тохиргоо</h2>
+      <p style="margin-top:4px">Бүртгэл, мэдэгдэл болон аюулгүй байдлын тохиргоо</p>
+    </div>
+  </div>
+
+  <div class="settings-wrap">
+
+    <!-- NAV -->
+    <nav class="settings-nav">
+      <div class="nav-item active" data-panel="account">
+        <i class="fas fa-user"></i> Бүртгэл
+      </div>
+      <div class="nav-item" data-panel="password">
+        <i class="fas fa-lock"></i> Нууц үг
+      </div>
+      <div class="nav-item" data-panel="notifications">
+        <i class="fas fa-bell"></i> Мэдэгдэл
+      </div>
+      <div class="nav-item" data-panel="appearance">
+        <i class="fas fa-palette"></i> Харагдац
+      </div>
+      <div class="nav-item" data-panel="danger">
+        <i class="fas fa-exclamation-triangle"></i> Аюултай бүс
+      </div>
+    </nav>
+
+    <!-- PANELS -->
+    <div>
+
+      <!-- Account -->
+      <div class="settings-panel active" id="panel-account">
+        <div class="s-card">
+          <h3>Хувийн мэдээлэл</h3>
+          <p class="s-sub">Нэр, имэйл болон профайлын тохиргоо</p>
+          <div class="field-row">
+            <div class="field">
+              <label>Овог</label>
+              <input type="text" id="set-lastname" placeholder="Болд">
+            </div>
+            <div class="field">
+              <label>Нэр</label>
+              <input type="text" id="set-firstname" placeholder="Бат">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label>Имэйл</label>
+              <input type="email" id="set-email" placeholder="email@example.com">
+            </div>
+            <div class="field">
+              <label>Эрх</label>
+              <select id="set-role">
+                <option value="student">Сурагч</option>
+                <option value="teacher">Багш</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label>Тухай</label>
+            <textarea id="set-bio" placeholder="Өөрийнхөө тухай товч бичнэ үү..."></textarea>
+          </div>
+          <button class="save-btn" onclick="saveAccount()">Хадгалах</button>
+          <span class="save-confirm" id="acc-confirm"><i class="fas fa-check"></i> Хадгалагдлаа</span>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="settings-panel" id="panel-password">
+        <div class="s-card">
+          <h3>Нууц үг солих</h3>
+          <p class="s-sub">Аюулгүй байдлын үүднээс нууц үгээ тогтмол солиорой</p>
+          <div class="field">
+            <label>Одоогийн нууц үг</label>
+            <input type="password" id="old-pw" placeholder="••••••••">
+          </div>
+          <div class="field">
+            <label>Шинэ нууц үг</label>
+            <input type="password" id="new-pw" placeholder="••••••••">
+          </div>
+          <div class="field">
+            <label>Шинэ нууц үг давтах</label>
+            <input type="password" id="new-pw2" placeholder="••••••••">
+          </div>
+          <button class="save-btn" onclick="changePassword()">Нууц үг солих</button>
+          <span class="save-confirm" id="pw-confirm"><i class="fas fa-check"></i> Солигдлоо</span>
+        </div>
+      </div>
+
+      <!-- Notifications -->
+      <div class="settings-panel" id="panel-notifications">
+        <div class="s-card">
+          <h3>Мэдэгдлийн тохиргоо</h3>
+          <p class="s-sub">Хүлээн авах мэдэгдлийн төрлийг тохируулна уу</p>
+          <div class="toggle-row">
+            <div class="toggle-info">
+              <h4>Шинэ хичээл</h4>
+              <p>Шинэ хичээл нэмэгдэх үед мэдэгдэл авах</p>
+            </div>
+            <label class="toggle"><input type="checkbox" checked id="n-courses"><span class="slider"></span></label>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-info">
+              <h4>Шалгалтын үр дүн</h4>
+              <p>Шалгалт дуусах үед оноог мэдэгдэл</p>
+            </div>
+            <label class="toggle"><input type="checkbox" checked id="n-exams"><span class="slider"></span></label>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-info">
+              <h4>Имэйл мэдэгдэл</h4>
+              <p>Имэйлээр сонордуулга авах</p>
+            </div>
+            <label class="toggle"><input type="checkbox" id="n-email"><span class="slider"></span></label>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-info">
+              <h4>Сурталчилгаа</h4>
+              <p>Урамшуулал болон тусгай санал</p>
+            </div>
+            <label class="toggle"><input type="checkbox" id="n-promo"><span class="slider"></span></label>
+          </div>
+          <br>
+          <button class="save-btn" onclick="saveNotifications()">Хадгалах</button>
+          <span class="save-confirm" id="notif-confirm"><i class="fas fa-check"></i> Хадгалагдлаа</span>
+        </div>
+      </div>
+
+      <!-- Appearance -->
+      <div class="settings-panel" id="panel-appearance">
+        <div class="s-card">
+          <h3>Харагдац</h3>
+          <p class="s-sub">Хэл болон дэлгэцийн тохиргоо</p>
+          <div class="field">
+            <label>Хэл</label>
+            <select id="set-lang">
+              <option value="mn">Монгол</option>
+              <option value="en">English</option>
+            </select>
+          </div>
+          <div class="toggle-row" style="padding-top:0">
+            <div class="toggle-info">
+              <h4>Харанхуй горим</h4>
+              <p>Харанхуй өнгөний схем ашиглах</p>
+            </div>
+            <label class="toggle"><input type="checkbox" id="dark-mode" onchange="toggleDark(this)"><span class="slider"></span></label>
+          </div>
+          <br>
+          <button class="save-btn" onclick="saveAppearance()">Хадгалах</button>
+          <span class="save-confirm" id="app-confirm"><i class="fas fa-check"></i> Хадгалагдлаа</span>
+        </div>
+      </div>
+
+      <!-- Danger -->
+      <div class="settings-panel" id="panel-danger">
+        <div class="s-card">
+          <h3 style="color:var(--rose)">Аюултай бүс</h3>
+          <p class="s-sub">Эдгээр үйлдлийг буцаах боломжгүй. Болгоомжтой байна уу.</p>
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:16px;border:1px solid var(--border);border-radius:10px">
+              <div>
+                <div style="font-size:14px;font-weight:600">Дэвшлийн өгөгдөл арилгах</div>
+                <div style="font-size:12px;color:var(--muted);margin-top:3px">Бүх хичээл болон шалгалтын явцыг устгана</div>
+              </div>
+              <button class="danger-btn" onclick="clearProgress()">Арилгах</button>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:16px;border:1px solid #fecaca;border-radius:10px;background:#fff5f5">
+              <div>
+                <div style="font-size:14px;font-weight:600;color:var(--rose)">Бүртгэл устгах</div>
+                <div style="font-size:12px;color:var(--muted);margin-top:3px">Таны бүх өгөгдлийг бүрмөсөн устгана</div>
+              </div>
+              <button class="danger-btn" onclick="deleteAccount()">Устгах</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../js/load.js"></script>
+<script src="../js/settings.js"></script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Бүртгүүлэх – EduLearn</title>
+  <link rel="stylesheet" href="../css/login.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+
+  <!-- ══ LEFT ══ -->
+  <div class="left">
+    <div class="left-content">
+      <div class="left-brand">
+        <div class="brand-icon"><i class="fas fa-graduation-cap"></i></div>
+        EduLearn
+      </div>
+      <h2 class="left-headline">Мэдлэгийн замд<br><span>нэгдээрэй</span></h2>
+      <p class="left-sub">Бүртгүүлж мэргэжлийн багш нарын хичээлд нэвтрэнэ үү</p>
+
+      <div class="left-features">
+        <div class="feat-item">
+          <div class="feat-icon"><i class="fas fa-user-graduate"></i></div>
+          <div>
+            <div class="feat-title">Сурагчаар нэгдэх</div>
+            <div class="feat-desc">Хичээл, материал, шалгалтад нэвтрэх</div>
+          </div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+          <div>
+            <div class="feat-title">Багшаар нэгдэх</div>
+            <div class="feat-desc">Анги үүсгэж, шалгалт тавих боломж</div>
+          </div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-icon"><i class="fas fa-shield-alt"></i></div>
+          <div>
+            <div class="feat-title">Найдвартай платформ</div>
+            <div class="feat-desc">Хаягаа нэгэн удаа бүртгүүлснээр бүгд нэвтрэх</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="left-stats">
+        <div class="stat-pill"><strong>100+</strong><span>Сурагч</span></div>
+        <div class="stat-pill"><strong>4.9★</strong><span>Үнэлгээ</span></div>
+        <div class="stat-pill"><strong>Үнэгүй</strong><span>Эхлэх</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ RIGHT ══ -->
+  <div class="right">
+    <div class="login-box">
+      <div class="login-header">
+        <h2>Бүртгүүлэх</h2>
+        <p class="subtitle">EduLearn-д тавтай морил</p>
+      </div>
+
+      <span class="role-label">Би бол:</span>
+      <div class="role-selector">
+        <button type="button" class="role-btn active" id="btn-student" onclick="selectRole('student')">
+          <i class="fa-solid fa-user-graduate"></i>
+          <span class="role-btn-title">Сурагч</span>
+        </button>
+        <button type="button" class="role-btn" id="btn-teacher" onclick="selectRole('teacher')">
+          <i class="fa-solid fa-chalkboard-user"></i>
+          <span class="role-btn-title">Багш</span>
+        </button>
+      </div>
+
+      <form id="signup-form" onsubmit="return false;">
+        <input type="hidden" name="role" id="role-input" value="student">
+
+        <!-- Name row -->
+        <div class="input-row">
+          <div class="input-box">
+            <label>Овог</label>
+            <input type="text" name="lastname" id="lastnameInput" placeholder="Болд" required autocomplete="family-name">
+          </div>
+          <div class="input-box">
+            <label>Нэр</label>
+            <input type="text" name="firstname" id="firstnameInput" placeholder="Бат" required autocomplete="given-name">
+          </div>
+        </div>
+
+        <div class="input-box">
+          <label>Имэйл хаяг</label>
+          <div class="input-icon-wrap">
+            <i class="fas fa-envelope"></i>
+            <input type="email" name="email" id="emailInput" placeholder="name@example.com" required autocomplete="email">
+          </div>
+        </div>
+
+        <div class="input-row">
+          <div class="input-box">
+            <label>Нууц үг</label>
+            <input type="password" name="password" id="passwordInput" placeholder="••••••••" required>
+          </div>
+          <div class="input-box">
+            <label>Давтах</label>
+            <input type="password" name="confirm_password" id="confirmInput" placeholder="••••••••" required>
+          </div>
+        </div>
+
+        <div class="options">
+          <label class="remember-label">
+            <input type="checkbox" name="terms" id="termsCheck" required>
+            Үйлчилгээний нөхцөлийг зөвшөөрч байна
+          </label>
+        </div>
+
+        <button type="submit" id="signup-btn">
+          <i class="fa-solid fa-user-plus"></i>
+          <span id="role-display">Сурагчаар</span> бүртгүүлэх
+        </button>
+
+        <div class="login-error" id="signupError"></div>
+      </form>
+
+      <div class="divider"><span>эсвэл</span></div>
+
+      <div class="signup">
+        <p><a href="login.html">Нэвтрэх</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../js/signup.js"></script>
+</body>
+</html>

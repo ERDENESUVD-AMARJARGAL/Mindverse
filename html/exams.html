@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EduLearn – Шалгалтууд</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/sidebar.css">
+  <link rel="stylesheet" href="../css/exams.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<div id="sidebar-container"></div>
+
+<div class="page">
+  <div class="section-head">
+    <div>
+      <h2>Математикийн <span>шалгалтууд</span></h2>
+      <p style="margin-top:4px">Мэдлэгээ шалгаад өөрийгөө дэвшүүл</p>
+    </div>
+  </div>
+
+  <div class="exams-grid" id="examsGrid"></div>
+</div>
+
+<!-- QUIZ MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modalBox">
+    <h2 id="modalTitle"></h2>
+    <p class="sub" id="modalSub"></p>
+    <div class="exam-timer-bar" id="examTimerBar">
+      <i class="fas fa-clock"></i>
+      <span id="timerDisplay">00:00</span>
+      <span class="timer-label">үлдсэн</span>
+      <div class="timer-track"><div class="timer-fill" id="timerFill"></div></div>
+    </div>
+    <div id="quizArea"></div>
+    <div class="modal-actions">
+      <button class="btn-close" onclick="closeModal()">Болих</button>
+      <button class="btn-next" id="btnNext" onclick="nextQuestion()">Дараагийн асуулт</button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/load.js"></script>
+<script src="../js/exams.js"></script>
+</body>
+</html>

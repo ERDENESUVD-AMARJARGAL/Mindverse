@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EduLearn – Хичээлүүд</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/sidebar.css">
+  <link rel="stylesheet" href="../css/student.css">
+  <link rel="stylesheet" href="../css/classes.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<div id="sidebar-container"></div>
+
+<div class="page">
+
+  <!-- Page header -->
+  <div class="cls-page-head">
+    <div class="cls-page-head-left">
+      <h1>Хичээлүүд</h1>
+      <p>Бүртгэлтэй хичээлүүд — хичээл, материал, шалгалт бүгд энд</p>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <div class="cls-head-tag"><i class="fas fa-layer-group"></i>4 хичээл</div>
+      <div class="cls-head-tag"><i class="fas fa-calendar-week"></i>2026 оны 2-р улирал</div>
+    </div>
+  </div>
+
+  <!-- Summary KPI cards -->
+  <div class="cls-summary" id="clsSummary">
+    <div class="cls-kpi" style="--kc:#3b82f6">
+      <div class="cls-kpi-icon"><i class="fas fa-book-open"></i></div>
+      <div><div class="cls-kpi-val" id="kpiLessons">0</div><div class="cls-kpi-lbl">Нийт хичээл</div></div>
+    </div>
+    <div class="cls-kpi" style="--kc:#10b981">
+      <div class="cls-kpi-icon"><i class="fas fa-check-circle"></i></div>
+      <div><div class="cls-kpi-val" id="kpiDone">0</div><div class="cls-kpi-lbl">Дуусгасан</div></div>
+    </div>
+    <div class="cls-kpi" style="--kc:#8b5cf6">
+      <div class="cls-kpi-icon"><i class="fas fa-star"></i></div>
+      <div><div class="cls-kpi-val" id="kpiAvg">0%</div><div class="cls-kpi-lbl">Дундаж оноо</div></div>
+    </div>
+    <div class="cls-kpi" style="--kc:#f59e0b">
+      <div class="cls-kpi-icon"><i class="fas fa-file-alt"></i></div>
+      <div><div class="cls-kpi-val" id="kpiUpcoming">0</div><div class="cls-kpi-lbl">Удахгүй шалгалт</div></div>
+    </div>
+  </div>
+
+  <!-- Search bar -->
+  <div class="cls-search-wrap">
+    <div class="cls-search-bar">
+      <i class="fas fa-search"></i>
+      <input type="text" id="clsSearch" placeholder="Хичээл хайх — нэр, сэдэв, багш..." oninput="filterClasses(this.value)">
+      <button class="cls-search-clear" id="clsSearchClear" onclick="clearClsSearch()"><i class="fas fa-times"></i></button>
+    </div>
+    <span class="cls-search-badge" id="clsSearchBadge" style="display:none"></span>
+  </div>
+
+  <!-- Layout -->
+  <div class="cls-layout" id="clsLayout">
+
+    <!-- Cards grid -->
+    <div class="cls-grid" id="clsGrid">
+      <div class="cls-no-results" id="clsNoResults" style="display:none">
+        <i class="fas fa-search"></i>
+        <p>Хайлтад тохирох хичээл олдсонгүй</p>
+      </div>
+    </div>
+
+    <!-- Detail panel -->
+    <div class="cls-detail" id="clsDetail">
+      <div class="cls-det-banner">
+        <div class="cls-det-top">
+          <div class="cls-det-icon" id="detIcon"><i class="fas fa-book-open"></i></div>
+          <div class="cls-det-info">
+            <div class="cls-det-subject" id="detSubject"></div>
+            <div class="cls-det-title"   id="detTitle"></div>
+            <div class="cls-det-teacher" id="detTeacher"></div>
+          </div>
+          <button class="cls-det-close" onclick="closeDetail()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cls-det-kpis" id="detKpis"></div>
+        <div class="cls-tabs">
+          <button class="cls-tab active" data-tab="lessons"   onclick="switchTab('lessons',this)"><i class="fas fa-road"></i>Хичээлүүд</button>
+          <button class="cls-tab"        data-tab="materials" onclick="switchTab('materials',this)"><i class="fas fa-folder-open"></i>Материалууд</button>
+          <button class="cls-tab"        data-tab="exams"     onclick="switchTab('exams',this)"><i class="fas fa-clipboard-list"></i>Шалгалтууд</button>
+        </div>
+      </div>
+      <div class="cls-tab-body">
+        <div class="cls-tab-panel active" id="tabLessons"></div>
+        <div class="cls-tab-panel"        id="tabMaterials"></div>
+        <div class="cls-tab-panel"        id="tabExams"></div>
+      </div>
+    </div>
+
+  </div><!-- /cls-layout -->
+</div><!-- /page -->
+
+<!-- Lesson Viewer Modal -->
+<div class="lsn-overlay" id="lsnOverlay" onclick="if(event.target===this)closeLsnModal()">
+  <div class="lsn-modal">
+    <div class="lsn-modal-head" id="lsnHead">
+      <div class="lsn-head-left">
+        <div class="lsn-status-tag" id="lsnStatusTag"></div>
+        <div style="flex:1;min-width:0">
+          <div class="lsn-modal-title" id="lsnModalTitle"></div>
+          <div class="lsn-modal-meta" id="lsnModalMeta"></div>
+        </div>
+      </div>
+      <button class="lsn-close-btn" onclick="closeLsnModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="lsn-modal-body" id="lsnModalBody"></div>
+  </div>
+</div>
+
+<script src="../js/load.js"></script>
+<script src="../js/classes.js"></script>
+</body>
+</html>
