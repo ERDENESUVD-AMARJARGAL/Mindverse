@@ -148,21 +148,72 @@
 .cal-ms-lbl { font-size: 12px; color: #64748b; flex: 1; }
 .cal-ms-val { font-size: 13px; font-weight: 800; color: #0f172a; }
 
-/* Upcoming widget */
-.cal-upcoming-list { display: flex; flex-direction: column; gap: 7px; }
-.cal-up-item {
-  display: flex; align-items: center; gap: 10px;
-  padding: 9px 12px; border-radius: 10px;
-  background: #f8fafc; border: 1.5px solid #e2e8f0;
+/* ── Next exam countdown card ── */
+.cal-countdown-card {
+  background: #fff;
+  border: 1.5px solid color-mix(in srgb, var(--ec,#3b82f6) 22%, #e2e8f0);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 20px color-mix(in srgb, var(--ec,#3b82f6) 12%, rgba(0,0,0,.06));
 }
-.cal-up-dot  { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
-.cal-up-body { flex: 1; min-width: 0; }
-.cal-up-title { font-size: 11.5px; font-weight: 700; color: #1e293b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.cal-up-sub   { font-size: 10px; color: #94a3b8; margin-top: 1px; }
-.cal-up-days  { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
-.cal-up-days.soon   { background: #fee2e2; color: #991b1b; }
-.cal-up-days.medium { background: #fef3c7; color: #92400e; }
-.cal-up-days.ok     { background: #d1fae5; color: #065f46; }
+.cal-countdown-top {
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;
+}
+.cal-countdown-tag {
+  font-size: 10.5px; font-weight: 700; color: #64748b;
+  display: flex; align-items: center; gap: 5px;
+}
+.cal-countdown-tag i { color: var(--ec,#3b82f6); }
+.cal-countdown-subj { font-size: 10.5px; font-weight: 700; }
+.cal-countdown-title {
+  font-size: 13px; font-weight: 800; color: #0f172a;
+  line-height: 1.35; margin-bottom: 14px;
+}
+.cal-countdown-center { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.cal-countdown-ring {
+  width: 72px; height: 72px; border-radius: 50%; flex-shrink: 0;
+  border: 4px solid color-mix(in srgb, var(--rc,#3b82f6) 20%, #e2e8f0);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: color-mix(in srgb, var(--rc,#3b82f6) 7%, #fff);
+}
+.cal-countdown-num { font-size: 26px; font-weight: 900; line-height: 1; }
+.cal-countdown-num.urgent { color: #ef4444; }
+.cal-countdown-num.soon   { color: #f59e0b; }
+.cal-countdown-num.ok     { color: #3b82f6; }
+.cal-countdown-unit { font-size: 9px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: .5px; }
+.cal-countdown-right { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+.cal-countdown-badge {
+  font-size: 10.5px; font-weight: 700; padding: 3px 10px;
+  border-radius: 99px; display: inline-flex; align-items: center; width: fit-content;
+}
+.cal-countdown-badge.urgent { background: #fee2e2; color: #b91c1c; }
+.cal-countdown-badge.soon   { background: #fef3c7; color: #92400e; }
+.cal-countdown-badge.ok     { background: #dbeafe; color: #1d4ed8; }
+.cal-countdown-detail {
+  font-size: 11px; color: #64748b;
+  display: flex; align-items: center; gap: 5px;
+}
+.cal-countdown-detail i { width: 12px; text-align: center; color: var(--ec,#3b82f6); opacity: .7; }
+.cal-countdown-prep-label {
+  display: flex; justify-content: space-between;
+  font-size: 10.5px; font-weight: 700; color: #64748b; margin-bottom: 5px;
+}
+.cal-countdown-bar-wrap { height: 6px; background: #e2e8f0; border-radius: 99px; overflow: hidden; }
+.cal-countdown-bar { height: 100%; border-radius: 99px; transition: width .6s; }
+
+/* ── Subject progress ── */
+.cal-subj-list { display: flex; flex-direction: column; gap: 10px; }
+.cal-subj-row { display: flex; align-items: center; gap: 9px; }
+.cal-subj-icon {
+  width: 30px; height: 30px; border-radius: 9px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 13px;
+}
+.cal-subj-body { flex: 1; min-width: 0; }
+.cal-subj-name { font-size: 11px; font-weight: 600; color: #1e293b; margin-bottom: 4px; }
+.cal-subj-track { height: 6px; background: #e2e8f0; border-radius: 99px; overflow: hidden; }
+.cal-subj-fill  { height: 100%; border-radius: 99px; transition: width .5s; }
+.cal-subj-pct   { font-size: 11px; font-weight: 800; width: 34px; text-align: right; flex-shrink: 0; }
 
 /* Dark mode */
 body.dark .cal-card,

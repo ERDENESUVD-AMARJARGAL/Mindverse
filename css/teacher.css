@@ -236,42 +236,38 @@
 .t-btn-icon.red:hover { background: #fee2e2; color: #dc2626; }
 
 /* ── CLASS LIST ── */
-.class-list { padding: 8px 0; }
-.class-row {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 14px 22px;
-  transition: background .15s;
+/* ── TEACHER CLASS 2×2 GRID ── */
+.t-cls-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 14px; padding: 16px;
 }
-.class-row:hover { background: #f8fafc; }
-.class-color {
-  width: 5px;
-  height: 44px;
-  border-radius: 4px;
-  flex-shrink: 0;
+.t-cls-card {
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 16px; border-radius: 16px; text-decoration: none;
+  border: 1.5px solid color-mix(in srgb, var(--cc) 18%, #e2e8f0);
+  background: color-mix(in srgb, var(--cc) 4%, #fff);
+  transition: transform .18s, box-shadow .18s, border-color .18s;
+  cursor: pointer;
 }
-.class-info { flex: 1; min-width: 0; }
-.class-name {
-  font-size: 14px;
-  font-weight: 600;
-  color: #1e293b;
-  margin-bottom: 3px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.t-cls-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px color-mix(in srgb, var(--cc) 22%, rgba(0,0,0,.08));
+  border-color: color-mix(in srgb, var(--cc) 50%, #e2e8f0);
 }
-.class-meta { font-size: 12px; color: #64748b; }
-.class-avg {
-  font-size: 13px;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 20px;
-  white-space: nowrap;
+.t-cls-top { display: flex; align-items: center; justify-content: space-between; }
+.t-cls-icon {
+  width: 42px; height: 42px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center; font-size: 17px;
 }
-.class-avg.good { background: #d1fae5; color: #065f46; }
-.class-avg.mid  { background: #fef3c7; color: #92400e; }
-.class-avg.low  { background: #fee2e2; color: #991b1b; }
+.t-cls-avg { font-size: 20px; font-weight: 800; }
+.t-cls-avg.good { color: #065f46; }
+.t-cls-avg.mid  { color: #92400e; }
+.t-cls-avg.low  { color: #991b1b; }
+.t-cls-name { font-size: 13px; font-weight: 700; color: #0f172a; line-height: 1.3; }
+.t-cls-meta { font-size: 11px; color: #64748b; display: flex; align-items: center; gap: 5px; }
+.t-cls-meta i { opacity: .6; }
+.t-cls-bar-wrap { height: 6px; background: #e2e8f0; border-radius: 99px; overflow: hidden; margin-top: 2px; }
+.t-cls-bar-fill { height: 100%; border-radius: 99px; transition: width .5s; }
 
 /* ── ASSIGNMENT TABS ── */
 .assign-tabs {

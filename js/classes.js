@@ -984,7 +984,10 @@ function submitAssignment() {
     closeAssignmentViewer();
     buildSummary();
     buildCards();
-    if (selectedIdx >= 0) renderAssignmentsPane(CLASSES[selectedIdx]);
+    if (selectedIdx >= 0) {
+      selectClass(selectedIdx);
+      renderAssignmentsPane(CLASSES[selectedIdx]);
+    }
   }, 1200);
 }
 

@@ -78,7 +78,7 @@ function renderCalendar() {
 
   document.getElementById('calGrid').innerHTML = html;
   updateStats();
-  renderUpcoming();
+  renderNextExam();
 }
 
 function selectDay(ds) {
@@ -141,28 +141,50 @@ function updateStats() {
   document.getElementById('calStatUrgent').textContent  = evs.filter(e => e.urgent).length;
 }
 
-function renderUpcoming() {
+function renderNextExam() {
+  const el = document.getElementById('calNextExam');
+  if (!el) return;
   const todayStr = mkDate(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate());
-  const upcoming = EVENTS
-    .filter(e => e.date >= todayStr)
-    .sort((a, b) => a.date.localeCompare(b.date))
-    .slice(0, 5);
+  const next = EVENTS
+    .filter(e => e.type === 'exam' && e.date >= todayStr)
+    .sort((a, b) => a.date.localeCompare(b.date))[0];
 
-  document.getElementById('calUpcoming').innerHTML = upcoming.length
-    ? upcoming.map(e => {
-        const diff = Math.round((new Date(e.date + 'T00:00:00') - new Date(todayStr + 'T00:00:00')) / 86400000);
-        const dayCls = diff <= 3 ? 'soon' : diff <= 7 ? 'medium' : 'ok';
-        const dayTxt = diff === 0 ? 'Өнөөдөр' : diff + ' өдөр';
-        return `<div class="cal-up-item">
-          <div class="cal-up-dot" style="background:${e.color}"></div>
-          <div class="cal-up-body">
-            <div class="cal-up-title">${e.title}</div>
-            <div class="cal-up-sub">${e.subject} · ${e.type === 'exam' ? 'Шалгалт' : 'Даалгавар'}</div>
-          </div>
-          <span class="cal-up-days ${dayCls}">${dayTxt}</span>
-        </div>`;
-      }).join('')
-    : '<div class="cal-no-events"><i class="fas fa-check"></i><p>Ойрын хуваарь байхгүй</p></div>';
+  if (!next) { el.innerHTML = ''; return; }
+
+  const diff   = Math.round((new Date(next.date + 'T00:00:00') - new Date(todayStr + 'T00:00:00')) / 86400000);
+  const prep   = 14;
+  const pct    = Math.max(0, Math.min(100, Math.round((prep - diff) / prep * 100)));
+  const urgCls = diff <= 3 ? 'urgent' : diff <= 7 ? 'soon' : 'ok';
+  const urgTxt = diff === 0 ? 'Өнөөдөр!' : diff <= 3 ? 'Яаралтай' : diff + ' өдөр';
+  const d      = new Date(next.date + 'T00:00:00');
+  const dateStr= `${d.getDate()} · ${MN_MONTHS[d.getMonth()]}`;
+
+  el.innerHTML = `
+    <div class="cal-countdown-card" style="--ec:${next.color}">
+      <div class="cal-countdown-top">
+        <span class="cal-countdown-tag"><i class="fas fa-bell"></i> Дараагийн шалгалт</span>
+        <span class="cal-countdown-subj" style="color:${next.color}">${next.subject}</span>
+      </div>
+      <div class="cal-countdown-title">${next.title}</div>
+      <div class="cal-countdown-center">
+        <div class="cal-countdown-ring" style="--rc:${next.color}">
+          <span class="cal-countdown-num ${urgCls}">${diff === 0 ? '!' : diff}</span>
+          <span class="cal-countdown-unit">өдөр</span>
+        </div>
+        <div class="cal-countdown-right">
+          <div class="cal-countdown-badge ${urgCls}">${urgTxt}</div>
+          <div class="cal-countdown-detail"><i class="fas fa-calendar-alt"></i>${dateStr}</div>
+          <div class="cal-countdown-detail"><i class="fas fa-clock"></i>${next.time || '—'}</div>
+          <div class="cal-countdown-detail"><i class="fas fa-list-ol"></i>${next.questions} асуулт · ${next.duration}</div>
+        </div>
+      </div>
+      <div class="cal-countdown-prep-label">
+        <span>Бэлтгэлийн явц</span><span>${pct}%</span>
+      </div>
+      <div class="cal-countdown-bar-wrap">
+        <div class="cal-countdown-bar" style="width:${pct}%;background:${next.color}"></div>
+      </div>
+    </div>`;
 }
 
 function prevMonth() {
