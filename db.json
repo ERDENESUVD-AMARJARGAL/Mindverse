@@ -1,0 +1,1943 @@
+{
+  "classes": [
+    {
+      "id": "cls_001",
+      "teacherId": "teacher_1",
+      "name": "10А анги",
+      "subject": "Алгебр",
+      "icon": "fa-calculator",
+      "color": "#3b82f6",
+      "students": 24,
+      "maxStudents": 30,
+      "avg": "84%",
+      "avgClass": "good",
+      "avgNum": 84,
+      "classCode": "ALG-7K2M",
+      "createdAt": "2026-01-15T08:00:00.000Z",
+      "lessons": [
+        {
+          "id": "lsn_001",
+          "classId": "cls_001",
+          "title": "Квадрат тэгшитгэл",
+          "meta": "45 мин · 2026/04/10",
+          "date": "2026-04-10",
+          "duration": 45,
+          "contentType": "link",
+          "contentUrl": "https://docs.google.com/document/d/example1",
+          "badge": "done"
+        },
+        {
+          "id": "lsn_002",
+          "classId": "cls_001",
+          "title": "Тэгшитгэлийн систем",
+          "meta": "50 мин · 2026/04/14",
+          "date": "2026-04-14",
+          "duration": 50,
+          "contentType": "link",
+          "contentUrl": "https://docs.google.com/document/d/example2",
+          "badge": "done"
+        },
+        {
+          "id": "lsn_003",
+          "classId": "cls_001",
+          "title": "Үл мэдэгдэгчтэй тэгш бус байдал",
+          "meta": "45 мин · 2026/04/18",
+          "date": "2026-04-18",
+          "duration": 45,
+          "contentType": "file",
+          "contentUrl": "/uploads/lesson3.pdf",
+          "badge": "done"
+        },
+        {
+          "id": "lsn_004",
+          "classId": "cls_001",
+          "title": "Функцийн утга",
+          "meta": "40 мин · 2026/04/22",
+          "date": "2026-04-22",
+          "duration": 40,
+          "contentType": "link",
+          "contentUrl": "https://docs.google.com/presentation/d/example4",
+          "badge": "upcoming"
+        },
+        {
+          "id": "lsn_005",
+          "classId": "cls_001",
+          "title": "Параболын график",
+          "meta": "50 мин · 2026/04/28",
+          "date": "2026-04-28",
+          "duration": 50,
+          "contentType": null,
+          "contentUrl": null,
+          "badge": "upcoming"
+        },
+        {
+          "id": "lsn_006",
+          "classId": "cls_001",
+          "title": "Дундын шалгалтын давтлага",
+          "meta": "60 мин · 2026/05/02",
+          "date": "2026-05-02",
+          "duration": 60,
+          "contentType": null,
+          "contentUrl": null,
+          "badge": "draft"
+        },
+        {
+          "id": "lsn_007",
+          "classId": "cls_001",
+          "title": "Квадратын бүрэн томъёо",
+          "meta": "45 мин · 2026/03/25",
+          "date": "2026-03-25",
+          "duration": 45,
+          "contentType": "link",
+          "contentUrl": "https://docs.google.com/document/d/example7",
+          "badge": "done"
+        },
+        {
+          "id": "lsn_008",
+          "classId": "cls_001",
+          "title": "Шүүгээний зарчим",
+          "meta": "50 мин · 2026/03/30",
+          "date": "2026-03-30",
+          "duration": 50,
+          "contentType": "file",
+          "contentUrl": "/uploads/lesson8.pdf",
+          "badge": "done"
+        },
+        {
+          "id": "lsn_009",
+          "classId": "cls_001",
+          "title": "Хоёр хувьсагчтэй тэгшитгэл",
+          "meta": "45 мин · 2026/04/03",
+          "date": "2026-04-03",
+          "duration": 45,
+          "contentType": "link",
+          "contentUrl": "https://docs.google.com/presentation/d/example9",
+          "badge": "done"
+        },
+        {
+          "id": "lsn_010",
+          "classId": "cls_001",
+          "title": "Бутархай тэгшитгэл",
+          "meta": "40 мин · 2026/05/06",
+          "date": "2026-05-06",
+          "duration": 40,
+          "contentType": null,
+          "contentUrl": null,
+          "badge": "upcoming"
+        }
+      ],
+      "exams": [
+        {
+          "id": "exm_001",
+          "classId": "cls_001",
+          "title": "Алгебрийн дундын шалгалт",
+          "meta": "2026/04/22 · 20 асуулт · 45 мин",
+          "date": "2026-04-22",
+          "duration": 45,
+          "totalQuestions": 20,
+          "contentType": "link",
+          "contentUrl": "https://forms.google.com/example1",
+          "status": "upcoming",
+          "result": null,
+          "resultNum": null,
+          "submissions": []
+        },
+        {
+          "id": "exm_002",
+          "classId": "cls_001",
+          "title": "Тэгшитгэлийн тест",
+          "meta": "2026/04/07 · 15 асуулт · 30 мин · Дундаж: 82%",
+          "date": "2026-04-07",
+          "duration": 30,
+          "totalQuestions": 15,
+          "contentType": "link",
+          "contentUrl": "https://forms.google.com/example2",
+          "status": "done",
+          "result": "82%",
+          "resultNum": 82,
+          "submissions": [
+            {
+              "studentId": "stu_001",
+              "score": 92,
+              "submittedAt": "2026-04-07T10:30:00Z"
+            },
+            {
+              "studentId": "stu_002",
+              "score": 87,
+              "submittedAt": "2026-04-07T10:45:00Z"
+            },
+            {
+              "studentId": "stu_003",
+              "score": 81,
+              "submittedAt": "2026-04-07T11:00:00Z"
+            },
+            {
+              "studentId": "stu_004",
+              "score": 74,
+              "submittedAt": "2026-04-07T11:15:00Z"
+            },
+            {
+              "studentId": "stu_005",
+              "score": 63,
+              "submittedAt": "2026-04-07T11:30:00Z"
+            },
+            {
+              "studentId": "stu_006",
+              "score": 90,
+              "submittedAt": "2026-04-07T10:20:00Z"
+            },
+            {
+              "studentId": "stu_007",
+              "score": 78,
+              "submittedAt": "2026-04-07T11:00:00Z"
+            },
+            {
+              "studentId": "stu_008",
+              "score": 85,
+              "submittedAt": "2026-04-07T10:50:00Z"
+            },
+            {
+              "studentId": "stu_009",
+              "score": 71,
+              "submittedAt": "2026-04-07T11:20:00Z"
+            },
+            {
+              "studentId": "stu_010",
+              "score": 66,
+              "submittedAt": "2026-04-07T11:40:00Z"
+            },
+            {
+              "studentId": "stu_011",
+              "score": 88,
+              "submittedAt": "2026-04-07T10:35:00Z"
+            },
+            {
+              "studentId": "stu_012",
+              "score": 73,
+              "submittedAt": "2026-04-07T11:10:00Z"
+            }
+          ]
+        },
+        {
+          "id": "exm_003",
+          "classId": "cls_001",
+          "title": "Квадратын томъёоны тест",
+          "meta": "2026/03/28 · 10 асуулт · 20 мин · Дундаж: 79%",
+          "date": "2026-03-28",
+          "duration": 20,
+          "totalQuestions": 10,
+          "contentType": "link",
+          "contentUrl": "https://forms.google.com/example3",
+          "status": "done",
+          "result": "79%",
+          "resultNum": 79,
+          "submissions": [
+            {
+              "studentId": "stu_001",
+              "score": 88,
+              "submittedAt": "2026-03-28T10:00:00Z"
+            },
+            {
+              "studentId": "stu_002",
+              "score": 82,
+              "submittedAt": "2026-03-28T10:15:00Z"
+            },
+            {
+              "studentId": "stu_003",
+              "score": 76,
+              "submittedAt": "2026-03-28T10:30:00Z"
+            },
+            {
+              "studentId": "stu_006",
+              "score": 85,
+              "submittedAt": "2026-03-28T10:05:00Z"
+            },
+            {
+              "studentId": "stu_008",
+              "score": 80,
+              "submittedAt": "2026-03-28T10:20:00Z"
+            }
+          ]
+        },
+        {
+          "id": "exm_004",
+          "classId": "cls_001",
+          "title": "Эцсийн шалгалт",
+          "meta": "2026/05/10 · 25 асуулт · 60 мин",
+          "date": "2026-05-10",
+          "duration": 60,
+          "totalQuestions": 25,
+          "contentType": null,
+          "contentUrl": null,
+          "status": "upcoming",
+          "result": null,
+          "resultNum": null,
+          "submissions": []
+        }
+      ],
+      "assignments": [
+        {
+          "id": "asn_001",
+          "classId": "cls_001",
+          "title": "Квадрат тэгшитгэл - ГД",
+          "meta": "Дуусах: 2026/04/22",
+          "dueDate": "2026-04-22",
+          "contentType": "link",
+          "contentUrl": "https://docs.google.com/forms/d/example_asn1",
+          "status": "active",
+          "submitted": 18,
+          "total": 24,
+          "submissions": [
+            {
+              "studentId": "stu_001",
+              "submittedAt": "2026-04-20T09:00:00Z",
+              "score": 95
+            },
+            {
+              "studentId": "stu_002",
+              "submittedAt": "2026-04-21T14:00:00Z",
+              "score": 88
+            },
+            {
+              "studentId": "stu_003",
+              "submittedAt": "2026-04-21T16:30:00Z",
+              "score": 82
+            },
+            {
+              "studentId": "stu_006",
+              "submittedAt": "2026-04-19T10:00:00Z",
+              "score": 91
+            },
+            {
+              "studentId": "stu_008",
+              "submittedAt": "2026-04-20T15:00:00Z",
+              "score": 86
+            }
+          ]
+        },
+        {
+          "id": "asn_002",
+          "classId": "cls_001",
+          "title": "Функцийн утга - ГД",
+          "meta": "Дуусах: 2026/04/25",
+          "dueDate": "2026-04-25",
+          "contentType": "file",
+          "contentUrl": "/uploads/asn_func.pdf",
+          "status": "active",
+          "submitted": 10,
+          "total": 24,
+          "submissions": [
+            {
+              "studentId": "stu_001",
+              "submittedAt": "2026-04-23T10:00:00Z",
+              "score": 90
+            }
+          ]
+        },
+        {
+          "id": "asn_003",
+          "classId": "cls_001",
+          "title": "Тэгшитгэлийн систем - ГД",
+          "meta": "Дуусах: 2026/04/14",
+          "dueDate": "2026-04-14",
+          "contentType": "link",
+          "contentUrl": "https://docs.google.com/forms/d/example_asn3",
+          "status": "done",
+          "submitted": 24,
+          "total": 24,
+          "submissions": [
+            {
+              "studentId": "stu_001",
+              "submittedAt": "2026-04-13T09:00:00Z",
+              "score": 94
+            },
+            {
+              "studentId": "stu_002",
+              "submittedAt": "2026-04-13T11:00:00Z",
+              "score": 89
+            },
+            {
+              "studentId": "stu_003",
+              "submittedAt": "2026-04-14T07:00:00Z",
+              "score": 80
+            },
+            {
+              "studentId": "stu_004",
+              "submittedAt": "2026-04-13T14:00:00Z",
+              "score": 72
+            },
+            {
+              "studentId": "stu_005",
+              "submittedAt": "2026-04-14T08:00:00Z",
+              "score": 60
+            },
+            {
+              "studentId": "stu_006",
+              "submittedAt": "2026-04-12T16:00:00Z",
+              "score": 92
+            },
+            {
+              "studentId": "stu_007",
+              "submittedAt": "2026-04-13T15:00:00Z",
+              "score": 75
+            },
+            {
+              "studentId": "stu_008",
+              "submittedAt": "2026-04-13T10:00:00Z",
+              "score": 84
+            },
+            {
+              "studentId": "stu_009",
+              "submittedAt": "2026-04-14T06:00:00Z",
+              "score": 68
+            }
+          ]
+        },
+        {
+          "id": "asn_004",
+          "classId": "cls_001",
+          "title": "Квадратын бүрэн томъёо - Дасгал",
+          "meta": "Дуусах: 2026/03/27",
+          "dueDate": "2026-03-27",
+          "contentType": "file",
+          "contentUrl": "/uploads/asn_quadratic.pdf",
+          "status": "done",
+          "submitted": 24,
+          "total": 24,
+          "submissions": [
+            {
+              "studentId": "stu_001",
+              "submittedAt": "2026-03-26T09:00:00Z",
+              "score": 96
+            },
+            {
+              "studentId": "stu_002",
+              "submittedAt": "2026-03-26T14:00:00Z",
+              "score": 85
+            },
+            {
+              "studentId": "stu_006",
+              "submittedAt": "2026-03-25T16:00:00Z",
+              "score": 93
+            },
+            {
+              "studentId": "stu_011",
+              "submittedAt": "2026-03-27T07:00:00Z",
+              "score": 87
+            }
+          ]
+        },
+        {
+          "id": "asn_005",
+          "classId": "cls_001",
+          "title": "Параболын график зурах",
+          "meta": "Дуусах: 2026/05/01",
+          "dueDate": "2026-05-01",
+          "contentType": "link",
+          "contentUrl": "https://docs.google.com/forms/d/example_asn5",
+          "status": "upcoming",
+          "submitted": 0,
+          "total": 24,
+          "submissions": []
+        }
+      ],
+      "studentList": [
+        {
+          "id": "stu_001",
+          "classId": "cls_001",
+          "firstName": "Болд",
+          "lastName": "Бат",
+          "av": "Б",
+          "color": "#dbeafe",
+          "tc": "#1d4ed8",
+          "score": 92,
+          "joinedAt": "2026-01-20T08:00:00Z"
+        },
+        {
+          "id": "stu_002",
+          "classId": "cls_001",
+          "firstName": "Сарнай",
+          "lastName": "Гантулга",
+          "av": "С",
+          "color": "#ede9fe",
+          "tc": "#5b21b6",
+          "score": 87,
+          "joinedAt": "2026-01-21T08:00:00Z"
+        },
+        {
+          "id": "stu_003",
+          "classId": "cls_001",
+          "firstName": "Анхбаяр",
+          "lastName": "",
+          "av": "А",
+          "color": "#d1fae5",
+          "tc": "#065f46",
+          "score": 81,
+          "joinedAt": "2026-01-22T08:00:00Z"
+        },
+        {
+          "id": "stu_004",
+          "classId": "cls_001",
+          "firstName": "Мөнхбаяр",
+          "lastName": "",
+          "av": "М",
+          "color": "#fef3c7",
+          "tc": "#92400e",
+          "score": 74,
+          "joinedAt": "2026-01-23T08:00:00Z"
+        },
+        {
+          "id": "stu_005",
+          "classId": "cls_001",
+          "firstName": "Цэцэгмаа",
+          "lastName": "",
+          "av": "Ц",
+          "color": "#fee2e2",
+          "tc": "#991b1b",
+          "score": 63,
+          "joinedAt": "2026-01-24T08:00:00Z"
+        },
+        {
+          "id": "stu_006",
+          "classId": "cls_001",
+          "firstName": "Батбаяр",
+          "lastName": "Дорж",
+          "av": "Б",
+          "color": "#fce7f3",
+          "tc": "#9d174d",
+          "score": 90,
+          "joinedAt": "2026-01-20T09:00:00Z"
+        },
+        {
+          "id": "stu_007",
+          "classId": "cls_001",
+          "firstName": "Оюунчимэг",
+          "lastName": "",
+          "av": "О",
+          "color": "#e0e7ff",
+          "tc": "#3730a3",
+          "score": 78,
+          "joinedAt": "2026-01-25T08:00:00Z"
+        },
+        {
+          "id": "stu_008",
+          "classId": "cls_001",
+          "firstName": "Тэмүүлэн",
+          "lastName": "",
+          "av": "Т",
+          "color": "#ccfbf1",
+          "tc": "#134e4a",
+          "score": 85,
+          "joinedAt": "2026-01-26T08:00:00Z"
+        },
+        {
+          "id": "stu_009",
+          "classId": "cls_001",
+          "firstName": "Хишигжаргал",
+          "lastName": "",
+          "av": "Х",
+          "color": "#fef9c3",
+          "tc": "#854d0e",
+          "score": 71,
+          "joinedAt": "2026-01-27T08:00:00Z"
+        },
+        {
+          "id": "stu_010",
+          "classId": "cls_001",
+          "firstName": "Ганбат",
+          "lastName": "",
+          "av": "Г",
+          "color": "#f3e8ff",
+          "tc": "#6b21a8",
+          "score": 66,
+          "joinedAt": "2026-01-28T08:00:00Z"
+        },
+        {
+          "id": "stu_011",
+          "classId": "cls_001",
+          "firstName": "Мөнхцэцэг",
+          "lastName": "",
+          "av": "М",
+          "color": "#dbeafe",
+          "tc": "#1d4ed8",
+          "score": 88,
+          "joinedAt": "2026-01-29T08:00:00Z"
+        },
+        {
+          "id": "stu_012",
+          "classId": "cls_001",
+          "firstName": "Дэлгэрмөрөн",
+          "lastName": "",
+          "av": "Д",
+          "color": "#ede9fe",
+          "tc": "#5b21b6",
+          "score": 73,
+          "joinedAt": "2026-02-01T08:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "cls_002",
+      "teacherId": "teacher_1",
+      "name": "9Б анги",
+      "subject": "Геометр",
+      "icon": "fa-shapes",
+      "color": "#10b981",
+      "students": 10,
+      "maxStudents": 25,
+      "avg": "71%",
+      "avgClass": "mid",
+      "avgNum": 71,
+      "classCode": "GEO-3P9X",
+      "createdAt": "2026-01-15T08:00:00.000Z",
+      "lessons": [
+        {
+          "id": "lsn_010",
+          "classId": "cls_002",
+          "title": "Теорем нотлох",
+          "meta": "45 мин · 2026/04/08",
+          "date": "2026-04-08",
+          "duration": 45,
+          "contentType": "link",
+          "contentUrl": "https://docs.google.com/document/d/geo1",
+          "badge": "done"
+        },
+        {
+          "id": "lsn_011",
+          "classId": "cls_002",
+          "title": "Гурвалжны өнцгүүд",
+          "meta": "40 мин · 2026/04/12",
+          "date": "2026-04-12",
+          "duration": 40,
+          "contentType": "link",
+          "contentUrl": "https://docs.google.com/document/d/geo2",
+          "badge": "done"
+        },
+        {
+          "id": "lsn_012",
+          "classId": "cls_002",
+          "title": "Пифагорын теорем",
+          "meta": "50 мин · 2026/04/17",
+          "date": "2026-04-17",
+          "duration": 50,
+          "contentType": "file",
+          "contentUrl": "/uploads/pythagoras.pdf",
+          "badge": "done"
+        },
+        {
+          "id": "lsn_013",
+          "classId": "cls_002",
+          "title": "Тойргийн шинж чанар",
+          "meta": "45 мин · 2026/04/23",
+          "date": "2026-04-23",
+          "duration": 45,
+          "contentType": "link",
+          "contentUrl": "https://docs.google.com/presentation/d/geo4",
+          "badge": "upcoming"
+        },
+        {
+          "id": "lsn_014",
+          "classId": "cls_002",
+          "title": "Координатын талбар дэх геометр",
+          "meta": "50 мин · 2026/03/20",
+          "date": "2026-03-20",
+          "duration": 50,
+          "contentType": "link",
+          "contentUrl": "https://docs.google.com/document/d/geo5",
+          "badge": "done"
+        },
+        {
+          "id": "lsn_015",
+          "classId": "cls_002",
+          "title": "Тэгш өнцгөт гурвалжны харьцаа",
+          "meta": "45 мин · 2026/03/28",
+          "date": "2026-03-28",
+          "duration": 45,
+          "contentType": "file",
+          "contentUrl": "/uploads/ratio_tri.pdf",
+          "badge": "done"
+        },
+        {
+          "id": "lsn_016",
+          "classId": "cls_002",
+          "title": "Дөрвөлжин ба параллелограмм",
+          "meta": "40 мин · 2026/04/02",
+          "date": "2026-04-02",
+          "duration": 40,
+          "contentType": "link",
+          "contentUrl": "https://docs.google.com/presentation/d/geo7",
+          "badge": "done"
+        },
+        {
+          "id": "lsn_017",
+          "classId": "cls_002",
+          "title": "Бага хэмжээстэй тойрог",
+          "meta": "45 мин · 2026/04/28",
+          "date": "2026-04-28",
+          "duration": 45,
+          "contentType": null,
+          "contentUrl": null,
+          "badge": "upcoming"
+        }
+      ],
+      "exams": [
+        {
+          "id": "exm_010",
+          "classId": "cls_002",
+          "title": "Геометрийн шалгалт",
+          "meta": "2026/04/25 · 15 асуулт · 30 мин",
+          "date": "2026-04-25",
+          "duration": 30,
+          "totalQuestions": 15,
+          "contentType": "link",
+          "contentUrl": "https://forms.google.com/geo1",
+          "status": "upcoming",
+          "result": null,
+          "resultNum": null,
+          "submissions": []
+        },
+        {
+          "id": "exm_011",
+          "classId": "cls_002",
+          "title": "Теорем нотлолтын тест",
+          "meta": "2026/04/05 · 10 асуулт · 20 мин · Дундаж: 68%",
+          "date": "2026-04-05",
+          "duration": 20,
+          "totalQuestions": 10,
+          "contentType": "link",
+          "contentUrl": "https://forms.google.com/geo2",
+          "status": "done",
+          "result": "68%",
+          "resultNum": 68,
+          "submissions": [
+            {
+              "studentId": "stu_010",
+              "score": 88,
+              "submittedAt": "2026-04-05T10:00:00Z"
+            },
+            {
+              "studentId": "stu_011",
+              "score": 77,
+              "submittedAt": "2026-04-05T10:30:00Z"
+            },
+            {
+              "studentId": "stu_012",
+              "score": 55,
+              "submittedAt": "2026-04-05T11:00:00Z"
+            },
+            {
+              "studentId": "stu_013",
+              "score": 62,
+              "submittedAt": "2026-04-05T11:15:00Z"
+            },
+            {
+              "studentId": "stu_014",
+              "score": 70,
+              "submittedAt": "2026-04-05T10:45:00Z"
+            },
+            {
+              "studentId": "stu_015",
+              "score": 58,
+              "submittedAt": "2026-04-05T11:30:00Z"
+            },
+            {
+              "studentId": "stu_016",
+              "score": 74,
+              "submittedAt": "2026-04-05T10:15:00Z"
+            },
+            {
+              "studentId": "stu_017",
+              "score": 65,
+              "submittedAt": "2026-04-05T11:00:00Z"
+            },
+            {
+              "studentId": "stu_018",
+              "score": 60,
+              "submittedAt": "2026-04-05T11:20:00Z"
+            }
+          ]
+        },
+        {
+          "id": "exm_012",
+          "classId": "cls_002",
+          "title": "Пифагорын теорем - тест",
+          "meta": "2026/04/18 · 12 асуулт · 25 мин · Дундаж: 73%",
+          "date": "2026-04-18",
+          "duration": 25,
+          "totalQuestions": 12,
+          "contentType": "link",
+          "contentUrl": "https://forms.google.com/geo3",
+          "status": "done",
+          "result": "73%",
+          "resultNum": 73,
+          "submissions": [
+            {
+              "studentId": "stu_010",
+              "score": 90,
+              "submittedAt": "2026-04-18T10:00:00Z"
+            },
+            {
+              "studentId": "stu_011",
+              "score": 80,
+              "submittedAt": "2026-04-18T10:20:00Z"
+            },
+            {
+              "studentId": "stu_013",
+              "score": 65,
+              "submittedAt": "2026-04-18T10:40:00Z"
+            },
+            {
+              "studentId": "stu_016",
+              "score": 78,
+              "submittedAt": "2026-04-18T10:10:00Z"
+            }
+          ]
+        }
+      ],
+      "assignments": [
+        {
+          "id": "asn_010",
+          "classId": "cls_002",
+          "title": "Теорем нотлох - ГД",
+          "meta": "Дуусах: 2026/04/24",
+          "dueDate": "2026-04-24",
+          "contentType": "link",
+          "contentUrl": "https://forms.google.com/geo_asn1",
+          "status": "active",
+          "submitted": 14,
+          "total": 18,
+          "submissions": [
+            {
+              "studentId": "stu_010",
+              "submittedAt": "2026-04-22T09:00:00Z",
+              "score": 90
+            },
+            {
+              "studentId": "stu_011",
+              "submittedAt": "2026-04-23T10:00:00Z",
+              "score": 78
+            },
+            {
+              "studentId": "stu_014",
+              "submittedAt": "2026-04-22T14:00:00Z",
+              "score": 72
+            },
+            {
+              "studentId": "stu_016",
+              "submittedAt": "2026-04-23T08:00:00Z",
+              "score": 80
+            },
+            {
+              "studentId": "stu_017",
+              "submittedAt": "2026-04-21T16:00:00Z",
+              "score": 67
+            }
+          ]
+        },
+        {
+          "id": "asn_011",
+          "classId": "cls_002",
+          "title": "Гурвалжны дасгал",
+          "meta": "Дуусах: 2026/04/18",
+          "dueDate": "2026-04-18",
+          "contentType": "file",
+          "contentUrl": "/uploads/triangle_exercise.pdf",
+          "status": "done",
+          "submitted": 18,
+          "total": 18,
+          "submissions": [
+            {
+              "studentId": "stu_010",
+              "submittedAt": "2026-04-17T09:00:00Z",
+              "score": 85
+            },
+            {
+              "studentId": "stu_011",
+              "submittedAt": "2026-04-17T11:00:00Z",
+              "score": 72
+            },
+            {
+              "studentId": "stu_012",
+              "submittedAt": "2026-04-18T08:00:00Z",
+              "score": 68
+            },
+            {
+              "studentId": "stu_013",
+              "submittedAt": "2026-04-18T09:00:00Z",
+              "score": 60
+            },
+            {
+              "studentId": "stu_014",
+              "submittedAt": "2026-04-17T10:00:00Z",
+              "score": 74
+            },
+            {
+              "studentId": "stu_015",
+              "submittedAt": "2026-04-18T07:00:00Z",
+              "score": 58
+            },
+            {
+              "studentId": "stu_016",
+              "submittedAt": "2026-04-17T14:00:00Z",
+              "score": 78
+            },
+            {
+              "studentId": "stu_017",
+              "submittedAt": "2026-04-17T15:00:00Z",
+              "score": 65
+            },
+            {
+              "studentId": "stu_018",
+              "submittedAt": "2026-04-18T06:00:00Z",
+              "score": 62
+            }
+          ]
+        },
+        {
+          "id": "asn_012",
+          "classId": "cls_002",
+          "title": "Тойргийн бодлого",
+          "meta": "Дуусах: 2026/04/12",
+          "dueDate": "2026-04-12",
+          "contentType": "file",
+          "contentUrl": "/uploads/circle_exercise.pdf",
+          "status": "late",
+          "submitted": 9,
+          "total": 18,
+          "submissions": [
+            {
+              "studentId": "stu_010",
+              "submittedAt": "2026-04-14T09:00:00Z",
+              "score": 82
+            },
+            {
+              "studentId": "stu_012",
+              "submittedAt": "2026-04-15T10:00:00Z",
+              "score": 60
+            },
+            {
+              "studentId": "stu_016",
+              "submittedAt": "2026-04-13T14:00:00Z",
+              "score": 75
+            }
+          ]
+        },
+        {
+          "id": "asn_013",
+          "classId": "cls_002",
+          "title": "Пифагорын теорем - ГД",
+          "meta": "Дуусах: 2026/04/20",
+          "dueDate": "2026-04-20",
+          "contentType": "link",
+          "contentUrl": "https://forms.google.com/geo_asn4",
+          "status": "done",
+          "submitted": 17,
+          "total": 18,
+          "submissions": [
+            {
+              "studentId": "stu_010",
+              "submittedAt": "2026-04-19T09:00:00Z",
+              "score": 92
+            },
+            {
+              "studentId": "stu_011",
+              "submittedAt": "2026-04-19T11:00:00Z",
+              "score": 76
+            },
+            {
+              "studentId": "stu_013",
+              "submittedAt": "2026-04-20T07:00:00Z",
+              "score": 64
+            },
+            {
+              "studentId": "stu_014",
+              "submittedAt": "2026-04-18T16:00:00Z",
+              "score": 78
+            },
+            {
+              "studentId": "stu_016",
+              "submittedAt": "2026-04-19T10:00:00Z",
+              "score": 81
+            },
+            {
+              "studentId": "stu_018",
+              "submittedAt": "2026-04-20T06:00:00Z",
+              "score": 70
+            }
+          ]
+        }
+      ],
+      "studentList": [
+        {
+          "id": "stu_010",
+          "classId": "cls_002",
+          "firstName": "Номин",
+          "lastName": "Цэцэг",
+          "av": "Н",
+          "color": "#d1fae5",
+          "tc": "#065f46",
+          "score": 88,
+          "joinedAt": "2026-01-20T08:00:00Z"
+        },
+        {
+          "id": "stu_011",
+          "classId": "cls_002",
+          "firstName": "Баярмаа",
+          "lastName": "",
+          "av": "Б",
+          "color": "#dbeafe",
+          "tc": "#1d4ed8",
+          "score": 77,
+          "joinedAt": "2026-01-21T08:00:00Z"
+        },
+        {
+          "id": "stu_012",
+          "classId": "cls_002",
+          "firstName": "Сувд",
+          "lastName": "",
+          "av": "С",
+          "color": "#ede9fe",
+          "tc": "#5b21b6",
+          "score": 72,
+          "joinedAt": "2026-01-22T08:00:00Z"
+        },
+        {
+          "id": "stu_013",
+          "classId": "cls_002",
+          "firstName": "Ундрал",
+          "lastName": "",
+          "av": "У",
+          "color": "#fef3c7",
+          "tc": "#92400e",
+          "score": 65,
+          "joinedAt": "2026-01-23T08:00:00Z"
+        },
+        {
+          "id": "stu_014",
+          "classId": "cls_002",
+          "firstName": "Пүрэвжаргал",
+          "lastName": "",
+          "av": "П",
+          "color": "#fee2e2",
+          "tc": "#991b1b",
+          "score": 70,
+          "joinedAt": "2026-01-24T08:00:00Z"
+        },
+        {
+          "id": "stu_015",
+          "classId": "cls_002",
+          "firstName": "Лхагвацэрэн",
+          "lastName": "",
+          "av": "Л",
+          "color": "#fce7f3",
+          "tc": "#9d174d",
+          "score": 58,
+          "joinedAt": "2026-01-25T08:00:00Z"
+        },
+        {
+          "id": "stu_016",
+          "classId": "cls_002",
+          "firstName": "Бат-Очир",
+          "lastName": "",
+          "av": "Б",
+          "color": "#e0e7ff",
+          "tc": "#3730a3",
+          "score": 74,
+          "joinedAt": "2026-01-26T08:00:00Z"
+        },
+        {
+          "id": "stu_017",
+          "classId": "cls_002",
+          "firstName": "Ариунболд",
+          "lastName": "",
+          "av": "А",
+          "color": "#ccfbf1",
+          "tc": "#134e4a",
+          "score": 65,
+          "joinedAt": "2026-01-27T08:00:00Z"
+        },
+        {
+          "id": "stu_018",
+          "classId": "cls_002",
+          "firstName": "Цогтбаатар",
+          "lastName": "",
+          "av": "Ц",
+          "color": "#fef9c3",
+          "tc": "#854d0e",
+          "score": 62,
+          "joinedAt": "2026-01-28T08:00:00Z"
+        },
+        {
+          "id": "student_1",
+          "classId": "cls_002",
+          "firstName": "Болд",
+          "lastName": "Бат",
+          "av": "Б",
+          "color": "#dbeafe",
+          "tc": "#1d4ed8",
+          "score": 0,
+          "joinedAt": "2026-05-08T00:10:40.762Z"
+        }
+      ]
+    },
+    {
+      "id": "cls_003",
+      "teacherId": "teacher_1",
+      "name": "11А анги",
+      "subject": "Тригонометр",
+      "icon": "fa-wave-square",
+      "color": "#f59e0b",
+      "students": 10,
+      "maxStudents": 28,
+      "avg": "79%",
+      "avgClass": "good",
+      "avgNum": 79,
+      "classCode": "TRG-5N4R",
+      "createdAt": "2026-01-15T08:00:00.000Z",
+      "lessons": [
+        {
+          "id": "lsn_020",
+          "classId": "cls_003",
+          "title": "Синус, косинус тодорхойлолт",
+          "meta": "45 мин · 2026/04/05",
+          "date": "2026-04-05",
+          "duration": 45,
+          "contentType": "link",
+          "contentUrl": "https://docs.google.com/document/d/trig1",
+          "badge": "done"
+        },
+        {
+          "id": "lsn_021",
+          "classId": "cls_003",
+          "title": "Тригонометрийн нэгдэл",
+          "meta": "50 мин · 2026/04/11",
+          "date": "2026-04-11",
+          "duration": 50,
+          "contentType": "link",
+          "contentUrl": "https://docs.google.com/document/d/trig2",
+          "badge": "done"
+        },
+        {
+          "id": "lsn_022",
+          "classId": "cls_003",
+          "title": "Тригонометрийн тэгшитгэл",
+          "meta": "50 мин · 2026/04/22",
+          "date": "2026-04-22",
+          "duration": 50,
+          "contentType": "file",
+          "contentUrl": "/uploads/trig_eq.pdf",
+          "badge": "upcoming"
+        },
+        {
+          "id": "lsn_023",
+          "classId": "cls_003",
+          "title": "Тангенс, котангенс",
+          "meta": "45 мин · 2026/03/18",
+          "date": "2026-03-18",
+          "duration": 45,
+          "contentType": "link",
+          "contentUrl": "https://docs.google.com/document/d/trig4",
+          "badge": "done"
+        },
+        {
+          "id": "lsn_024",
+          "classId": "cls_003",
+          "title": "Нөхцөлт тэнцэтгэл",
+          "meta": "50 мин · 2026/03/25",
+          "date": "2026-03-25",
+          "duration": 50,
+          "contentType": "file",
+          "contentUrl": "/uploads/conditional.pdf",
+          "badge": "done"
+        },
+        {
+          "id": "lsn_025",
+          "classId": "cls_003",
+          "title": "Арктригонометрийн функц",
+          "meta": "45 мин · 2026/04/01",
+          "date": "2026-04-01",
+          "duration": 45,
+          "contentType": "link",
+          "contentUrl": "https://docs.google.com/presentation/d/trig6",
+          "badge": "done"
+        },
+        {
+          "id": "lsn_026",
+          "classId": "cls_003",
+          "title": "Давхардлын томъёо",
+          "meta": "50 мин · 2026/04/28",
+          "date": "2026-04-28",
+          "duration": 50,
+          "contentType": null,
+          "contentUrl": null,
+          "badge": "upcoming"
+        }
+      ],
+      "exams": [
+        {
+          "id": "exm_020",
+          "classId": "cls_003",
+          "title": "Тригонометрийн тест",
+          "meta": "2026/04/16 · 15 асуулт · 30 мин · Дундаж: 74%",
+          "date": "2026-04-16",
+          "duration": 30,
+          "totalQuestions": 15,
+          "contentType": "link",
+          "contentUrl": "https://forms.google.com/trig1",
+          "status": "done",
+          "result": "74%",
+          "resultNum": 74,
+          "submissions": [
+            {
+              "studentId": "stu_020",
+              "score": 85,
+              "submittedAt": "2026-04-16T10:00:00Z"
+            },
+            {
+              "studentId": "stu_021",
+              "score": 79,
+              "submittedAt": "2026-04-16T10:30:00Z"
+            },
+            {
+              "studentId": "stu_022",
+              "score": 58,
+              "submittedAt": "2026-04-16T11:00:00Z"
+            },
+            {
+              "studentId": "stu_023",
+              "score": 82,
+              "submittedAt": "2026-04-16T10:15:00Z"
+            },
+            {
+              "studentId": "stu_024",
+              "score": 70,
+              "submittedAt": "2026-04-16T10:45:00Z"
+            },
+            {
+              "studentId": "stu_025",
+              "score": 76,
+              "submittedAt": "2026-04-16T11:15:00Z"
+            },
+            {
+              "studentId": "stu_026",
+              "score": 68,
+              "submittedAt": "2026-04-16T11:30:00Z"
+            },
+            {
+              "studentId": "stu_027",
+              "score": 74,
+              "submittedAt": "2026-04-16T10:20:00Z"
+            },
+            {
+              "studentId": "stu_028",
+              "score": 61,
+              "submittedAt": "2026-04-16T11:45:00Z"
+            }
+          ]
+        },
+        {
+          "id": "exm_021",
+          "classId": "cls_003",
+          "title": "Нэгдлийн томъёо - тест",
+          "meta": "2026/04/09 · 12 асуулт · 25 мин · Дундаж: 77%",
+          "date": "2026-04-09",
+          "duration": 25,
+          "totalQuestions": 12,
+          "contentType": "link",
+          "contentUrl": "https://forms.google.com/trig2",
+          "status": "done",
+          "result": "77%",
+          "resultNum": 77,
+          "submissions": [
+            {
+              "studentId": "stu_020",
+              "score": 88,
+              "submittedAt": "2026-04-09T10:00:00Z"
+            },
+            {
+              "studentId": "stu_021",
+              "score": 80,
+              "submittedAt": "2026-04-09T10:20:00Z"
+            },
+            {
+              "studentId": "stu_022",
+              "score": 62,
+              "submittedAt": "2026-04-09T10:40:00Z"
+            },
+            {
+              "studentId": "stu_023",
+              "score": 84,
+              "submittedAt": "2026-04-09T10:10:00Z"
+            },
+            {
+              "studentId": "stu_025",
+              "score": 78,
+              "submittedAt": "2026-04-09T10:30:00Z"
+            },
+            {
+              "studentId": "stu_027",
+              "score": 75,
+              "submittedAt": "2026-04-09T10:50:00Z"
+            }
+          ]
+        },
+        {
+          "id": "exm_022",
+          "classId": "cls_003",
+          "title": "Эцсийн шалгалт",
+          "meta": "2026/05/05 · 20 асуулт · 50 мин",
+          "date": "2026-05-05",
+          "duration": 50,
+          "totalQuestions": 20,
+          "contentType": null,
+          "contentUrl": null,
+          "status": "upcoming",
+          "result": null,
+          "resultNum": null,
+          "submissions": []
+        }
+      ],
+      "assignments": [
+        {
+          "id": "asn_020",
+          "classId": "cls_003",
+          "title": "Тригонометрийн нэгдэл",
+          "meta": "Дуусах: 2026/04/18",
+          "dueDate": "2026-04-18",
+          "contentType": "link",
+          "contentUrl": "https://forms.google.com/trig_asn1",
+          "status": "done",
+          "submitted": 21,
+          "total": 22,
+          "submissions": [
+            {
+              "studentId": "stu_020",
+              "submittedAt": "2026-04-17T09:00:00Z",
+              "score": 88
+            },
+            {
+              "studentId": "stu_021",
+              "submittedAt": "2026-04-17T10:00:00Z",
+              "score": 82
+            },
+            {
+              "studentId": "stu_022",
+              "submittedAt": "2026-04-18T07:00:00Z",
+              "score": 75
+            },
+            {
+              "studentId": "stu_023",
+              "submittedAt": "2026-04-17T11:00:00Z",
+              "score": 85
+            },
+            {
+              "studentId": "stu_024",
+              "submittedAt": "2026-04-17T14:00:00Z",
+              "score": 72
+            },
+            {
+              "studentId": "stu_025",
+              "submittedAt": "2026-04-18T06:00:00Z",
+              "score": 78
+            },
+            {
+              "studentId": "stu_026",
+              "submittedAt": "2026-04-17T15:00:00Z",
+              "score": 70
+            },
+            {
+              "studentId": "stu_027",
+              "submittedAt": "2026-04-18T08:00:00Z",
+              "score": 76
+            },
+            {
+              "studentId": "stu_028",
+              "submittedAt": "2026-04-17T16:00:00Z",
+              "score": 65
+            }
+          ]
+        },
+        {
+          "id": "asn_021",
+          "classId": "cls_003",
+          "title": "Давхардлын томъёо - ГД",
+          "meta": "Дуусах: 2026/04/23",
+          "dueDate": "2026-04-23",
+          "contentType": "file",
+          "contentUrl": "/uploads/double_angle.pdf",
+          "status": "active",
+          "submitted": 16,
+          "total": 22,
+          "submissions": [
+            {
+              "studentId": "stu_020",
+              "submittedAt": "2026-04-22T09:00:00Z",
+              "score": 91
+            },
+            {
+              "studentId": "stu_023",
+              "submittedAt": "2026-04-22T10:00:00Z",
+              "score": 83
+            },
+            {
+              "studentId": "stu_025",
+              "submittedAt": "2026-04-21T15:00:00Z",
+              "score": 80
+            },
+            {
+              "studentId": "stu_027",
+              "submittedAt": "2026-04-22T11:00:00Z",
+              "score": 77
+            }
+          ]
+        },
+        {
+          "id": "asn_022",
+          "classId": "cls_003",
+          "title": "Арктригонометрийн функц - ГД",
+          "meta": "Дуусах: 2026/04/04",
+          "dueDate": "2026-04-04",
+          "contentType": "link",
+          "contentUrl": "https://forms.google.com/trig_asn3",
+          "status": "done",
+          "submitted": 20,
+          "total": 22,
+          "submissions": [
+            {
+              "studentId": "stu_020",
+              "submittedAt": "2026-04-03T09:00:00Z",
+              "score": 86
+            },
+            {
+              "studentId": "stu_021",
+              "submittedAt": "2026-04-03T11:00:00Z",
+              "score": 79
+            },
+            {
+              "studentId": "stu_022",
+              "submittedAt": "2026-04-04T07:00:00Z",
+              "score": 70
+            },
+            {
+              "studentId": "stu_023",
+              "submittedAt": "2026-04-03T10:00:00Z",
+              "score": 82
+            },
+            {
+              "studentId": "stu_026",
+              "submittedAt": "2026-04-04T06:00:00Z",
+              "score": 68
+            },
+            {
+              "studentId": "stu_028",
+              "submittedAt": "2026-04-03T14:00:00Z",
+              "score": 60
+            }
+          ]
+        },
+        {
+          "id": "asn_023",
+          "classId": "cls_003",
+          "title": "Тригонометрийн тэгшитгэл - ГД",
+          "meta": "Дуусах: 2026/04/26",
+          "dueDate": "2026-04-26",
+          "contentType": null,
+          "contentUrl": null,
+          "status": "upcoming",
+          "submitted": 0,
+          "total": 22,
+          "submissions": []
+        }
+      ],
+      "studentList": [
+        {
+          "id": "stu_020",
+          "classId": "cls_003",
+          "firstName": "Гэрэлмаа",
+          "lastName": "",
+          "av": "Г",
+          "color": "#d1fae5",
+          "tc": "#065f46",
+          "score": 85,
+          "joinedAt": "2026-01-20T08:00:00Z"
+        },
+        {
+          "id": "stu_021",
+          "classId": "cls_003",
+          "firstName": "Нарантуяа",
+          "lastName": "",
+          "av": "Н",
+          "color": "#dbeafe",
+          "tc": "#1d4ed8",
+          "score": 79,
+          "joinedAt": "2026-01-21T08:00:00Z"
+        },
+        {
+          "id": "stu_022",
+          "classId": "cls_003",
+          "firstName": "Энхбаяр",
+          "lastName": "",
+          "av": "Э",
+          "color": "#fef3c7",
+          "tc": "#92400e",
+          "score": 76,
+          "joinedAt": "2026-01-22T08:00:00Z"
+        },
+        {
+          "id": "stu_023",
+          "classId": "cls_003",
+          "firstName": "Ганхуяг",
+          "lastName": "",
+          "av": "Г",
+          "color": "#ede9fe",
+          "tc": "#5b21b6",
+          "score": 82,
+          "joinedAt": "2026-01-23T08:00:00Z"
+        },
+        {
+          "id": "stu_024",
+          "classId": "cls_003",
+          "firstName": "Батмөнх",
+          "lastName": "",
+          "av": "Б",
+          "color": "#fee2e2",
+          "tc": "#991b1b",
+          "score": 70,
+          "joinedAt": "2026-01-24T08:00:00Z"
+        },
+        {
+          "id": "stu_025",
+          "classId": "cls_003",
+          "firstName": "Золбаяр",
+          "lastName": "",
+          "av": "З",
+          "color": "#fce7f3",
+          "tc": "#9d174d",
+          "score": 76,
+          "joinedAt": "2026-01-25T08:00:00Z"
+        },
+        {
+          "id": "stu_026",
+          "classId": "cls_003",
+          "firstName": "Түвшинжаргал",
+          "lastName": "",
+          "av": "Т",
+          "color": "#e0e7ff",
+          "tc": "#3730a3",
+          "score": 68,
+          "joinedAt": "2026-01-26T08:00:00Z"
+        },
+        {
+          "id": "stu_027",
+          "classId": "cls_003",
+          "firstName": "Алтансарнай",
+          "lastName": "",
+          "av": "А",
+          "color": "#ccfbf1",
+          "tc": "#134e4a",
+          "score": 74,
+          "joinedAt": "2026-01-27T08:00:00Z"
+        },
+        {
+          "id": "stu_028",
+          "classId": "cls_003",
+          "firstName": "Наваансүрэн",
+          "lastName": "",
+          "av": "Н",
+          "color": "#fef9c3",
+          "tc": "#854d0e",
+          "score": 61,
+          "joinedAt": "2026-01-28T08:00:00Z"
+        },
+        {
+          "id": "student_1",
+          "classId": "cls_003",
+          "firstName": "Болд",
+          "lastName": "Бат",
+          "av": "Б",
+          "color": "#dbeafe",
+          "tc": "#1d4ed8",
+          "score": 0,
+          "joinedAt": "2026-05-07T22:37:56.454Z"
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "id": "teacher_1",
+      "role": "teacher",
+      "firstName": "Баярмаа",
+      "lastName": "Цэнд",
+      "email": "tsend@school.mn",
+      "password": "teacher123",
+      "bio": "",
+      "notificationSettings": {
+        "newAssignment": true,
+        "examReminder": true,
+        "gradePosted": true,
+        "classUpdate": true
+      },
+      "appearanceSettings": {
+        "darkMode": false,
+        "fontSize": "medium",
+        "sidebarCollapsed": false
+      },
+      "classCode": null,
+      "classId": null,
+      "paymentStatus": null,
+      "balance": 500
+    },
+    {
+      "id": "student_1",
+      "role": "student",
+      "firstName": "Болд",
+      "lastName": "Бат",
+      "email": "bold@student.mn",
+      "password": "student123",
+      "bio": "",
+      "notificationSettings": {
+        "newAssignment": true,
+        "examReminder": true,
+        "gradePosted": true,
+        "classUpdate": true
+      },
+      "appearanceSettings": {
+        "darkMode": false,
+        "fontSize": "medium",
+        "sidebarCollapsed": false
+      },
+      "classCode": "ALG-7K2M",
+      "classId": [
+        "cls_001",
+        "cls_003",
+        "cls_002"
+      ],
+      "paymentStatus": null,
+      "balance": 50000
+    },
+    {
+      "id": "stu_001",
+      "role": "student",
+      "firstName": "Болд",
+      "lastName": "Бат",
+      "email": "bold@student.mn",
+      "password": "student123",
+      "bio": "",
+      "notificationSettings": {
+        "newAssignment": true,
+        "examReminder": true,
+        "gradePosted": true,
+        "classUpdate": true
+      },
+      "appearanceSettings": {
+        "darkMode": false,
+        "fontSize": "medium",
+        "sidebarCollapsed": false
+      },
+      "classCode": "ALG-7K2M",
+      "classId": "cls_001",
+      "paymentStatus": "paid"
+    },
+    {
+      "id": "stu_006",
+      "role": "student",
+      "firstName": "Батбаяр",
+      "lastName": "Дорж",
+      "email": "batbayar@student.mn",
+      "password": "student123",
+      "bio": "",
+      "notificationSettings": {
+        "newAssignment": true,
+        "examReminder": true,
+        "gradePosted": false,
+        "classUpdate": true
+      },
+      "appearanceSettings": {
+        "darkMode": false,
+        "fontSize": "medium",
+        "sidebarCollapsed": false
+      },
+      "classCode": "ALG-7K2M",
+      "classId": "cls_001",
+      "paymentStatus": "paid"
+    },
+    {
+      "id": "stu_007",
+      "role": "student",
+      "firstName": "Оюунчимэг",
+      "lastName": "",
+      "email": "oyunchimeg@student.mn",
+      "password": "student123",
+      "bio": "",
+      "notificationSettings": {
+        "newAssignment": true,
+        "examReminder": true,
+        "gradePosted": true,
+        "classUpdate": false
+      },
+      "appearanceSettings": {
+        "darkMode": true,
+        "fontSize": "large",
+        "sidebarCollapsed": false
+      },
+      "classCode": "ALG-7K2M",
+      "classId": "cls_001",
+      "paymentStatus": "paid"
+    },
+    {
+      "id": "stu_008",
+      "role": "student",
+      "firstName": "Тэмүүлэн",
+      "lastName": "",
+      "email": "temuulen@student.mn",
+      "password": "student123",
+      "bio": "",
+      "notificationSettings": {
+        "newAssignment": true,
+        "examReminder": false,
+        "gradePosted": true,
+        "classUpdate": true
+      },
+      "appearanceSettings": {
+        "darkMode": false,
+        "fontSize": "small",
+        "sidebarCollapsed": true
+      },
+      "classCode": "ALG-7K2M",
+      "classId": "cls_001",
+      "paymentStatus": "paid"
+    },
+    {
+      "id": "stu_010",
+      "role": "student",
+      "firstName": "Номин",
+      "lastName": "Цэцэг",
+      "email": "nomin@student.mn",
+      "password": "student123",
+      "bio": "",
+      "notificationSettings": {
+        "newAssignment": true,
+        "examReminder": true,
+        "gradePosted": true,
+        "classUpdate": true
+      },
+      "appearanceSettings": {
+        "darkMode": false,
+        "fontSize": "medium",
+        "sidebarCollapsed": false
+      },
+      "classCode": "GEO-3P9X",
+      "classId": "cls_002",
+      "paymentStatus": "paid"
+    },
+    {
+      "id": "stu_011",
+      "role": "student",
+      "firstName": "Баярмаа",
+      "lastName": "",
+      "email": "bayarmaa@student.mn",
+      "password": "student123",
+      "bio": "",
+      "notificationSettings": {
+        "newAssignment": true,
+        "examReminder": true,
+        "gradePosted": true,
+        "classUpdate": false
+      },
+      "appearanceSettings": {
+        "darkMode": false,
+        "fontSize": "medium",
+        "sidebarCollapsed": false
+      },
+      "classCode": "GEO-3P9X",
+      "classId": "cls_002",
+      "paymentStatus": "paid"
+    },
+    {
+      "id": "stu_014",
+      "role": "student",
+      "firstName": "Пүрэвжаргал",
+      "lastName": "",
+      "email": "purevjaragal@student.mn",
+      "password": "student123",
+      "bio": "",
+      "notificationSettings": {
+        "newAssignment": false,
+        "examReminder": true,
+        "gradePosted": true,
+        "classUpdate": true
+      },
+      "appearanceSettings": {
+        "darkMode": false,
+        "fontSize": "medium",
+        "sidebarCollapsed": false
+      },
+      "classCode": "GEO-3P9X",
+      "classId": "cls_002",
+      "paymentStatus": "unpaid"
+    },
+    {
+      "id": "stu_016",
+      "role": "student",
+      "firstName": "Бат-Очир",
+      "lastName": "",
+      "email": "batochir@student.mn",
+      "password": "student123",
+      "bio": "",
+      "notificationSettings": {
+        "newAssignment": true,
+        "examReminder": true,
+        "gradePosted": true,
+        "classUpdate": true
+      },
+      "appearanceSettings": {
+        "darkMode": true,
+        "fontSize": "medium",
+        "sidebarCollapsed": false
+      },
+      "classCode": "GEO-3P9X",
+      "classId": "cls_002",
+      "paymentStatus": "paid"
+    },
+    {
+      "id": "stu_020",
+      "role": "student",
+      "firstName": "Гэрэлмаа",
+      "lastName": "",
+      "email": "gerelmaa@student.mn",
+      "password": "student123",
+      "bio": "",
+      "notificationSettings": {
+        "newAssignment": true,
+        "examReminder": true,
+        "gradePosted": true,
+        "classUpdate": true
+      },
+      "appearanceSettings": {
+        "darkMode": false,
+        "fontSize": "medium",
+        "sidebarCollapsed": false
+      },
+      "classCode": "TRG-5N4R",
+      "classId": "cls_003",
+      "paymentStatus": "paid"
+    },
+    {
+      "id": "stu_023",
+      "role": "student",
+      "firstName": "Ганхуяг",
+      "lastName": "",
+      "email": "gankhuyag@student.mn",
+      "password": "student123",
+      "bio": "",
+      "notificationSettings": {
+        "newAssignment": true,
+        "examReminder": true,
+        "gradePosted": false,
+        "classUpdate": true
+      },
+      "appearanceSettings": {
+        "darkMode": false,
+        "fontSize": "large",
+        "sidebarCollapsed": false
+      },
+      "classCode": "TRG-5N4R",
+      "classId": "cls_003",
+      "paymentStatus": "paid"
+    },
+    {
+      "id": "stu_025",
+      "role": "student",
+      "firstName": "Золбаяр",
+      "lastName": "",
+      "email": "zolbayar@student.mn",
+      "password": "student123",
+      "bio": "",
+      "notificationSettings": {
+        "newAssignment": true,
+        "examReminder": false,
+        "gradePosted": true,
+        "classUpdate": true
+      },
+      "appearanceSettings": {
+        "darkMode": false,
+        "fontSize": "medium",
+        "sidebarCollapsed": true
+      },
+      "classCode": "TRG-5N4R",
+      "classId": "cls_003",
+      "paymentStatus": "unpaid"
+    },
+    {
+      "id": "stu_028",
+      "role": "student",
+      "firstName": "Наваансүрэн",
+      "lastName": "",
+      "email": "navaansuren@student.mn",
+      "password": "student123",
+      "bio": "",
+      "notificationSettings": {
+        "newAssignment": true,
+        "examReminder": true,
+        "gradePosted": true,
+        "classUpdate": false
+      },
+      "appearanceSettings": {
+        "darkMode": false,
+        "fontSize": "medium",
+        "sidebarCollapsed": false
+      },
+      "classCode": "TRG-5N4R",
+      "classId": "cls_003",
+      "paymentStatus": "paid"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "task_demo_1",
+      "studentId": "stu_003",
+      "studentName": "Анхбаяр",
+      "subject": "Алгебр",
+      "title": "Квадрат функцийн оргил цэгийг олох",
+      "description": "f(x) = -2x² + 8x - 3 функцийн оргил цэгийн координатыг олохыг ойлгохгүй байна. Томъёогоор ч, график байгуулж ч үзсэн ч болохгүй байна.",
+      "reward": 3000,
+      "difficulty": "hard",
+      "status": "claimed",
+      "claimedBy": "student_1",
+      "claimedByName": "Болд",
+      "postedAt": "2026-04-20T10:00:00.000Z"
+    },
+    {
+      "id": "task_demo_2",
+      "studentId": "stu_010",
+      "studentName": "Номин",
+      "subject": "Геометр",
+      "title": "Теорем Пифагорыг нотлох",
+      "description": "Теорем Пифагорыг геометрийн аргаар нотлох шаардлагатай байна. Зурагтай дэлгэрэнгүй тайлбар хэрэгтэй.",
+      "reward": 5000,
+      "difficulty": "medium",
+      "status": "open",
+      "claimedBy": null,
+      "claimedByName": null,
+      "postedAt": "2026-04-19T14:30:00.000Z"
+    },
+    {
+      "id": "6h0xX-_nhMw",
+      "studentId": "student_1",
+      "studentName": "Болд",
+      "subject": "Геометр",
+      "title": "геометр-1",
+      "description": "ЦӨЙцауфйуцаф",
+      "reward": 500,
+      "difficulty": "easy",
+      "status": "completed",
+      "claimedBy": "teacher_1",
+      "claimedByName": "Баярмаа Цэнд",
+      "postedAt": "2026-05-07T22:25:54.817Z",
+      "answer": "ASF",
+      "answerSubmittedAt": "2026-05-08T00:36:31.475Z"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

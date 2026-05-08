@@ -1,0 +1,196 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --t: .22s ease;
+  --blue: #07437d;
+  --blue-light: #3589d0;
+  --radius: 14px;
+  --shadow: 0 2px 16px rgba(0,0,0,.07);
+}
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #f1f5f9;
+  color: #1e293b;
+  min-height: 100vh;
+ 
+}
+
+.page {
+  background: #f1f5f9;
+  color: #1e293b;
+  min-height: 100vh;
+}
+
+/* ── Banner ── */
+.teacher-banner {
+  background: linear-gradient(135deg, #03254a 0%, #07437d 45%, #1d4ed8 100%);
+  border-radius: 18px;
+  padding: 28px 36px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  color: #fff;
+  box-shadow: 0 8px 28px rgba(7,67,125,.22);
+  position: relative;
+  overflow: hidden;
+}
+.teacher-banner::before {
+  content: '';
+  position: absolute;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.05);
+  top: -100px; right: -50px;
+  pointer-events: none;
+}
+.teacher-banner-text { position: relative; z-index: 1; }
+.banner-eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,.13); border: 1px solid rgba(255,255,255,.22);
+  color: rgba(255,255,255,.88); font-size: 11px; font-weight: 600; 
+  letter-spacing: .5px; padding: 5px 13px; border-radius: 99px; margin-bottom: 10px;
+}
+.banner-title {
+  font-size: 24px; font-weight: 800; letter-spacing: -.4px; line-height: 1.2; margin-bottom: 4px;
+}
+.banner-title span {
+  background: linear-gradient(90deg, #93c5fd, #c4b5fd);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.banner-sub { font-size: 13px; color: rgba(255,255,255,.62); }
+.banner-actions { display: flex; gap: 10px; position: relative; z-index: 1; }
+.btn-banner {
+  padding: 11px 20px; border-radius: 11px; font-family: inherit;
+  font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,.18); border: 1.5px solid rgba(255,255,255,.3); color: #fff;
+  transition: all .2s; white-space: nowrap;
+}
+.btn-banner:hover { background: rgba(255,255,255,.28); }
+.btn-banner.outline { background: transparent; border-color: rgba(255,255,255,.3); }
+
+/* ── Stats Grid ── */
+.teacher-stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px; margin-bottom: 24px;
+}
+.t-stat-card {
+  background: #fff; border: 1px solid rgba(7,67,125,.12); border-radius: 16px;
+  padding: 18px 20px; display: flex; align-items: center; gap: 14px;
+  box-shadow: 0 2px 12px rgba(7,67,125,.08); position: relative; overflow: hidden;
+  transition: transform .2s, box-shadow .2s;
+}
+.t-stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(7,67,125,.15); }
+.t-stat-icon {
+  width: 48px; height: 48px; border-radius: 13px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 18px;
+}
+.t-stat-body { flex: 1; }
+.t-stat-val { font-size: 26px; font-weight: 800; color: #0f172a; line-height: 1; }
+.t-stat-lbl { font-size: 12px; color: #64748b; font-weight: 500; margin-top: 2px; }
+.t-stat-trend {
+  position: absolute; top: 12px; right: 14px;
+  font-size: 11px; font-weight: 700; color: #059669; display: flex; align-items: center; gap: 3px;
+}
+.t-stat-trend i { font-size: 10px; }
+
+/* ── Main Grid Layout ── */
+.teacher-grid {
+  display: grid; grid-template-columns: 1fr 340px; gap: 22px; align-items: flex-start;
+}
+.teacher-col-main { display: flex; flex-direction: column; gap: 22px; }
+
+/* ── Shared Card ── */
+.t-card {
+  background: #fff; border: 1px solid #e2e8f0; border-radius: 18px;
+  padding: 22px 24px; box-shadow: 0 2px 10px rgba(0,0,0,.04);
+}
+.t-card-head {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  margin-bottom: 18px; flex-wrap: wrap; gap: 10px;
+}
+.t-card-head h3 { font-size: 15px; font-weight: 700; color: #0f172a; display: flex; align-items: center; gap: 8px; margin: 0; }
+.t-card-head h3 i { color: #07437d; }
+.t-card-head p { font-size: 12px; color: #64748b; margin: 2px 0 0 0; }
+.t-btn-sm {
+  padding: 7px 14px; border-radius: 99px; font-family: inherit;
+  font-size: 12px; font-weight: 600; background: #eff6ff; color: #1d4ed8;
+  border: 1px solid #bfdbfe; cursor: pointer; display: flex; align-items: center; gap: 5px;
+  transition: all .15s; white-space: nowrap;
+}
+.t-btn-sm:hover { background: #dbeafe; }
+
+/* ── Class Cards Grid ── */
+.t-cls-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px; }
+.t-cls-card {
+  background: #fff; border: 1.5px solid #e2e8f0; border-radius: 16px; overflow: hidden;
+  cursor: pointer; transition: all .2s; position: relative;
+}
+.t-cls-card:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(0,0,0,.08); border-color: var(--cc, #3b82f6); }
+.t-cls-top { padding: 16px 16px 0; display: flex; align-items: center; justify-content: space-between; }
+.t-cls-icon {
+  width: 48px; height: 48px; border-radius: 13px;
+  background: color-mix(in srgb, var(--cc, #3b82f6) 12%, #fff); color: var(--cc, #3b82f6);
+  display: flex; align-items: center; justify-content: center; font-size: 20px;
+}
+.t-cls-avg {
+  font-size: 18px; font-weight: 900; color: #0f172a; background: #f1f5f9;
+  padding: 4px 10px; border-radius: 8px;
+}
+.t-cls-content { padding: 14px 16px 16px; }
+.t-cls-name { font-size: 14px; font-weight: 800; color: #1e293b; margin-bottom: 4px; }
+.t-cls-meta { font-size: 11px; color: #64748b; margin-bottom: 10px; }
+.t-cls-bar-wrap { height: 5px; background: #e2e8f0; border-radius: 99px; overflow: hidden; }
+.t-cls-bar-fill { height: 100%; border-radius: 99px; transition: width .6s ease; }
+
+/* ── Assignment List ── */
+.assign-list { display: flex; flex-direction: column; gap: 10px; }
+.assign-row {
+  display: flex; align-items: center; gap: 12px; padding: 14px 16px;
+  background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 14px;
+  transition: all .15s;
+}
+.assign-row:hover { border-color: var(--cc, #3b82f6); box-shadow: 0 2px 10px rgba(0,0,0,.05); }
+.assign-status-dot { width: 10px; height: 10px; border-radius: 50%; background: #f59e0b; flex-shrink: 0; }
+.assign-info { flex: 1; min-width: 0; }
+.assign-title { font-size: 13px; font-weight: 700; color: #0f172a; margin-bottom: 3px; }
+.assign-meta { font-size: 11px; color: #64748b; display: flex; gap: 10px; flex-wrap: wrap; }
+.assign-badge {
+  font-size: 10.5px; font-weight: 700; padding: 4px 12px; border-radius: 20px; flex-shrink: 0;
+  background: #fef3c7; color: #92400e; border: 1px solid #fde68a;
+}
+.assign-badge.done { background: #d1fae5; color: #065f46; border-color: #bbf7d0; }
+.empty-msg { text-align: center; padding: 24px; color: #94a3b8; font-size: 13px; }
+
+/* ── Exam List ── */
+.exam-list { display: flex; flex-direction: column; gap: 12px; }
+.exam-entry {
+  display: flex; align-items: center; gap: 14px; padding: 16px;
+  background: #f8fafc; border-radius: 14px; border: 1px solid #e2e8f0;
+}
+.exam-entry-left { flex-shrink: 0; }
+.exam-entry-date {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: linear-gradient(135deg, #eff6ff, #dbeafe); color: #1d4ed8;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  font-weight: 800; line-height: 1;
+}
+.exam-entry-date span:first-child { font-size: 16px; }
+.exam-entry-date span:last-child { font-size: 9px; opacity: .8; text-transform: uppercase; }
+.exam-entry-info { flex: 1; min-width: 0; }
+.exam-entry-title { font-size: 13px; font-weight: 700; color: #0f172a; margin-bottom: 3px; }
+.exam-entry-meta { font-size: 11px; color: #64748b; display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .teacher-grid { grid-template-columns: 1fr; }
+  .t-cls-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+}
+@media (max-width: 640px) {
+  .page { padding: 16px !important; }
+  .teacher-banner { padding: 20px; flex-direction: column; align-items: flex-start; }
+  .banner-title { font-size: 20px; }
+  .teacher-stats { grid-template-columns: 1fr 1fr; }
+}
