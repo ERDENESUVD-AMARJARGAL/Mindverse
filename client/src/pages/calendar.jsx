@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import api from '../services/api'
 
 // Демо дататай тохируулахын тулд (2026 оны 4-р сарын 19-нд гэж үзүүлэх)
 const DEMO_TODAY = new Date(2026, 3, 19); 
@@ -27,13 +28,11 @@ function Calendar() {
             setLoading(true);
             try {
                 // 1. Хэрэглэгчийн мэдээлэл авах (classId-г олж авах)
-                const uRes = await fetch(`${window.API_URL}/users/${userId}`);
-                const user = await uRes.json();
+                const { data: user } = await api.get(`/users/${userId}`);
                 const ids = Array.isArray(user.classId) ? user.classId : [user.classId].filter(Boolean);
 
                 // 2. Бүх ангиудын мэдээлэл татах
-                const cRes = await fetch(`${window.API_URL}/classes`);
-                const allClasses = await cRes.json();
+                const { data: allClasses } = await api.get('/classes');
                 const myClasses = allClasses.filter(c => ids.includes(c.id));
 
                 let normalizedEvents = [];

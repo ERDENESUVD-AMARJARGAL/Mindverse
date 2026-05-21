@@ -1,6 +1,5 @@
 import { useState, useEffect, useMemo } from 'react'
-
-const API = '/api';
+import api from '../services/api'
 
 const PALETTE = [
   { bg: '#dbeafe', tc: '#1d4ed8', btn: '#3b82f6', tag: '#eff6ff', tagTc: '#1d4ed8' },
@@ -69,14 +68,10 @@ function TeacherStudents() {
  
   useEffect(() => {
     setLoading(true);
-    fetch(`${API}/classes?teacherId=${teacherId}`)
-      .then(res => {
-        if (!res.ok) throw new Error('Сервертэй холбогдоход алдаа гарлаа');
-        return res.json();
-      })
+    api.get(`/classes?teacherId=${teacherId}`)
+      .then(res => res.data)
       .then(async data => {
-        const userRes = await fetch(`${API}/users`);
-        const users = userRes.ok ? await userRes.json() : [];
+        const { data: users } = await api.get('/users');
         const usersById = new Map(safe(users).map(user => [user.id, user]));
         setClasses(data);
 

@@ -1,0 +1,5 @@
+✅ Server running on http://localhost:3000
+2026-05-19T07:41:05.991Z - GET /api/health
+2026-05-19T07:41:26.499Z - GET /api/classes?teacherId=teacher_1
+2026-05-19T07:41:27.682Z - POST /api/login
+2026-05-19T07:41:28.368Z - GET /signup

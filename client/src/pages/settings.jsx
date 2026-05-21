@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import api from '../services/api'
 
     function Settings() {
         const userId = sessionStorage.getItem('user_id');
@@ -41,11 +42,7 @@ import { useState } from 'react'
                 const payload = { firstName: form.firstName, lastName: form.lastName, email: form.email };
                 
                 // 1. DB шинэчлэх
-                await fetch(`${window.API_URL}/users/${userId}`, {
-                    method: 'PATCH',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
+                await api.patch(`/users/${userId}`, payload);
 
                 // 2. Session шинэчлэх (Sidebar болон бусад хуудас шууд харах)
                 const updatedUser = { ...user, ...payload };
@@ -68,11 +65,7 @@ import { useState } from 'react'
             setIsLoading(true);
             try {
                 // TODO: Authentication байхгүй учир энд хуучин нууц үгийг шалгах боломжгүй, шууд солих үйлдэл хийв.
-                await fetch(`${window.API_URL}/users/${userId}`, {
-                    method: 'PATCH',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ password: passwords.new1 })
-                });
+                await api.patch(`/users/${userId}`, { password: passwords.new1 });
                 
                 setPasswords({ old: '', new1: '', new2: '' });
                 triggerFlash('pw');
@@ -89,11 +82,7 @@ import { useState } from 'react'
             
             try {
                 const updatedUser = { ...user, notificationSettings: newNotif };
-                await fetch(`${window.API_URL}/users/${userId}`, {
-                    method: 'PATCH',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ notificationSettings: newNotif })
-                });
+                await api.patch(`/users/${userId}`, { notificationSettings: newNotif });
                 sessionStorage.setItem('user', JSON.stringify(updatedUser));
                 setUser(updatedUser);
                 triggerFlash('notif');
@@ -110,11 +99,7 @@ import { useState } from 'react'
             try {
                 const newAppSettings = { ...user.appearanceSettings, darkMode: checked };
                 const updatedUser = { ...user, appearanceSettings: newAppSettings };
-                await fetch(`${window.API_URL}/users/${userId}`, {
-                    method: 'PATCH',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ appearanceSettings: newAppSettings })
-                });
+                await api.patch(`/users/${userId}`, { appearanceSettings: newAppSettings });
                 sessionStorage.setItem('user', JSON.stringify(updatedUser));
                 setUser(updatedUser);
             } catch (err) {
@@ -126,7 +111,7 @@ import { useState } from 'react'
         const deleteAccount = () => {
             if (!confirm('Анхааруулга: Таны бүртгэл болон холбогдох бүх өгөгдөл устгагдах болно!\nҮргэлж үү?')) return;
             
-            fetch(`${window.API_URL}/users/${userId}`, { method: 'DELETE' })
+            api.delete(`/users/${userId}`)
                 .then(() => {
                     sessionStorage.clear();
                     window.location.hash = '/signup'; // Хуудас руу үсрэх

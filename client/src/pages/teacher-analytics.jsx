@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { average, classAverage, classScores, itemScores } from '../utils/classStats'
-
-const API = '/api';
+import api from '../services/api'
 
 /* ── Хугацааны тохиргоо ── */
 const PERIOD_KEYS   = ['week', 'month', 'quarter', 'year'];
@@ -100,11 +99,8 @@ function TeacherAnalytics() {
   /* ── API ── */
   useEffect(() => {
     setLoading(true);
-    fetch(`${API}/classes?teacherId=${teacherId}`)
-      .then(res => {
-        if (!res.ok) throw new Error('Сервертэй холбогдоход алдаа гарлаа');
-        return res.json();
-      })
+    api.get(`/classes?teacherId=${teacherId}`)
+      .then(res => res.data)
       .then(data => { setClasses(data); setLoading(false); })
       .catch(err  => { setError(err.message); setLoading(false); });
   }, [teacherId]);

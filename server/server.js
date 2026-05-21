@@ -2,32 +2,70 @@ const express = require('express')
 const fs = require('fs').promises
 const path = require('path')
 const cors = require('cors')
+require('dotenv').config()
+const mongoose = require('mongoose')
 
 const app = express()
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 const DB_PATH = path.join(__dirname, 'db.json')
 const CLIENT_DIST = path.join(__dirname, '..', 'client', 'dist')
+const MID_ROOT = path.join(__dirname, '..', '..', 'mid')
+
+// MongoDB connection
+const mongoUri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/mindverse'
+mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('✅ MongoDB connected'))
+    .catch(err => {
+        console.error('MongoDB connection error', err)
+    })
 
 // ── Middleware ────────────────────────────────────────────
-app.use(cors({ origin: 'http://localhost:5173' }))
+app.use(cors({
+    origin(origin, cb) {
+        const allowedOrigins = new Set([
+            'http://localhost:3000',
+            'http://127.0.0.1:3000',
+            'http://localhost:5173',
+            'http://127.0.0.1:5173',
+        ])
+        if (!origin || allowedOrigins.has(origin)) return cb(null, true)
+        return cb(null, false)
+    }
+}))
 app.use(express.json({ limit: '10mb' }))
 app.use((req, res, next) => {
     console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`)
     next()
 })
 
-// ── DB Helpers ────────────────────────────────────────────
+// ── DB Helpers (MongoDB via Mongoose) ─────────────────────
+const User = require('./models/User')
+const Class = require('./models/Class')
+const Task = require('./models/Task')
+const bcrypt = require('bcryptjs')
+const { body, validationResult } = require('express-validator')
+
 async function readDB() {
-    try {
-        const data = await fs.readFile(DB_PATH, 'utf-8')
-        return JSON.parse(data)
-    } catch {
-        return { users: [], classes: [], tasks: [] }
-    }
+    const users = await User.find({}).lean()
+    const classes = await Class.find({}).lean()
+    const tasks = await Task.find({}).lean()
+    return { users: users || [], classes: classes || [], tasks: tasks || [] }
 }
 
 async function writeDB(data) {
-    await fs.writeFile(DB_PATH, JSON.stringify(data, null, 2), 'utf-8')
+    // Replace collections with provided data (suitable for small/local datasets)
+    if (data.users) {
+        await User.deleteMany({})
+        if (data.users.length) await User.insertMany(data.users)
+    }
+    if (data.classes) {
+        await Class.deleteMany({})
+        if (data.classes.length) await Class.insertMany(data.classes)
+    }
+    if (data.tasks) {
+        await Task.deleteMany({})
+        if (data.tasks.length) await Task.insertMany(data.tasks)
+    }
 }
 
 function avgClassName(avgNum) {
@@ -162,9 +200,11 @@ app.post('/api/login', async (req, res) => {
     const { email, password } = req.body
     if (!email || !password) return res.status(400).json({ error: 'Мэдээлэл дутуу байна' })
 
-    const db = await readDB()
-    const user = db.users.find(u => u.email === email && u.password === password)
+    const user = await User.findOne({ email }).lean()
     if (!user) return res.status(401).json({ error: 'И-мэйл эсвэл нууц үг буруу байна' })
+
+    const match = await bcrypt.compare(password, user.password || '')
+    if (!match) return res.status(401).json({ error: 'И-мэйл эсвэл нууц үг буруу байна' })
 
     const { password: _, ...safeUser } = user
     res.json({ success: true, user: safeUser })
@@ -187,17 +227,26 @@ app.get('/api/users/:id', async (req, res) => {
     res.json(safeUser)
 })
 
-app.post('/api/users', async (req, res) => {
-    const newUser = req.body
-    const db = await readDB()
-    if (db.users.some(u => u.email === newUser.email)) {
-        return res.status(400).json({ error: 'Энэ имэйл аль хэдийн бүртгэгдсэн байна' })
+app.post('/api/users',
+    body('email').isEmail().withMessage('Имэйл буруу байна'),
+    body('password').isLength({ min: 6 }).withMessage('Нууц үг дор хаяж 6 тэмдэгттэй байх ёстой'),
+    async (req, res) => {
+        const errors = validationResult(req)
+        if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() })
+
+        const { email, password, ...rest } = req.body
+        const existing = await User.findOne({ email })
+        if (existing) return res.status(400).json({ error: 'Энэ имэйл аль хэдийн бүртгэгдсэн байна' })
+
+        const hashed = await bcrypt.hash(password, 10)
+        const newUser = { id: rest.id || `user_${Date.now()}`, email, password: hashed, ...rest }
+        if (!Array.isArray(newUser.classId)) newUser.classId = newUser.classId ? [newUser.classId] : []
+
+        const created = await User.create(newUser)
+        const safe = safeUser(created.toObject ? created.toObject() : created)
+        res.status(201).json(safe)
     }
-    if (!newUser.classId) newUser.classId = []
-    db.users.push(newUser)
-    await writeDB(db)
-    res.status(201).json(newUser)
-})
+)
 
 app.patch('/api/users/:id', async (req, res) => {
     const db = await readDB()
@@ -400,12 +449,20 @@ app.post('/api/join-class', async (req, res) => {
 })
 
 // ── START ─────────────────────────────────────────────────
-// Serve the built React app from the same Express backend in production.
+app.get('/api/health', (req, res) => {
+    res.json({ ok: true, app: 'Mindverse API' })
+})
+
+app.use('/legacy', express.static(MID_ROOT))
 app.use(express.static(CLIENT_DIST))
 app.get(/.*/, (req, res, next) => {
     if (req.path.startsWith('/api')) return next()
+
     res.sendFile(path.join(CLIENT_DIST, 'index.html'), (err) => {
-        if (err) next(err)
+        if (!err) return
+        res.sendFile(path.join(MID_ROOT, 'html', 'index.html'), (fallbackErr) => {
+            if (fallbackErr) next(fallbackErr)
+        })
     })
 })
 

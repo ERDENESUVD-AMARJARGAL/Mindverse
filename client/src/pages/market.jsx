@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-const API = '/api';
+import api from '../services/api'
 
 const DIFF_LABEL = { easy:'Хялбар', medium:'Дунд', hard:'Хэцүү' };
 const STATUS_LABEL = { open:'Нээлттэй', claimed:'Хариулт илгэсэн', completed:'Зөвшөөрсөн', rejected:'Татгалзсан', cancelled:'Цуцласан' };
@@ -69,12 +69,10 @@ function Market() {
     const loadData = useCallback(async () => {
         setLoading(true);
         try {
-            const [tRes, uRes] = await Promise.all([
-                fetch(`${API}/tasks`),
-                fetch(`${API}/users/${userId}`)
+            const [{ data: tData }, { data: uData }] = await Promise.all([
+                api.get('/tasks'),
+                api.get(`/users/${userId}`)
             ]);
-            const tData = await tRes.json();
-            const uData = await uRes.json();
             setTasks(Array.isArray(tData) ? tData : []);
             setBalance(uData.balance || 0);
         } catch(e) { console.error(e); }
@@ -91,10 +89,7 @@ function Market() {
     const handleCharge = async () => {
         const amt = parseInt(chargeAmt);
         if (!amt || amt < 1000) { triggerToast('1,000₮-өөс их дүн оруулна уу','error'); return; }
-        await fetch(API + '/users/' + userId, {
-            method:'PATCH', headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({ balance: balance + amt })
-        });
+        await api.patch('/users/' + userId, { balance: balance + amt });
         setChargeAmt(''); setCharge(false);
         triggerToast(fmtMoney(amt) + ' амжилттай нэмэгдлээ!');
         loadData();
@@ -112,14 +107,11 @@ function Market() {
             return;
         }
         const attachments = await Promise.all(postFiles.map(fileToAttachment));
-        await fetch(API + '/tasks', {
-            method:'POST', headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({
+        await api.post('/tasks', {
                 id:'task_'+Date.now(), studentId:userId, studentName:userName,
                 subject, title, description, reward:parseInt(reward), difficulty, attachments,
                 status:'open', claimedBy:null, claimedByName:null, answer:null,
                 postedAt: new Date().toISOString()
-            })
         });
         setPost(false);
         setPostForm({ subject:'', title:'', description:'', reward:'', difficulty:'easy' });
@@ -130,30 +122,21 @@ function Market() {
 
     const handleCancel = async (task) => {
         if (!confirm('Та энэ хүсэлтийг цуцлах уу?\n' + fmtMoney(task.reward) + ' буцаж ирнэ.')) return;
-        await fetch(`${API}/tasks/${task.id}`, {
-            method:'PATCH', headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({ status:'cancelled' })
-        });
+        await api.patch(`/tasks/${task.id}`, { status:'cancelled' });
         triggerToast('Цуцагдлаа. ' + fmtMoney(task.reward) + ' буцаж ирлээ.');
         setReview(null); loadData();
     };
 
     const handleApprove = async (task) => {
         if (!confirm('Багшийн хариултыг зөвшөөрөх үү?\n' + fmtMoney(task.reward) + ' багш руу шилжинэ.')) return;
-        await fetch(`${API}/tasks/${task.id}`, {
-            method:'PATCH', headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({ status:'completed' })
-        });
+        await api.patch(`/tasks/${task.id}`, { status:'completed' });
         triggerToast('Зөвшөөрсөн! ' + fmtMoney(task.reward) + ' багш руу шилжлээ.');
         setReview(null); loadData();
     };
 
     const handleReject = async (task) => {
         if (!confirm('Багшийн хариултыг татгалзах уу?\n' + fmtMoney(task.reward) + ' танд буцаж ирнэ.')) return;
-        await fetch(`${API}/tasks/${task.id}`, {
-            method:'PATCH', headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({ status:'rejected' })
-        });
+        await api.patch(`/tasks/${task.id}`, { status:'rejected' });
         triggerToast('Татгалзлаа. ' + fmtMoney(task.reward) + ' буцаж ирлээ.');
         setReview(null); loadData();
     };

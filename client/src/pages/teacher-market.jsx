@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-const API = '/api';
+import api from '../services/api'
 
 const DIFF_LABEL = { easy:'Хялбар', medium:'Дунд', hard:'Хэцүү' };
 const STATUS_LABEL = { open:'Нээлттэй', claimed:'Хариулт илгэсэн', completed:'Зөвшөөрсөн', rejected:'Татгалзсан', cancelled:'Цуцласан' };
@@ -66,10 +66,10 @@ function TeacherMarket() {
     const loadData = useCallback(async () => {
         setLoading(true);
         try {
-            const tRes = await fetch(`${API}/tasks`);
-            const uRes = await fetch(`${API}/users/${userId}`);
-            const tData = await tRes.json();
-            const uData = await uRes.json();
+            const [{ data: tData }, { data: uData }] = await Promise.all([
+                api.get('/tasks'),
+                api.get(`/users/${userId}`)
+            ]);
             setTasks(Array.isArray(tData) ? tData : []);
             setTeacherBalance(Number(uData.balance) || 0);
             if (uData?.id) {
@@ -90,10 +90,7 @@ function TeacherMarket() {
     const handleSubmitAnswer = async () => {
         if (!answerText.trim() && answerFiles.length === 0) { triggerToast('Хариулт эсвэл файл оруулна уу','error'); return; }
         const answerAttachments = await Promise.all(answerFiles.map(fileToAttachment));
-        await fetch(API + '/tasks/' + answerModal.id, {
-            method:'PATCH', headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({ status:'claimed', claimedBy:userId, claimedByName:teacherName, answer:answerText.trim(), answerAttachments, answerSubmittedAt:new Date().toISOString() })
-        });
+        await api.patch('/tasks/' + answerModal.id, { status:'claimed', claimedBy:userId, claimedByName:teacherName, answer:answerText.trim(), answerAttachments, answerSubmittedAt:new Date().toISOString() });
         setAnswerModal(null); setAnswerText(''); setAnswerFiles([]);
         triggerToast('Хариулт илгээгдлээ! Сурагч зөвшөөрөхийг хүлээнэ.');
         loadData();

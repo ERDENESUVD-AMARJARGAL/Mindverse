@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
-    "dev": "nodemon server"
+    "dev": "nodemon server",
+    "migrate": "node migrate.js"
   },
   "keywords": [],
   "author": "",
@@ -14,7 +15,11 @@
   "type": "commonjs",
   "dependencies": {
     "cors": "^2.8.6",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "mongoose": "^7.6.0",
+    "dotenv": "^16.3.1",
+    "bcryptjs": "^2.4.3",
+    "express-validator": "^7.0.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"

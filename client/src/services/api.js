@@ -1,17 +1,14 @@
 import axios from 'axios'
 
-// vite.config.js дахь proxy-р дамжин localhost:3000/api руу очно
+export const API_BASE_URL = '/api'
+
 const api = axios.create({
-    baseURL: '/api',
+    baseURL: API_BASE_URL,
     headers: { 'Content-Type': 'application/json' }
 })
 
-// Request interceptor — хэрэв token хэрэгтэй болвол энд нэм
-api.interceptors.request.use((config) => {
-    return config
-})
+api.interceptors.request.use((config) => config)
 
-// Response interceptor — 401 бол login руу шилжүүлэх
 api.interceptors.response.use(
     (response) => response,
     (error) => {
