@@ -5,6 +5,17 @@ const cors = require('cors')
 require('dotenv').config()
 const mongoose = require('mongoose')
 
+// ── Environment Validation ────────────────────────────────
+if (process.env.NODE_ENV === 'production') {
+    if (!process.env.MONGO_URI) {
+        console.error('❌ MONGO_URI is required in production')
+        process.exit(1)
+    }
+    if (!process.env.ALLOWED_ORIGINS) {
+        console.warn('⚠️ ALLOWED_ORIGINS not set, using defaults')
+    }
+}
+
 const app = express()
 const PORT = process.env.PORT || 3000
 const DB_PATH = path.join(__dirname, 'db.json')
@@ -20,19 +31,65 @@ mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true })
     })
 
 // ── Middleware ────────────────────────────────────────────
+const isProduction = process.env.NODE_ENV === 'production'
+const allowedOrigins = new Set([
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+    ...(process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : [])
+])
+
 app.use(cors({
     origin(origin, cb) {
-        const allowedOrigins = new Set([
-            'http://localhost:3000',
-            'http://127.0.0.1:3000',
-            'http://localhost:5173',
-            'http://127.0.0.1:5173',
-        ])
         if (!origin || allowedOrigins.has(origin)) return cb(null, true)
-        return cb(null, false)
-    }
+        if (!isProduction) return cb(null, true) // Дослух үе шатанд урсгал өгөх
+        return cb(new Error('CORS not allowed'))
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }))
 app.use(express.json({ limit: '10mb' }))
+
+// ── Rate Limiting (Basic) ─────────────────────────────────
+const requestCounts = new Map()
+const RATE_LIMIT = 100 // requests
+const RATE_WINDOW = 60000 // 1 minute in ms
+
+app.use((req, res, next) => {
+    const ip = req.ip || req.connection.remoteAddress
+    const now = Date.now()
+    
+    if (!requestCounts.has(ip)) {
+        requestCounts.set(ip, [])
+    }
+    
+    const requests = requestCounts.get(ip)
+    requestCounts.set(ip, requests.filter(time => now - time < RATE_WINDOW))
+    
+    const currentRequests = requestCounts.get(ip)
+    if (currentRequests.length >= RATE_LIMIT) {
+        return res.status(429).json({ error: 'Too many requests, please try again later' })
+    }
+    
+    currentRequests.push(now)
+    next()
+})
+
+// Clean up old entries every 10 minutes
+setInterval(() => {
+    const now = Date.now()
+    for (const [ip, requests] of requestCounts) {
+        const filtered = requests.filter(time => now - time < RATE_WINDOW)
+        if (filtered.length === 0) {
+            requestCounts.delete(ip)
+        } else {
+            requestCounts.set(ip, filtered)
+        }
+    }
+}, 600000)
+
 app.use((req, res, next) => {
     console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`)
     next()
@@ -466,6 +523,23 @@ app.get(/.*/, (req, res, next) => {
     })
 })
 
+// ── ERROR HANDLER ─────────────────────────────────────────
+app.use((err, req, res, next) => {
+    const status = err.status || 500
+    const message = process.env.NODE_ENV === 'production' 
+        ? 'Internal Server Error' 
+        : err.message
+    
+    console.error(`[ERROR] ${status}: ${err.message}`)
+    console.error(err.stack)
+    
+    res.status(status).json({ 
+        error: message,
+        ...(process.env.NODE_ENV !== 'production' && { details: err.message })
+    })
+})
+
 app.listen(PORT, () => {
     console.log(`✅ Server running on http://localhost:${PORT}`)
+    console.log(`📝 Environment: ${process.env.NODE_ENV || 'development'}`)
 })
