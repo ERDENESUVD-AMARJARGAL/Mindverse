@@ -3,6 +3,7 @@ import api from '../services/api'
 import { useAuth } from '../hooks/useAuth'
 
 // ── Helpers ──────────────────────────────────────────────
+//Hiceeliin yvtsiig huvicilah
 function getProgress(cls) {
     const total = (cls.lessons || []).length
     const done = Array.isArray(cls.userProgress?.completedLessons)
@@ -10,19 +11,19 @@ function getProgress(cls) {
         : 0
     return total ? Math.round(done / total * 100) : 0
 }
-
+//Shalgaltiin onoo bodoh
 function getUserScore(item, userId) {
     const sub = (item.submissions || []).find(s => s.studentId === userId || s.id === userId)
     return sub?.score != null ? Number(sub.score) : null
 }
-
+//Onoonuudiin dundaj bodoh
 function getAvgScore(classes, userId) {
     const nums = classes.flatMap(c =>
         (c.exams || []).map(e => getUserScore(e, userId)).filter(Number.isFinite)
     )
     return nums.length ? Math.round(nums.reduce((a, b) => a + b, 0) / nums.length) : null
 }
-
+//Udahgui boloh ehnii 4n shalgalt
 function getUpcomingExams(classes) {
     return classes
         .flatMap(c => (c.exams || [])
@@ -31,13 +32,13 @@ function getUpcomingExams(classes) {
         )
         .slice(0, 4)
 }
-
+//Hiigeegui daalgavriin toog toolno
 function getPendingAssigns(classes, userId) {
     return classes.flatMap(c =>
         (c.assignments || []).filter(a => !(a.submissions || []).some(s => s.studentId === userId || s.id === userId))
     ).length
 }
-
+//
 function parseExamDate(meta) {
     const match = (meta || '').match(/(\d{4})\/(\d{2})\/(\d{2})/)
     if (!match) return { day: '—', month: '—' }
