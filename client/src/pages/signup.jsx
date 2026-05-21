@@ -52,7 +52,6 @@ function SignupPage() {
                     return
                 }
 
-                // AuthContext-т хадгалах (sessionStorage автоматаар хадгална)
                 login(user)
 
                 navigate(user.role === 'teacher' ? '/teacher-main' : '/student-main')
